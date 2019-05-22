@@ -257,6 +257,138 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-java-io" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/23/java-io/" class="article-date">
+      <time datetime="2017-06-22T16:00:00.000Z" itemprop="datePublished">2017-06-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/23/java-io/">Java IO流学习超详细总结（图文并茂）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h3 id="Java流操作有关的类或接口："><a href="#Java流操作有关的类或接口：" class="headerlink" title="Java流操作有关的类或接口："></a>Java流操作有关的类或接口：</h3><p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/AvIsTc.jpg" alt="0659b2ee5661173439cc0a92f3390c89"><br>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IO/">IO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2017/06/23/java-io/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Java-error1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/20/Java-error1/" class="article-date">
+      <time datetime="2017-06-19T16:00:00.000Z" itemprop="datePublished">2017-06-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/20/Java-error1/">java.sql.SQLException Field &#39;id&#39; doesn&#39;t have a default value</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>1、错误描述</p>
+<p>在做一个电商网站项目时，使用 Mybatis + MySQL 时出现问题 <code>Caused by: java.sql.SQLException: Field &#39;id&#39; doesn&#39;t have a default value</code> ，网上很多人说是 <a href="https://my.oschina.net/boonya/blog/692232">MyBatis 插入数据行 ID 没生成自增</a>。但是我尝试好久，没解决该问题。</p>
+<p>2、错误原因</p>
+<p>后来才发现是因为创建数据库时的建表语句中的 id 是主键的，但是在插入的过程中，没有给予数值，并且没有让 id 自增。</p>
+<p>3、解决办法</p>
+<p>修改数据库表中的id，让其自增（在插入的过程中，不插入id数据时）。</p>
+<p>（我是直接将整个数据库都导出来，然后在每个表的 id 后面加上一个 <code>auto_increment</code>）, 如下 ：<br>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2017/06/20/Java-error1/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-中缀表达式转换成前缀和后缀表达式这类题目的超实用解题技巧" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -394,6 +526,70 @@
 
 
   
+    <article id="post-Bootstrap入门需掌握的知识点（二）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/18/Bootstrap入门需掌握的知识点（二）/" class="article-date">
+      <time datetime="2017-06-17T16:00:00.000Z" itemprop="datePublished">2017-06-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/18/Bootstrap入门需掌握的知识点（二）/">Bootstrap入门需掌握的知识点（二）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h4 id="相关阅读："><a href="#相关阅读：" class="headerlink" title="相关阅读："></a>相关阅读：</h4><h4 id="Bootstrap入门需掌握的知识点（一）"><a href="#Bootstrap入门需掌握的知识点（一）" class="headerlink" title="Bootstrap入门需掌握的知识点（一）"></a><a href="http://blog.csdn.net/tzs_1041218129/article/details/53966502">Bootstrap入门需掌握的知识点（一）</a></h4><h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><h4 id="基本实例"><a href="#基本实例" class="headerlink" title="基本实例"></a>基本实例</h4><p>为任意 <code>&lt;table&gt;</code> 标签添加 <code>.table</code> 类可以为其赋予基本的样式 — 少量的内补（padding）和水平方向的分隔线。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;table class=&quot;table&quot;&gt;</span><br><span class="line">  ...</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Bootstrap/">Bootstrap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2017/06/18/Bootstrap入门需掌握的知识点（二）/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Bootstrap入门需掌握的知识点（一）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -445,70 +641,6 @@
       
         <p class="article-more-link">
           <a  href="/2017/06/18/Bootstrap入门需掌握的知识点（一）/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Bootstrap入门需掌握的知识点（二）" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/06/18/Bootstrap入门需掌握的知识点（二）/" class="article-date">
-      <time datetime="2017-06-17T16:00:00.000Z" itemprop="datePublished">2017-06-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/18/Bootstrap入门需掌握的知识点（二）/">Bootstrap入门需掌握的知识点（二）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h4 id="相关阅读："><a href="#相关阅读：" class="headerlink" title="相关阅读："></a>相关阅读：</h4><h4 id="Bootstrap入门需掌握的知识点（一）"><a href="#Bootstrap入门需掌握的知识点（一）" class="headerlink" title="Bootstrap入门需掌握的知识点（一）"></a><a href="http://blog.csdn.net/tzs_1041218129/article/details/53966502">Bootstrap入门需掌握的知识点（一）</a></h4><h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><h4 id="基本实例"><a href="#基本实例" class="headerlink" title="基本实例"></a>基本实例</h4><p>为任意 <code>&lt;table&gt;</code> 标签添加 <code>.table</code> 类可以为其赋予基本的样式 — 少量的内补（padding）和水平方向的分隔线。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;table class=&quot;table&quot;&gt;</span><br><span class="line">  ...</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Bootstrap/">Bootstrap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/06/18/Bootstrap入门需掌握的知识点（二）/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -908,135 +1040,6 @@
       
         <p class="article-more-link">
           <a  href="/2017/06/14/通过项目逐步深入了解Mybatis(三)/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Hexo-yilia-toc" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/06/13/Hexo-yilia-toc/" class="article-date">
-      <time datetime="2017-06-12T16:00:00.000Z" itemprop="datePublished">2017-06-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/13/Hexo-yilia-toc/">Hexo + yilia 主题实现文章目录</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>为了方便查看每篇文章的目录结构，可以定位到想看的地方，特地找了下如何实现这个功能。</p>
-<h3 id="添加-CSS-样式"><a href="#添加-CSS-样式" class="headerlink" title="添加 CSS 样式"></a>添加 CSS 样式</h3><p>打开 <code>themes\yilia\source</code> 下的 <code>main.234bc0.css</code> 文件，直接在后面添加如下代码：<br>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/06/13/Hexo-yilia-toc/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Java连接Oracle数据库的三种连接方式" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/06/13/Java连接Oracle数据库的三种连接方式/" class="article-date">
-      <time datetime="2017-06-12T16:00:00.000Z" itemprop="datePublished">2017-06-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/13/Java连接Oracle数据库的三种连接方式/">Java连接Oracle数据库的三种连接方式</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="背景："><a href="#背景：" class="headerlink" title="背景："></a>背景：</h3><p>这两天在学习Oracle数据库，这里就总结下自己上课所学的知识，同时记录下来，方便整理当天所学下的知识，也同时方便日后自己查询。</p>
-<p>SQL语句的话，这里我就不多讲了，感觉和其他的数据库（MySQL、SQL Server）都是类似，区别不大。</p>
-<p>今天在这里就写下 Java 连接 Oracle 数据库的三种连接方式。<br>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/06/13/Java连接Oracle数据库的三种连接方式/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
