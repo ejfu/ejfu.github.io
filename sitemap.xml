@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.54tianzhisheng.cn/2019/03/24/Flink-code-memory-management/</loc>
+    
+    <lastmod>2019-05-25T05:41:35.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.54tianzhisheng.cn/2019/03/23/Flink-code-checkpoint/</loc>
     
     <lastmod>2019-05-22T12:31:47.000Z</lastmod>
@@ -660,14 +667,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/01/24/mac/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/01/09/lombok/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/01/09/lombok/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/01/24/mac/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
@@ -681,14 +688,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/12/02/wx-01/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/01/04/weixin/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/01/04/weixin/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/12/02/wx-01/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
