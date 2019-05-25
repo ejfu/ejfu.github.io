@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/</loc>
+    
+    <lastmod>2019-05-25T06:31:02.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.54tianzhisheng.cn/2019/03/25/Flink-code-jobmanager/</loc>
+    
+    <lastmod>2019-05-25T06:30:44.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.54tianzhisheng.cn/2019/03/24/Flink-code-memory-management/</loc>
     
     <lastmod>2019-05-25T05:41:35.000Z</lastmod>
