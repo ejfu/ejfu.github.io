@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/</loc>
+    
+    <lastmod>2019-06-02T10:02:42.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.54tianzhisheng.cn/2019/01/06/Flink-Kafka-sink/</loc>
     
     <lastmod>2019-05-30T15:13:51.000Z</lastmod>
@@ -30,14 +37,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/</loc>
     
     <lastmod>2019-05-30T15:13:51.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/</loc>
     
     <lastmod>2019-05-30T15:13:51.000Z</lastmod>
     
