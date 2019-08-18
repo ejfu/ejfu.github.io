@@ -17,28 +17,24 @@
    <meta name="keywords" content="Flink,Spark,大数据,Hive,Java,架构,后端,服务端,RocketMQ,分布式消息队列,分布式存储,技术博客,HBase,ElasticSearch,Spring,Spring Boot,Spring Boot 2.0,Spring Cloud,Spring MVC,Java EE,前端,HTML,MyBatis,Android,Docker,Mac,Consul,Kafka,Logstash,Kibana,MySQL,Maven,Nginx,Python,RabbitMQ,ActiveMQ,JVM">
 
 
-  <title>字符串 | zhisheng的博客</title>
+  <title>Flink 从0到1学习 —— 如何使用 Side Output 来分流？ | zhisheng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题目一：如果一个字符串 str ，把字符串 str 前面的任意部分挪到后面去形成的字符串叫做 str 的旋转词。比如 str = “ 1234 ” ， 那么 str 的旋转词有 “ 1234 ” ， “ 2341 ” ， “ 3412 ” ， “ 4123 ” 。给定两个字符串 a 和 b ，请判断 a 和 b 是否互为旋转词？">
-<meta name="keywords" content="数据结构,算法,字符串">
+  <meta name="description" content="前言之前在 Flink 从0到1学习—— Flink 不可以连续 Split(分流)？ 讲过 Flink 使用连续的 Split 会有问题，当时提供了几种解决方法，有一种方法就是使用 Side Output 来进行，当时留了个余念，那么就在这篇文章详细的讲一波，教大家如何使用 Side Output 来分流。">
+<meta name="keywords" content="Flink,大数据,流式计算">
 <meta property="og:type" content="article">
-<meta property="og:title" content="字符串">
-<meta property="og:url" content="http://www.54tianzhisheng.cn/2017/06/13/【字符串】字符串逆序/index.html">
+<meta property="og:title" content="Flink 从0到1学习 —— 如何使用 Side Output 来分流？">
+<meta property="og:url" content="http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/index.html">
 <meta property="og:site_name" content="zhisheng的博客">
-<meta property="og:description" content="题目一：如果一个字符串 str ，把字符串 str 前面的任意部分挪到后面去形成的字符串叫做 str 的旋转词。比如 str = “ 1234 ” ， 那么 str 的旋转词有 “ 1234 ” ， “ 2341 ” ， “ 3412 ” ， “ 4123 ” 。给定两个字符串 a 和 b ，请判断 a 和 b 是否互为旋转词？">
+<meta property="og:description" content="前言之前在 Flink 从0到1学习—— Flink 不可以连续 Split(分流)？ 讲过 Flink 使用连续的 Split 会有问题，当时提供了几种解决方法，有一种方法就是使用 Side Output 来进行，当时留了个余念，那么就在这篇文章详细的讲一波，教大家如何使用 Side Output 来分流。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://img.blog.csdn.net/20170121132530062?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170121132658185?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170121132714935?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170121132729920?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170121132805577?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170121132820828?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fp3jkmizmpj30o00didgn.jpg">
-<meta property="og:updated_time" content="2018-03-06T16:05:10.000Z">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-06-12-141928.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg">
+<meta property="og:updated_time" content="2019-08-18T08:28:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="字符串">
-<meta name="twitter:description" content="题目一：如果一个字符串 str ，把字符串 str 前面的任意部分挪到后面去形成的字符串叫做 str 的旋转词。比如 str = “ 1234 ” ， 那么 str 的旋转词有 “ 1234 ” ， “ 2341 ” ， “ 3412 ” ， “ 4123 ” 。给定两个字符串 a 和 b ，请判断 a 和 b 是否互为旋转词？">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20170121132530062?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:title" content="Flink 从0到1学习 —— 如何使用 Side Output 来分流？">
+<meta name="twitter:description" content="前言之前在 Flink 从0到1学习—— Flink 不可以连续 Split(分流)？ 讲过 Flink 使用连续的 Split 会有问题，当时提供了几种解决方法，有一种方法就是使用 Side Output 来进行，当时留了个余念，那么就在这篇文章详细的讲一波，教大家如何使用 Side Output 来分流。">
+<meta name="twitter:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-06-12-141928.jpg">
   
     <link rel="alternative" href="/atom.xml" title="zhisheng的博客" type="application/atom+xml">
   
@@ -265,11 +261,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-【字符串】字符串逆序" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-flink-side-output" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/06/13/【字符串】字符串逆序/" class="article-date">
-      <time datetime="2017-06-12T16:00:00.000Z" itemprop="datePublished">2017-06-13</time>
+      <a href="/2019/08/18/flink-side-output/" class="article-date">
+      <time datetime="2019-08-17T16:00:00.000Z" itemprop="datePublished">2019-08-18</time>
 </a>
     </div>
   
@@ -282,7 +278,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      字符串
+      Flink 从0到1学习 —— 如何使用 Side Output 来分流？
     </h1>
   
 
@@ -293,7 +289,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字符串/">字符串</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -303,57 +299,106 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="题目一："><a href="#题目一：" class="headerlink" title="题目一："></a>题目一：</h4><p>如果一个字符串 str ，把字符串 str 前面的任意部分挪到后面去形成的字符串叫做 str 的旋转词。比如 str = “ 1234 ” ， 那么 str 的旋转词有 “ 1234 ” ， “ 2341 ” ， “ 3412 ” ， “ 4123 ” 。给定两个字符串 a 和 b ，请判断 a 和 b 是否互为旋转词？<br><a id="more"></a><br>举例：</p>
-<p>a = “ cdab “ , b = “ abcd “ 。返回 true。</p>
-<p>a = “ 1ab2 “ , b = “ ab12 “ 。返回 false。</p>
-<p>a = “ 2ab1 “ , b= “ ab12 “ 。 返回 true。</p>
-<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>最优解时间复杂度为 O(N)</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前在 <a href="http://www.54tianzhisheng.cn/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a> 讲过 Flink 使用连续的 Split 会有问题，当时提供了几种解决方法，有一种方法就是使用 Side Output 来进行，当时留了个余念，那么就在这篇文章详细的讲一波，教大家如何使用 Side Output 来分流。</p>
+<a id="more"></a>
+<h3 id="Side-Output"><a href="#Side-Output" class="headerlink" title="Side Output"></a>Side Output</h3><p>通常我们在处理数据的时候，有时候想对不同情况的数据进行不同的处理，那么就需要把数据流进行分流。比如我们在那篇文章里面的例子：需要将从 Kafka 过来的告警和恢复数据进行分类拆分，然后在对每种数据再分为告警数据和恢复数据。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-06-12-141928.jpg" alt=""></p>
+<p>如果是使用 filter 来进行拆分，也能满足我们的需求，但每次筛选过滤都要保留整个流，然后通过遍历整个流来获取相应的数据，显然很浪费性能。假如能够在一个流里面就进行多次输出就好了，恰好 Flink 的 Side Output 则提供了这样的功能。</p>
+<h3 id="如何使用？"><a href="#如何使用？" class="headerlink" title="如何使用？"></a>如何使用？</h3><p>要使用 Side Output 的话，你首先需要做的是定义一个 OutputTag 来标识 Side Output，代表这个 Tag 是要收集哪种类型的数据，如果是要收集多种不一样类型的数据，那么你就需要定义多种 OutputTag。例如：如果我要将告警/恢复的数据分为机器、容器、中间件等的数据，那么我们起码就得定义三个 OutputTag，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> OutputTag&lt;AlertEvent&gt; middleware = <span class="keyword">new</span> OutputTag&lt;AlertEvent&gt;(<span class="string">"MIDDLEWARE"</span>) &#123;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> OutputTag&lt;AlertEvent&gt; machine = <span class="keyword">new</span> OutputTag&lt;AlertEvent&gt;(<span class="string">"MACHINE"</span>) &#123;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> OutputTag&lt;AlertEvent&gt; docker = <span class="keyword">new</span> OutputTag&lt;AlertEvent&gt;(<span class="string">"DOCKER"</span>) &#123;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>然后呢，你可以使用下面几种函数来处理数据，在处理数据的过程中，进行判断将不同种类型的数据存到不同的 OutputTag 中去。</p>
 <ul>
-<li>先判断字符串 a 和 b 是否长度相等。</li>
-<li>如果长度相等，生成 a + a 的大字符串。</li>
-<li>然后判断大字符串中是否包含 b 字符串。（使用 kmp 算法判断）如果大字符串中包含字符串 b ，那么字符串 a 和 b 就互为旋转词。</li>
+<li>ProcessFunction</li>
+<li>KeyedProcessFunction</li>
+<li>CoProcessFunction</li>
+<li>ProcessWindowFunction</li>
+<li>ProcessAllWindowFunction</li>
 </ul>
-<p>举例：</p>
-<p>a = “ 1234 “</p>
-<p>a + a = “ 12341234 “</p>
-<p>很明显发现，如果字符串 a 的长度为 N，在 a + a 的大字符串中，任意一个长度为 N 的子串都是 a 的旋转词。</p>
-<hr>
-<h4 id="题目二："><a href="#题目二：" class="headerlink" title="题目二："></a>题目二：</h4><p>给定一个字符串 a， 请在单词间做逆序调整。</p>
-<p>举例：</p>
-<p>“ pig  loves  dog “ 逆序成 “ dog  loves  pig “ 。</p>
-<p>“ I’m  a  student. “ 逆序成 “ student.  a  I’m “</p>
-<h4 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h4><ul>
-<li>实现将字符串局部所有字符逆序的函数 f</li>
-<li>利用 f 将字符串所有字符逆序</li>
-<li>找到逆序后的字符串中每一个单词的区域，利用 f 将每一个单词的区域逆序</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20170121132530062?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<hr>
-<h4 id="题目三："><a href="#题目三：" class="headerlink" title="题目三："></a>题目三：</h4><p>给定一个字符串 a 和一个整数 i。N为字符串的长度，i 为 a 中的位置，将 a [ 0 … i ] 移到右侧，a [ i  + 1 … N - 1 ]移到左侧。</p>
-<p>举例：</p>
-<p>a = “ ABCDE “ ，i = 2 。将 str 调整为 “ DEABC “ 。</p>
-<p>要求：时间复杂度为 O(N)，额外空间复杂度为 O(1)。</p>
-<h4 id="思路：-2"><a href="#思路：-2" class="headerlink" title="思路："></a>思路：</h4><ul>
-<li><p>先将 a[ 0 … i ] 部分的字符逆序</p>
-<p><img src="http://img.blog.csdn.net/20170121132658185?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-<li><p>再将 a[ i + 1 … N - 1 ] 部分的字符逆序</p>
-<p><img src="http://img.blog.csdn.net/20170121132714935?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-<li><p>最后将整体的字符 a 逆序</p>
-<p><img src="http://img.blog.csdn.net/20170121132729920?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-</ul>
-<hr>
-<h4 id="题目四："><a href="#题目四：" class="headerlink" title="题目四："></a>题目四：</h4><p>给定一个字符串类型的数组 strs，请找到一种拼接顺序，使得将所有的字符串拼接起来组成的大字符串是所有可能性中字典顺序最小的，并返回这个字符串。</p>
-<p>举例：</p>
-<p>strs = [ “ abc “ ,  “ de “ ]，可以拼接成 “ abcde “，也可以拼接成 “ deabc “，但是前者的字典顺序更小，所以返回 “  abcde “ 。</p>
-<p>strs = [ “ b “,  “ ba “ ], 可以拼接成 “ bba “, 也可以拼接成 “ bab “,但是后者的字典顺序更小，所以返回 “ bab “。</p>
-<h4 id="思路：-3"><a href="#思路：-3" class="headerlink" title="思路："></a>思路：</h4><p>最优解的时间复杂度O(N*logN)，其实质是一种排序的实现。</p>
-<p><img src="http://img.blog.csdn.net/20170121132805577?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> <img src="http://img.blog.csdn.net/20170121132820828?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHpzXzEwNDEyMTgxMjk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>方案二中是比较两个字符串彼此拼接后的字典顺序，所以能成功。</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fp3jkmizmpj30o00didgn.jpg" alt=""></p>
+<p>比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//dataStream 是总的数据流</span></span><br><span class="line">SingleOutputStreamOperator&lt;AlertEvent, AlertEvent&gt; outputStream = dataStream.process(<span class="keyword">new</span> ProcessFunction&lt;AlertEvent, AlertEvent&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processElement</span><span class="params">(AlertEvent value, Context ctx, Collector&lt;AlertEvent&gt; out)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"MACHINE"</span>.equals(value.type)) &#123;</span><br><span class="line">            ctx.output(machine, value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"DOCKER"</span>.equals(value.type)) &#123;</span><br><span class="line">            ctx.output(docker, value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"MIDDLEWARE"</span>.equals(value.type)) &#123;</span><br><span class="line">            ctx.output(middleware, value);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//其他的业务逻辑</span></span><br><span class="line">            out.collect(value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>好了，既然上面我们已经将不同类型的数据进行放到不同的 OutputTag 里面了，那么我们该如何去获取呢？你可以使用 getSideOutput 方法来获取不同 OutputTag 的数据，比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//机器相关的告警&amp;恢复数据</span></span><br><span class="line">outputStream.getSideOutput(machine).print();</span><br><span class="line"></span><br><span class="line"><span class="comment">//容器相关的告警&amp;恢复数据</span></span><br><span class="line">outputStream.getSideOutput(docker).print();</span><br><span class="line"></span><br><span class="line"><span class="comment">//中间件相关的告警&amp;恢复数据</span></span><br><span class="line">outputStream.getSideOutput(middleware).print();</span><br></pre></td></tr></table></figure>
+<p>这样你就可以获取到 Side Output 数据了。</p>
+<p>另外你还可以看下我在 Github 放的一个完整 demo 代码: <a href="https://github.com/zhisheng17/flink-learning/blob/master/flink-learning-examples/src/main/java/com/zhisheng/examples/streaming/sideoutput/Main.java">https://github.com/zhisheng17/flink-learning/blob/master/flink-learning-examples/src/main/java/com/zhisheng/examples/streaming/sideoutput/Main.java</a></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文讲了如何使用 Side Output 来进行分流，比较简单，大家可以稍微阅读一下 demo 代码就可以很清楚了解。</p>
+<p>本文地址是：<a href="http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/">http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/</a></p>
+<h3 id="Github-代码仓库"><a href="#Github-代码仓库" class="headerlink" title="Github 代码仓库"></a>Github 代码仓库</h3><p><a href="https://github.com/zhisheng17/flink-learning/">https://github.com/zhisheng17/flink-learning/</a></p>
+<p>以后这个项目的所有代码都将放在这个仓库里，包含了自己学习 flink 的一些 demo 和博客</p>
+<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>1、<a href="http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/">Flink 从0到1学习 —— Apache Flink 介绍</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2018/09/18/flink-install">Flink 从0到1学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">Flink 从0到1学习 —— Flink 配置文件详解</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">Flink 从0到1学习 —— Data Source 介绍</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/">Flink 从0到1学习 —— 如何自定义 Data Source ？</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2018/10/29/flink-sink/">Flink 从0到1学习 —— Data Sink 介绍</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/">Flink 从0到1学习 —— 如何自定义 Data Sink ？</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2018/11/04/Flink-Data-transformation/">Flink 从0到1学习 —— Flink Data transformation(转换)</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/">Flink 从0到1学习 —— 介绍 Flink 中的 Stream Windows</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2018/12/11/Flink-time/">Flink 从0到1学习 —— Flink 中的几种 Time 详解</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 ElasticSearch</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/01/05/Flink-run/">Flink 从0到1学习 —— Flink 项目如何运行？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/01/06/Flink-Kafka-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Kafka</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/">Flink 从0到1学习 —— Flink JobManager 高可用性配置</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/01/14/Flink-parallelism-slot/">Flink 从0到1学习 —— Flink parallelism 和 Slot 介绍</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/01/15/Flink-MySQL-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></p>
+<p>17、<a href="http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></p>
+<p>18、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HBase</a></p>
+<p>19、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HDFS</a></p>
+<p>20、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Redis</a></p>
+<p>21、<a href="https://t.zsxq.com/uVbi2nq">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Cassandra</a></p>
+<p>22、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Flume</a></p>
+<p>23、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 InfluxDB</a></p>
+<p>24、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RocketMQ</a></p>
+<p>25、<a href="http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/">Flink 从0到1学习 —— 你上传的 jar 包藏到哪里去了</a></p>
+<p>26、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— 你的 Flink job 日志跑到哪里去了</a></p>
+<p>27、<a href="http://www.54tianzhisheng.cn/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></p>
+<p>28、<a href="http://www.54tianzhisheng.cn/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></p>
+<p>29、<a href="http://www.54tianzhisheng.cn/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></p>
+<p>30、<a href="http://www.54tianzhisheng.cn/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></p>
+<p>31、<a href="http://www.54tianzhisheng.cn/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></p>
+<p>32、<a href="http://www.54tianzhisheng.cn/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></p>
+<p>33、<a href="http://www.54tianzhisheng.cn/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></p>
+<p>34、<a href="http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></p>
+<p>35、<a href="http://www.54tianzhisheng.cn/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></p>
+<p>36、<a href="http://www.54tianzhisheng.cn/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></p>
+<p>37、<a href="http://www.54tianzhisheng.cn/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></p>
+<p>38、<a href="http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></p>
+<p>39、<a href="http://www.54tianzhisheng.cn/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></p>
+<p>40、<a href="http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/">Flink 全网最全资源（视频、博客、PPT、入门、实战、源码解析、问答等持续更新）</a></p>
+<p>41、<a href="https://mp.weixin.qq.com/s/ok-YwuVbwAVtJz7hUCiZxg">Flink 灵魂两百问，这谁顶得住？</a></p>
+<p>42、<a href="http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></p>
+<h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><p>1、<a href="http://www.54tianzhisheng.cn/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/tags/Flink/">Flink 源码解析—— local 模式启动流程</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— standalone session 模式启动流程</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></p>
+<p>17、<a href="http://www.54tianzhisheng.cn/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></p>
+<p>18、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-core</a></p>
+<p>19、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-datadog</a></p>
+<p>20、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-dropwizard</a></p>
+<p>21、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-graphite</a></p>
+<p>22、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-influxdb</a></p>
+<p>23、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-jmx</a></p>
+<p>24、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-slf4j</a></p>
+<p>25、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-statsd</a></p>
+<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-prometheus</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg" alt=""></p>
+<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg" alt=""></p>
+<p>27、<a href="http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></p>
+<p>28、<a href="https://t.zsxq.com/UvrRNJM">大数据重磅炸弹——实时计算框架 Flink</a></p>
+<p>29、<a href="https://t.zsxq.com/QVFqjea">Flink Checkpoint-轻量级分布式快照</a></p>
+<p>30、<a href="http://www.54tianzhisheng.cn/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></p>
 
       
       
@@ -409,13 +454,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/06/13/【字符串】字符串逆序/">字符串</a></p>
+        <p><span>本文标题:</span><a href="/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 zhisheng 的个人博客">zhisheng</a></p>
-        <p><span>发布时间:</span>2017年06月13日 - 00时00分</p>
-        <p><span>最后更新:</span>2018年03月07日 - 00时05分</p>
+        <p><span>发布时间:</span>2019年08月18日 - 00时00分</p>
+        <p><span>最后更新:</span>2019年08月18日 - 16时28分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/06/13/【字符串】字符串逆序/" title="字符串">http://www.54tianzhisheng.cn/2017/06/13/【字符串】字符串逆序/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2017/06/13/【字符串】字符串逆序/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/18/flink-side-output/" title="Flink 从0到1学习 —— 如何使用 Side Output 来分流？">http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -428,18 +473,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/06/13/【字符串】判断两字符串是否互为旋转词？/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/12/31/Flink-resources/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          【字符串】判断两字符串是否互为旋转词？
+          Flink 全网最全资源（视频、博客、PPT、入门、实战、源码解析、问答等持续更新）
         
       </div>
     </a>
   
   
-    <a href="/2017/06/13/奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True-/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True?</div>
+    <a href="/2019/08/06/flink-streaming-system/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">你公司到底需不需要引入实时计算引擎？</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -450,7 +495,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#题目一："><span class="toc-number">1.</span> <span class="toc-text">题目一：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#思路："><span class="toc-number">2.</span> <span class="toc-text">思路：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#题目二："><span class="toc-number">3.</span> <span class="toc-text">题目二：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#思路：-1"><span class="toc-number">4.</span> <span class="toc-text">思路：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#题目三："><span class="toc-number">5.</span> <span class="toc-text">题目三：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#思路：-2"><span class="toc-number">6.</span> <span class="toc-text">思路：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#题目四："><span class="toc-number">7.</span> <span class="toc-text">题目四：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#思路：-3"><span class="toc-number">8.</span> <span class="toc-text">思路：</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Side-Output"><span class="toc-number">2.</span> <span class="toc-text">Side Output</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何使用？"><span class="toc-number">3.</span> <span class="toc-text">如何使用？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Github-代码仓库"><span class="toc-number">5.</span> <span class="toc-text">Github 代码仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客"><span class="toc-number">6.</span> <span class="toc-text">博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码解析"><span class="toc-number">7.</span> <span class="toc-text">源码解析</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -516,13 +561,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/06/13/【字符串】判断两字符串是否互为旋转词？/" title="上一篇: 【字符串】判断两字符串是否互为旋转词？">
+            <a href="/2019/12/31/Flink-resources/" title="上一篇: Flink 全网最全资源（视频、博客、PPT、入门、实战、源码解析、问答等持续更新）">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/06/13/奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True-/" title="下一篇: 奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True?">
+            <a href="/2019/08/06/flink-streaming-system/" title="下一篇: 你公司到底需不需要引入实时计算引擎？">
                 <i class="fa fa-angle-right"></i>
             </a>
         
