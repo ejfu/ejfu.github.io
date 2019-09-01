@@ -257,6 +257,69 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Flink-code-JobManager-submitJob" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/27/Flink-code-JobManager-submitJob/" class="article-date">
+      <time datetime="2019-03-26T16:00:00.000Z" itemprop="datePublished">2019-03-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>JobManager 处理 SubmitJob<br>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2019/03/27/Flink-code-JobManager-submitJob/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Flink-code-ExecutionGraph" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1166,7 +1229,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/ieWce6.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>写这篇文章其实也是知识星球里面的一个小伙伴问了这样一个问题：</p>
+<blockquote>
+<p>通过 flink UI 仪表盘提交的 jar 是存储在哪个目录下？</p>
+</blockquote>
           
       
       
@@ -1355,7 +1421,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/1tNeFo.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前有文章 <a href="http://www.54tianzhisheng.cn/2019/01/06/Flink-Kafka-sink/">《从0到1学习Flink》—— Flink 写入数据到 Kafka</a> 写过 Flink 将处理后的数据后发到 Kafka 消息队列中去，当然我们常用的消息队列可不止这一种，还有 RocketMQ、RabbitMQ 等，刚好 Flink 也支持将数据写入到 RabbitMQ，所以今天我们就来写篇文章讲讲如何将 Flink 处理后的数据写入到 RabbitMQ。</p>
           
       
       
@@ -1418,7 +1484,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/3Cbxab.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前其实在 <a href="http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/">《从0到1学习Flink》—— 如何自定义 Data Sink ？</a> 文章中其实已经写了点将数据写入到 MySQL，但是一些配置化的东西当时是写死的，不能够通用，最近知识星球里有朋友叫我: 写个从 kafka 中读取数据，经过 Flink 做个预聚合，然后创建数据库连接池将数据批量写入到 mysql 的例子。</p>
           
       
       
@@ -1436,69 +1502,6 @@
       
         <p class="article-more-link">
           <a  href="/2019/01/15/Flink-MySQL-sink/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Flink-parallelism-slot" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/01/14/Flink-parallelism-slot/" class="article-date">
-      <time datetime="2019-01-13T16:00:00.000Z" itemprop="datePublished">2019-01-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/14/Flink-parallelism-slot/">Flink 从 0 到 1 学习 —— Flink parallelism 和 Slot 介绍</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-04-24-171741.jpg" alt=""><br>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2019/01/14/Flink-parallelism-slot/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

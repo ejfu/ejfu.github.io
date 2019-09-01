@@ -257,6 +257,70 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Flink-parallelism-slot" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/01/14/Flink-parallelism-slot/" class="article-date">
+      <time datetime="2019-01-13T16:00:00.000Z" itemprop="datePublished">2019-01-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/14/Flink-parallelism-slot/">Flink 从 0 到 1 学习 —— Flink parallelism 和 Slot 介绍</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之所以写这个是因为前段时间自己的项目出现过这样的一个问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Caused by: akka.pattern.AskTimeoutException: </span><br><span class="line">Ask timed out on [Actor[akka://flink/user/taskmanager_0#15608456]] after [10000 ms]. </span><br><span class="line">Sender[null] sent message of type &quot;org.apache.flink.runtime.rpc.messages.LocalRpcInvocation&quot;.</span><br></pre></td></tr></table></figure>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2019/01/14/Flink-parallelism-slot/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Flink-JobManager-High-availability" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -284,7 +348,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/duhRAK.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前在 <a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">《从0到1学习Flink》—— Flink 配置文件详解</a> 讲过 Flink 的配置，但是后面陆续有人来问我一些配置相关的东西，在加上我现在对 Flink 也更熟悉了些，这里我就再写下 Flink JobManager 的配置相关信息。</p>
           
       
       
@@ -347,7 +411,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/XYl9Ug.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前文章 <a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">《从0到1学习Flink》—— Flink 写入数据到 ElasticSearch</a> 写了如何将 Kafka 中的数据存储到 ElasticSearch 中，里面其实就已经用到了 Flink 自带的 Kafka source connector（FlinkKafkaConsumer）。存入到 ES 只是其中一种情况，那么如果我们有多个地方需要这份通过 Flink 转换后的数据，是不是又要我们继续写个 sink 的插件呢？确实，所以 Flink 里面就默认支持了不少 sink，比如也支持 Kafka sink connector（FlinkKafkaProducer），那么这篇文章我们就讲讲如何将数据写入到 Kafka。</p>
           
       
       
@@ -410,7 +474,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/HXmHJo.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前写了不少 Flink 文章了，也有不少 demo，但是文章写的时候都是在本地直接运行 Main 类的 main 方法，其实 Flink 是支持在 UI 上上传 Flink Job 的 jar 包，然后运行得。最开始在第一篇 <a href="http://www.54tianzhisheng.cn/2018/09/18/flink-install/">《从0到1学习Flink》—— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a> 中其实提到过了 Flink 自带的 UI 界面，今天我们就来看看如何将我们的项目打包在这里发布运行。</p>
           
       
       
@@ -473,7 +537,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/9qJpA4.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前面 FLink 的文章中我们已经介绍了说 Flink 已经有很多自带的 Connector。</p>
           
       
       
@@ -536,7 +600,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/BuSGR2.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Flink 在流程序中支持不同的 <strong>Time</strong> 概念，就比如有 Processing Time、Event Time 和 Ingestion Time。</p>
           
       
       
@@ -599,7 +663,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/SdRTWm.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>目前有许多数据分析的场景从批处理到流处理的演变， 虽然可以将批处理作为流处理的特殊情况来处理，但是分析无穷集的流数据通常需要思维方式的转变并且具有其自己的术语（例如，“windowing（窗口化）”、“at-least-once（至少一次）”、“exactly-once（只有一次）” ）。</p>
           
       
       
@@ -662,7 +726,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/3615BN.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在第一篇介绍 Flink 的文章 <a href="http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/#Flink-%E7%A8%8B%E5%BA%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%B5%81%E7%BB%93%E6%9E%84">《《从0到1学习Flink》—— Apache Flink 介绍》</a> 中就说过 Flink 程序的结构</p>
           
       
       
@@ -725,7 +789,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-04-24-171459.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前篇文章 <a href="http://www.54tianzhisheng.cn/2018/10/29/flink-sink/">《从0到1学习Flink》—— Data Sink 介绍</a> 介绍了 Flink Data Sink，也介绍了 Flink 自带的 Sink，那么如何自定义自己的 Sink 呢？这篇文章将写一个 demo 教大家将从 Kafka Source 的数据 Sink 到 MySQL 中去。</p>
           
       
       
@@ -788,7 +852,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-04-24-171600.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在 <a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">《从0到1学习Flink》—— Data Source 介绍</a> 文章中，我给大家介绍了 Flink Data Source 以及简短的介绍了一下自定义 Data Source，这篇文章更详细的介绍下，并写一个 demo 出来让大家理解。</p>
           
       
       
@@ -851,7 +915,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/mes9Gk.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>再上一篇文章中 <a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">《从0到1学习Flink》—— Data Source 介绍</a> 讲解了 Flink Data Source ，那么这里就来讲讲 Flink Data Sink 吧。</p>
           
       
       
@@ -914,7 +978,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/01CVPy.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Data Sources 是什么呢？就字面意思其实就可以知道：数据来源。</p>
           
       
       
@@ -977,7 +1041,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/I7XU9D.jpg" alt=""></p>
+              <p>前面文章我们已经知道 Flink 是什么东西了，安装好 Flink 后，我们再来看下安装路径下的配置文件吧。</p>
           
       
       
@@ -1040,7 +1104,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/60kY3A.jpg" alt=""></p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Flink 是一种流式计算框架，为什么我会接触到 Flink 呢？</p>
           
       
       
@@ -1103,7 +1167,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/dI5o9o.jpg" alt="009"></p>
+              <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>1、安装查看 Java 的版本号，推荐使用 Java 8。</p>
           
       
       
@@ -1436,69 +1500,6 @@
       
         <p class="article-more-link">
           <a  href="/2018/08/05/es-code01/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-why-see-es-code" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/04/why-see-es-code/" class="article-date">
-      <time datetime="2018-08-03T16:00:00.000Z" itemprop="datePublished">2018-08-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/04/why-see-es-code/">渣渣菜鸡为什么要看 ElasticSearch 源码？</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-04-25-134007.jpg" alt=""></p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ElasticSearch/">ElasticSearch</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/08/04/why-see-es-code/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
