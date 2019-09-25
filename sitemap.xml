@@ -4,14 +4,21 @@
   <url>
     <loc>http://www.54tianzhisheng.cn/2020/01/01/bigdata-ads/</loc>
     
-    <lastmod>2019-09-25T01:52:17.000Z</lastmod>
+    <lastmod>2019-09-25T03:40:34.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/</loc>
+    
+    <lastmod>2019-09-25T03:39:00.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://www.54tianzhisheng.cn/2019/08/26/flink-back-pressure/</loc>
     
-    <lastmod>2019-09-25T01:19:33.000Z</lastmod>
+    <lastmod>2019-09-25T02:22:39.000Z</lastmod>
     
   </url>
   
@@ -114,13 +121,6 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/11/04/Flink-Data-transformation/</loc>
-    
-    <lastmod>2019-09-17T15:13:34.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
@@ -128,7 +128,7 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/11/04/Flink-Data-transformation/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
     
@@ -142,7 +142,7 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
     
@@ -150,6 +150,13 @@
   
   <url>
     <loc>http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/</loc>
+    
+    <lastmod>2019-09-17T15:13:34.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
     
@@ -226,14 +233,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/06/12/flink-split/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/06/18/flink-state/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/06/18/flink-state/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/06/12/flink-split/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
     
@@ -275,13 +282,6 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/06/16/flink-sql-oppo/</loc>
-    
-    <lastmod>2019-09-17T15:13:34.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
@@ -289,9 +289,16 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/06/16/flink-sql-oppo/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/</loc>
+    
+    <lastmod>2019-09-01T12:02:46.000Z</lastmod>
     
   </url>
   
@@ -304,13 +311,6 @@
   
   <url>
     <loc>http://www.54tianzhisheng.cn/2019/03/21/Flink-code-JobGraph/</loc>
-    
-    <lastmod>2019-09-01T12:02:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/</loc>
     
     <lastmod>2019-09-01T12:02:46.000Z</lastmod>
     
@@ -366,13 +366,6 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/23/Flink-code-checkpoint/</loc>
-    
-    <lastmod>2019-09-01T12:02:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.54tianzhisheng.cn/2019/07/04/Flink-code-clients/</loc>
     
     <lastmod>2019-09-01T12:02:46.000Z</lastmod>
@@ -380,7 +373,21 @@
   </url>
   
   <url>
+    <loc>http://www.54tianzhisheng.cn/2019/03/23/Flink-code-checkpoint/</loc>
+    
+    <lastmod>2019-09-01T12:02:46.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.54tianzhisheng.cn/2019/03/25/Flink-code-jobmanager/</loc>
+    
+    <lastmod>2019-09-01T12:02:46.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.54tianzhisheng.cn/2019/03/19/Flink-code-streaming-wordcount-start/</loc>
     
     <lastmod>2019-09-01T12:02:46.000Z</lastmod>
     
@@ -401,7 +408,7 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/19/Flink-code-streaming-wordcount-start/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/</loc>
     
     <lastmod>2019-09-01T12:02:46.000Z</lastmod>
     
@@ -409,13 +416,6 @@
   
   <url>
     <loc>http://www.54tianzhisheng.cn/2019/03/14/Flink-code-structure/</loc>
-    
-    <lastmod>2019-09-01T12:02:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/</loc>
     
     <lastmod>2019-09-01T12:02:46.000Z</lastmod>
     
