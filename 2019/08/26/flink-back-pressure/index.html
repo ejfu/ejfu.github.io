@@ -53,7 +53,12 @@
 <meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-010155.jpg">
 <meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-005033.jpg">
 <meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-005112.jpg">
-<meta property="og:updated_time" content="2019-09-25T01:02:05.000Z">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-150802.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-06-13-130351.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg">
+<meta property="og:updated_time" content="2019-09-25T01:06:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一文彻底搞懂 Flink 网络流控与反压机制">
 <meta name="twitter:description" content="看完本文，你能get到以下知识 Flink 流处理为什么需要网络流控？ Flink V1.5 版之前网络流控介绍">
@@ -462,12 +467,96 @@
 <p>如图，使用 Flink 1.5+，即使是非常低的 Buffer timeout（例如1ms，对于低延迟场景）也提供高达超时默认参数（100ms）75％ 的最大吞吐，但会缓存更少的数据。但是笔者仍然不理解为什么 timeout 设置为0时，吞吐量竟然能比 Flink 1.4 的吞吐量提高那么多。Credit 只是解决了反压的问题，并不能优化低延迟的吞吐量。杨华老师的回答是网络协议栈做了其他优化而且性能测试是在特定场景下做的。笔者后续会继续深入学习研究 Flink 网络通信来解决笔者目前的疑问。</p>
 <p>本文作者：<strong>范磊</strong></p>
 <p>原文链接地址：<a href="">https://www.jianshu.com/p/2779e73abcb8</a></p>
-<p>参考文献：</p>
-<p><a href="https://flink.apache.org">Flink官网</a></p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="https://flink.apache.org">Flink官网</a></p>
 <p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fflink-china%2Fflink-training-course">flink-china系列课程—-2.7 Flink网络流控及反压剖析</a></p>
 <p>Flink 官网两篇关于 Flink 网络协议栈的博客:</p>
 <p><a href="https://flink.apache.org/2019/06/05/flink-network-stack.html#inflicting-backpressure-1">A Deep-Dive into Flink’s Network Stack</a></p>
 <p><a href="https://flink.apache.org/2019/07/23/flink-network-stack-2.html">Flink Network Stack Vol. 2: Monitoring, Metrics, and that Backpressure Thing</a></p>
+<p>另外我自己整理了些 Flink 的学习资料，目前已经全部放到微信公众号（zhisheng）了，你可以回复关键字：<strong>Flink</strong> 即可无条件获取到。另外也可以加我微信 你可以加我的微信：<strong>yuanblog_tzs</strong>，探讨技术！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg" alt=""></p>
+<p>更多私密资料请加入知识星球！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-150802.jpg" alt=""></p>
+<p>另外你如果感兴趣的话，也可以关注我的公众号。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-06-13-130351.jpg" alt=""></p>
+<h3 id="Github-代码仓库"><a href="#Github-代码仓库" class="headerlink" title="Github 代码仓库"></a>Github 代码仓库</h3><p><a href="https://github.com/zhisheng17/flink-learning/">https://github.com/zhisheng17/flink-learning/</a></p>
+<p>以后这个项目的所有代码都将放在这个仓库里，包含了自己学习 flink 的一些 demo 和博客。</p>
+<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>1、<a href="http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/">Flink 从0到1学习 —— Apache Flink 介绍</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2018/09/18/flink-install">Flink 从0到1学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">Flink 从0到1学习 —— Flink 配置文件详解</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">Flink 从0到1学习 —— Data Source 介绍</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/">Flink 从0到1学习 —— 如何自定义 Data Source ？</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2018/10/29/flink-sink/">Flink 从0到1学习 —— Data Sink 介绍</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/">Flink 从0到1学习 —— 如何自定义 Data Sink ？</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2018/11/04/Flink-Data-transformation/">Flink 从0到1学习 —— Flink Data transformation(转换)</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/">Flink 从0到1学习 —— 介绍 Flink 中的 Stream Windows</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2018/12/11/Flink-time/">Flink 从0到1学习 —— Flink 中的几种 Time 详解</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 ElasticSearch</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/01/05/Flink-run/">Flink 从0到1学习 —— Flink 项目如何运行？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/01/06/Flink-Kafka-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Kafka</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/">Flink 从0到1学习 —— Flink JobManager 高可用性配置</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/01/14/Flink-parallelism-slot/">Flink 从0到1学习 —— Flink parallelism 和 Slot 介绍</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/01/15/Flink-MySQL-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></p>
+<p>17、<a href="http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></p>
+<p>18、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HBase</a></p>
+<p>19、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HDFS</a></p>
+<p>20、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Redis</a></p>
+<p>21、<a href="https://t.zsxq.com/uVbi2nq">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Cassandra</a></p>
+<p>22、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Flume</a></p>
+<p>23、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 InfluxDB</a></p>
+<p>24、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RocketMQ</a></p>
+<p>25、<a href="http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/">Flink 从0到1学习 —— 你上传的 jar 包藏到哪里去了</a></p>
+<p>26、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— 你的 Flink job 日志跑到哪里去了</a></p>
+<p>27、<a href="http://www.54tianzhisheng.cn/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></p>
+<p>28、<a href="http://www.54tianzhisheng.cn/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></p>
+<p>29、<a href="http://www.54tianzhisheng.cn/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></p>
+<p>30、<a href="http://www.54tianzhisheng.cn/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></p>
+<p>31、<a href="http://www.54tianzhisheng.cn/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></p>
+<p>32、<a href="http://www.54tianzhisheng.cn/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></p>
+<p>33、<a href="http://www.54tianzhisheng.cn/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></p>
+<p>34、<a href="http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></p>
+<p>35、<a href="http://www.54tianzhisheng.cn/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></p>
+<p>36、<a href="http://www.54tianzhisheng.cn/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></p>
+<p>37、<a href="http://www.54tianzhisheng.cn/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></p>
+<p>38、<a href="http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></p>
+<p>39、<a href="http://www.54tianzhisheng.cn/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></p>
+<p>40、<a href="http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/">Flink 全网最全资源（视频、博客、PPT、入门、实战、源码解析、问答等持续更新）</a></p>
+<p>41、<a href="https://mp.weixin.qq.com/s/ok-YwuVbwAVtJz7hUCiZxg">Flink 灵魂两百问，这谁顶得住？</a></p>
+<p>42、<a href="http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></p>
+<p>43、<a href="http://www.54tianzhisheng.cn/2019/08/06/flink-streaming-system/">你公司到底需不需要引入实时计算引擎？</a></p>
+<p>44、<a href="http://www.54tianzhisheng.cn/2019/08/19/flink/">一文让你彻底了解大数据实时计算引擎 Flink</a></p>
+<h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><p>1、<a href="http://www.54tianzhisheng.cn/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/tags/Flink/">Flink 源码解析—— local 模式启动流程</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— standalone session 模式启动流程</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></p>
+<p>17、<a href="http://www.54tianzhisheng.cn/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></p>
+<p>18、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-core</a></p>
+<p>19、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-datadog</a></p>
+<p>20、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-dropwizard</a></p>
+<p>21、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-graphite</a></p>
+<p>22、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-influxdb</a></p>
+<p>23、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-jmx</a></p>
+<p>24、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-slf4j</a></p>
+<p>25、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-statsd</a></p>
+<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-prometheus</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg" alt=""></p>
+<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg" alt=""></p>
+<p>27、<a href="http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></p>
+<p>28、<a href="https://t.zsxq.com/UvrRNJM">大数据重磅炸弹——实时计算框架 Flink</a></p>
+<p>29、<a href="https://t.zsxq.com/QVFqjea">Flink Checkpoint-轻量级分布式快照</a></p>
+<p>30、<a href="http://www.54tianzhisheng.cn/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></p>
 
       
       
@@ -526,7 +615,7 @@
         <p><span>本文标题:</span><a href="/2019/08/26/flink-back-pressure/">一文彻底搞懂 Flink 网络流控与反压机制</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 zhisheng 的个人博客">zhisheng</a></p>
         <p><span>发布时间:</span>2019年08月26日 - 00时00分</p>
-        <p><span>最后更新:</span>2019年09月25日 - 09时02分</p>
+        <p><span>最后更新:</span>2019年09月25日 - 09时06分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/08/26/flink-back-pressure/" title="一文彻底搞懂 Flink 网络流控与反压机制">http://www.54tianzhisheng.cn/2019/08/26/flink-back-pressure/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2019/08/26/flink-back-pressure/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -569,7 +658,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-流处理为什么需要网络流控？"><span class="toc-number">1.</span> <span class="toc-text">Flink 流处理为什么需要网络流控？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-V1-5-版之前网络流控介绍"><span class="toc-number">2.</span> <span class="toc-text">Flink V1.5 版之前网络流控介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#跨-TaskManager，反压如何向上游传播"><span class="toc-number">2.0.1.</span> <span class="toc-text">跨 TaskManager，反压如何向上游传播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Task-内部，反压如何向上游传播"><span class="toc-number">2.0.2.</span> <span class="toc-text">Task 内部，反压如何向上游传播</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-V1-5-版之前的反压策略存在的问题"><span class="toc-number">3.</span> <span class="toc-text">Flink V1.5 版之前的反压策略存在的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Credit的反压策略实现原理"><span class="toc-number">4.</span> <span class="toc-text">Credit的反压策略实现原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-如何在吞吐量和延迟之间做权衡？"><span class="toc-number">5.</span> <span class="toc-text">Flink 如何在吞吐量和延迟之间做权衡？</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-流处理为什么需要网络流控？"><span class="toc-number">1.</span> <span class="toc-text">Flink 流处理为什么需要网络流控？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-V1-5-版之前网络流控介绍"><span class="toc-number">2.</span> <span class="toc-text">Flink V1.5 版之前网络流控介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#跨-TaskManager，反压如何向上游传播"><span class="toc-number">2.0.1.</span> <span class="toc-text">跨 TaskManager，反压如何向上游传播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Task-内部，反压如何向上游传播"><span class="toc-number">2.0.2.</span> <span class="toc-text">Task 内部，反压如何向上游传播</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-V1-5-版之前的反压策略存在的问题"><span class="toc-number">3.</span> <span class="toc-text">Flink V1.5 版之前的反压策略存在的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Credit的反压策略实现原理"><span class="toc-number">4.</span> <span class="toc-text">Credit的反压策略实现原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-如何在吞吐量和延迟之间做权衡？"><span class="toc-number">5.</span> <span class="toc-text">Flink 如何在吞吐量和延迟之间做权衡？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文献"><span class="toc-number">5.1.</span> <span class="toc-text">参考文献</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Github-代码仓库"><span class="toc-number">5.2.</span> <span class="toc-text">Github 代码仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客"><span class="toc-number">5.3.</span> <span class="toc-text">博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码解析"><span class="toc-number">5.4.</span> <span class="toc-text">源码解析</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
