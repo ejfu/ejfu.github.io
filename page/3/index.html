@@ -275,7 +275,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <p>Job Manager 启动<br>
@@ -338,7 +338,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <p>Standalone session 模式启动流程</p>
@@ -401,7 +401,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <p>Flink 源码项目结构一览</p>
@@ -464,7 +464,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>写这篇文章其实也是知识星球里面的一个小伙伴问了这样一个问题：</p>
@@ -530,7 +530,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-04-25-133346.jpg" alt=""></p>
@@ -593,7 +593,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/VBdn73.jpg" alt=""></p>
@@ -656,7 +656,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前有文章 <a href="http://www.54tianzhisheng.cn/2019/01/06/Flink-Kafka-sink/">《从0到1学习Flink》—— Flink 写入数据到 Kafka</a> 写过 Flink 将处理后的数据后发到 Kafka 消息队列中去，当然我们常用的消息队列可不止这一种，还有 RocketMQ、RabbitMQ 等，刚好 Flink 也支持将数据写入到 RabbitMQ，所以今天我们就来写篇文章讲讲如何将 Flink 处理后的数据写入到 RabbitMQ。</p>
@@ -719,7 +719,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前其实在 <a href="http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/">《从0到1学习Flink》—— 如何自定义 Data Sink ？</a> 文章中其实已经写了点将数据写入到 MySQL，但是一些配置化的东西当时是写死的，不能够通用，最近知识星球里有朋友叫我: 写个从 kafka 中读取数据，经过 Flink 做个预聚合，然后创建数据库连接池将数据批量写入到 mysql 的例子。</p>
@@ -782,7 +782,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之所以写这个是因为前段时间自己的项目出现过这样的一个问题：</p>
@@ -846,7 +846,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前在 <a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">《从0到1学习Flink》—— Flink 配置文件详解</a> 讲过 Flink 的配置，但是后面陆续有人来问我一些配置相关的东西，在加上我现在对 Flink 也更熟悉了些，这里我就再写下 Flink JobManager 的配置相关信息。</p>
@@ -909,7 +909,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前文章 <a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">《从0到1学习Flink》—— Flink 写入数据到 ElasticSearch</a> 写了如何将 Kafka 中的数据存储到 ElasticSearch 中，里面其实就已经用到了 Flink 自带的 Kafka source connector（FlinkKafkaConsumer）。存入到 ES 只是其中一种情况，那么如果我们有多个地方需要这份通过 Flink 转换后的数据，是不是又要我们继续写个 sink 的插件呢？确实，所以 Flink 里面就默认支持了不少 sink，比如也支持 Kafka sink connector（FlinkKafkaProducer），那么这篇文章我们就讲讲如何将数据写入到 Kafka。</p>
@@ -972,7 +972,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前写了不少 Flink 文章了，也有不少 demo，但是文章写的时候都是在本地直接运行 Main 类的 main 方法，其实 Flink 是支持在 UI 上上传 Flink Job 的 jar 包，然后运行得。最开始在第一篇 <a href="http://www.54tianzhisheng.cn/2018/09/18/flink-install/">《从0到1学习Flink》—— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a> 中其实提到过了 Flink 自带的 UI 界面，今天我们就来看看如何将我们的项目打包在这里发布运行。</p>
@@ -1035,7 +1035,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前面 FLink 的文章中我们已经介绍了说 Flink 已经有很多自带的 Connector。</p>
@@ -1098,7 +1098,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Flink 在流程序中支持不同的 <strong>Time</strong> 概念，就比如有 Processing Time、Event Time 和 Ingestion Time。</p>
@@ -1161,7 +1161,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>目前有许多数据分析的场景从批处理到流处理的演变， 虽然可以将批处理作为流处理的特殊情况来处理，但是分析无穷集的流数据通常需要思维方式的转变并且具有其自己的术语（例如，“windowing（窗口化）”、“at-least-once（至少一次）”、“exactly-once（只有一次）” ）。</p>
@@ -1224,7 +1224,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在第一篇介绍 Flink 的文章 <a href="http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/#Flink-%E7%A8%8B%E5%BA%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%B5%81%E7%BB%93%E6%9E%84">《《从0到1学习Flink》—— Apache Flink 介绍》</a> 中就说过 Flink 程序的结构</p>
@@ -1287,7 +1287,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前篇文章 <a href="http://www.54tianzhisheng.cn/2018/10/29/flink-sink/">《从0到1学习Flink》—— Data Sink 介绍</a> 介绍了 Flink Data Sink，也介绍了 Flink 自带的 Sink，那么如何自定义自己的 Sink 呢？这篇文章将写一个 demo 教大家将从 Kafka Source 的数据 Sink 到 MySQL 中去。</p>
@@ -1350,7 +1350,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在 <a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">《从0到1学习Flink》—— Data Source 介绍</a> 文章中，我给大家介绍了 Flink Data Source 以及简短的介绍了一下自定义 Data Source，这篇文章更详细的介绍下，并写一个 demo 出来让大家理解。</p>
@@ -1413,7 +1413,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>再上一篇文章中 <a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">《从0到1学习Flink》—— Data Source 介绍</a> 讲解了 Flink Data Source ，那么这里就来讲讲 Flink Data Sink 吧。</p>
@@ -1476,7 +1476,7 @@
       </header>
       
     
-    <div class="article-entry" itemprop="articleBody" id="article-inner">
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Data Sources 是什么呢？就字面意思其实就可以知道：数据来源。</p>
