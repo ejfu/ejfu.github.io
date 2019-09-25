@@ -264,7 +264,7 @@
 </a>
     </div>
   
-  <div class="article-inner">
+  <div class="article-inner" id="article-inner">
     
       <input type="hidden" class="isFancy" />
     
@@ -291,7 +291,7 @@
       </div>
       
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody" id="article-inner">
       
           
         <p>你知道在 <code>java</code> 中除了 8 种基本类型外，其他的都是类对象以及其引用。所以 <code>&quot;xyz &quot;</code>在 <code>java</code> 中它是一个<code>String</code> 对象.对于 <code>string</code> 类对象来说他的对象值是不能修改的，也就是具有不变性。</p>
@@ -342,6 +342,17 @@
             </div>
           </div>
         </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                id: 'article-inner',
+                blogId: '15013-1569300160626-611',
+                name: 'zhisheng',
+                qrcode: 'http://www.54tianzhisheng.cn/img/wx.jpg',
+                keyword: '1024',
+            });
+        </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
         <script type="text/javascript">
           $(".pay_item").click(function(){
@@ -351,7 +362,7 @@
             $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
           });
           function dashangToggle(){
-            
+
             $(".hide_box").fadeToggle();
             $(".shang_box").fadeToggle();
           }

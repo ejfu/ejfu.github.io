@@ -262,7 +262,7 @@
 </a>
     </div>
   
-  <div class="article-inner">
+  <div class="article-inner" id="article-inner">
     
       <input type="hidden" class="isFancy" />
     
@@ -289,7 +289,7 @@
       </div>
       
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody" id="article-inner">
       
           
         <p>HashMap 和 Hashtable 的比较是 Java 面试中的常见问题，用来考验程序员是否能够正确使用集合类以及是否可以随机应变使用多种思路解决问题。HashMap 的工作原理、ArrayList 与 Vector 的比较以及这个问题是有关 Java 集合框架的最经典的问题。Hashtable 是个过时的集合类，存在于 Java API 中很久了。在 Java 4 中被重写了，实现了 Map 接口，所以自此以后也成了 Java 集合框架中的一部分。Hashtable 和 HashMap 在 Java 面试中相当容易被问到，甚至成为了集合框架面试题中最常被考的问题，所以在参加任何 Java 面试之前，都不要忘了准备这一题。<br><a id="more"></a><br>这篇文章中，我们不仅将会看到 HashMap 和 Hashtable 的区别，还将看到它们之间的相似之处。</p>
@@ -446,6 +446,17 @@
             </div>
           </div>
         </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                id: 'article-inner',
+                blogId: '15013-1569300160626-611',
+                name: 'zhisheng',
+                qrcode: 'http://www.54tianzhisheng.cn/img/wx.jpg',
+                keyword: '1024',
+            });
+        </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
         <script type="text/javascript">
           $(".pay_item").click(function(){
@@ -455,7 +466,7 @@
             $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
           });
           function dashangToggle(){
-            
+
             $(".hide_box").fadeToggle();
             $(".shang_box").fadeToggle();
           }

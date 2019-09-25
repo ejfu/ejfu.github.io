@@ -262,7 +262,7 @@
 </a>
     </div>
   
-  <div class="article-inner">
+  <div class="article-inner" id="article-inner">
     
       <input type="hidden" class="isFancy" />
     
@@ -289,7 +289,7 @@
       </div>
       
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody" id="article-inner">
       
           
         <h3 id="完整代码地址：Python爬虫实战之爬取糗事百科段子"><a href="#完整代码地址：Python爬虫实战之爬取糗事百科段子" class="headerlink" title="完整代码地址：Python爬虫实战之爬取糗事百科段子"></a>完整代码地址：<a href="https://github.com/zhisheng17/Python-Projects/tree/master/qiushibaike">Python爬虫实战之爬取糗事百科段子</a></h3><h3 id="程序代码详解："><a href="#程序代码详解：" class="headerlink" title="程序代码详解："></a>程序代码详解：</h3><ol>
@@ -371,6 +371,17 @@
             </div>
           </div>
         </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                id: 'article-inner',
+                blogId: '15013-1569300160626-611',
+                name: 'zhisheng',
+                qrcode: 'http://www.54tianzhisheng.cn/img/wx.jpg',
+                keyword: '1024',
+            });
+        </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
         <script type="text/javascript">
           $(".pay_item").click(function(){
@@ -380,7 +391,7 @@
             $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
           });
           function dashangToggle(){
-            
+
             $(".hide_box").fadeToggle();
             $(".shang_box").fadeToggle();
           }

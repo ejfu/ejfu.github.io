@@ -261,7 +261,7 @@
 </a>
     </div>
   
-  <div class="article-inner">
+  <div class="article-inner" id="article-inner">
     
       <input type="hidden" class="isFancy" />
     
@@ -288,7 +288,7 @@
       </div>
       
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody" id="article-inner">
       
           
         <p>介绍：ElasticSearch 是一个基于 Lucene 的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于 RESTful web 接口。Elasticsearch 是用 Java 开发的，并作为Apache许可条款下的开放源码发布，是当前流行的企业级搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。</p>
@@ -621,6 +621,17 @@
             </div>
           </div>
         </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                id: 'article-inner',
+                blogId: '15013-1569300160626-611',
+                name: 'zhisheng',
+                qrcode: 'http://www.54tianzhisheng.cn/img/wx.jpg',
+                keyword: '1024',
+            });
+        </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
         <script type="text/javascript">
           $(".pay_item").click(function(){
@@ -630,7 +641,7 @@
             $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
           });
           function dashangToggle(){
-            
+
             $(".hide_box").fadeToggle();
             $(".shang_box").fadeToggle();
           }

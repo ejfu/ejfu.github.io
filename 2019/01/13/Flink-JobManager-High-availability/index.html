@@ -269,7 +269,7 @@
 </a>
     </div>
   
-  <div class="article-inner">
+  <div class="article-inner" id="article-inner">
     
       <input type="hidden" class="isFancy" />
     
@@ -296,7 +296,7 @@
       </div>
       
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody" id="article-inner">
       
           
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前在 <a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">《从0到1学习Flink》—— Flink 配置文件详解</a> 讲过 Flink 的配置，但是后面陆续有人来问我一些配置相关的东西，在加上我现在对 Flink 也更熟悉了些，这里我就再写下 Flink JobManager 的配置相关信息。</p>
@@ -477,6 +477,17 @@
             </div>
           </div>
         </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                id: 'article-inner',
+                blogId: '15013-1569300160626-611',
+                name: 'zhisheng',
+                qrcode: 'http://www.54tianzhisheng.cn/img/wx.jpg',
+                keyword: '1024',
+            });
+        </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
         <script type="text/javascript">
           $(".pay_item").click(function(){
@@ -486,7 +497,7 @@
             $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
           });
           function dashangToggle(){
-            
+
             $(".hide_box").fadeToggle();
             $(".shang_box").fadeToggle();
           }

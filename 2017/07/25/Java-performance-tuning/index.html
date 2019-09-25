@@ -261,7 +261,7 @@
 </a>
     </div>
   
-  <div class="article-inner">
+  <div class="article-inner" id="article-inner">
     
       <input type="hidden" class="isFancy" />
     
@@ -288,7 +288,7 @@
       </div>
       
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody" id="article-inner">
       
           
         <p>昨天写了篇文章 <a href="http://www.54tianzhisheng.cn/2017/04/29/MySQL-select-good/">《MySQL 处理海量数据时的一些优化查询速度方法》</a> ，其实开发中不止数据库要优化，还有我们本身的开发代码也需要优化，这样我们开发的产品才能够得到极致的体验。也许有些人认为这些细小的地方没有啥好修改的，改与不改对运行效率没啥大的影响？首先在我们本地一个人测试下效率是不怎么明显，但是如果到发布上线后，你的用户有几百万，甚至上千万，这些用户同时访问你的网站，那么你的网站是否经得住考验呢，效率那高不高呢，如果效率不高，那么需要多出很多买服务器的经费呢，所以想想还是很有必要注意这些小的细节。今天就讲讲一些 Java 性能调优需要格外注意的一些细节。</p>
@@ -472,6 +472,17 @@
             </div>
           </div>
         </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                id: 'article-inner',
+                blogId: '15013-1569300160626-611',
+                name: 'zhisheng',
+                qrcode: 'http://www.54tianzhisheng.cn/img/wx.jpg',
+                keyword: '1024',
+            });
+        </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
         <script type="text/javascript">
           $(".pay_item").click(function(){
@@ -481,7 +492,7 @@
             $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
           });
           function dashangToggle(){
-            
+
             $(".hide_box").fadeToggle();
             $(".shang_box").fadeToggle();
           }

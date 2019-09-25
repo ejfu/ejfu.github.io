@@ -266,7 +266,7 @@
 </a>
     </div>
   
-  <div class="article-inner">
+  <div class="article-inner" id="article-inner">
     
       <input type="hidden" class="isFancy" />
     
@@ -293,7 +293,7 @@
       </div>
       
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody" id="article-inner">
       
           
         <h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>因为学校的原因，需要在大三的时候出去实训几个月，然后选择的是在昆山，公司规定要在 2017 年 4 月 19 号之前赶到，所以我提前订的机票是 17 号，之所以会订机票，其实很大一部分原因是由于自己之前没有坐过飞机，所以想体验一下坐飞机的感脚（嘿嘿），再加上这是机票的淡季，所以坐飞机的价钱比做高铁还便宜。整个行程：学校 ——&gt;  南昌机场 ——&gt;  上海虹桥机场 ——&gt;  公司</p>
@@ -389,6 +389,17 @@
             </div>
           </div>
         </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                id: 'article-inner',
+                blogId: '15013-1569300160626-611',
+                name: 'zhisheng',
+                qrcode: 'http://www.54tianzhisheng.cn/img/wx.jpg',
+                keyword: '1024',
+            });
+        </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
         <script type="text/javascript">
           $(".pay_item").click(function(){
@@ -398,7 +409,7 @@
             $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
           });
           function dashangToggle(){
-            
+
             $(".hide_box").fadeToggle();
             $(".shang_box").fadeToggle();
           }

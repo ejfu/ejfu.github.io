@@ -262,7 +262,7 @@
 </a>
     </div>
   
-  <div class="article-inner">
+  <div class="article-inner" id="article-inner">
     
       <input type="hidden" class="isFancy" />
     
@@ -289,7 +289,7 @@
       </div>
       
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody" id="article-inner">
       
           
         <p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1510377299466&amp;di=46ef1567d27dca27fcfe2970924e2c28&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.redsh.com%2Fimg2017%2F1710251213522.jpeg" alt=""><br>昨晚和朋友聊天说双十一都买啥，结果 TMD 竟然都是书籍，不愧是标准的程序猿。所以这里想推荐基佬的一份书单，方便大家在双十一剁剁剁，建议先收藏本书单，认真啃完一本再买下一本，扎实走完每一步，希望书单能在你想要进一步打怪升级的路上，给予些许帮助！<br><a id="more"></a></p>
@@ -615,6 +615,17 @@
             </div>
           </div>
         </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                id: 'article-inner',
+                blogId: '15013-1569300160626-611',
+                name: 'zhisheng',
+                qrcode: 'http://www.54tianzhisheng.cn/img/wx.jpg',
+                keyword: '1024',
+            });
+        </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
         <script type="text/javascript">
           $(".pay_item").click(function(){
@@ -624,7 +635,7 @@
             $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
           });
           function dashangToggle(){
-            
+
             $(".hide_box").fadeToggle();
             $(".shang_box").fadeToggle();
           }

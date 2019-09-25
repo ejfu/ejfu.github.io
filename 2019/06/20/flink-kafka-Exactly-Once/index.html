@@ -269,7 +269,7 @@
 </a>
     </div>
   
-  <div class="article-inner">
+  <div class="article-inner" id="article-inner">
     
       <input type="hidden" class="isFancy" />
     
@@ -296,7 +296,7 @@
       </div>
       
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody" id="article-inner">
       
           
         <p>Apache Flink 自2017年12月发布的1.4.0版本开始，为流计算引入了一个重要的里程碑特性：TwoPhaseCommitSinkFunction（相关的 Jira）。它提取了两阶段提交协议的通用逻辑，使得通过 Flink 来构建端到端的 Exactly-Once 程序成为可能。同时支持一些数据源（source）和输出端（sink），包括 Apache Kafka  0.11及更高版本。它提供了一个抽象层，用户只需要实现少数方法就能实现端到端的 Exactly-Once 语义。</p>
@@ -507,6 +507,17 @@
             </div>
           </div>
         </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                id: 'article-inner',
+                blogId: '15013-1569300160626-611',
+                name: 'zhisheng',
+                qrcode: 'http://www.54tianzhisheng.cn/img/wx.jpg',
+                keyword: '1024',
+            });
+        </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
         <script type="text/javascript">
           $(".pay_item").click(function(){
@@ -516,7 +527,7 @@
             $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
           });
           function dashangToggle(){
-            
+
             $(".hide_box").fadeToggle();
             $(".shang_box").fadeToggle();
           }

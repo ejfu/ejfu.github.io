@@ -270,7 +270,7 @@
 </a>
     </div>
   
-  <div class="article-inner">
+  <div class="article-inner" id="article-inner">
     
       <input type="hidden" class="isFancy" />
     
@@ -297,7 +297,7 @@
       </div>
       
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody" id="article-inner">
       
           
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前文章 <a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">《从0到1学习Flink》—— Flink 写入数据到 ElasticSearch</a> 写了如何将 Kafka 中的数据存储到 ElasticSearch 中，里面其实就已经用到了 Flink 自带的 Kafka source connector（FlinkKafkaConsumer）。存入到 ES 只是其中一种情况，那么如果我们有多个地方需要这份通过 Flink 转换后的数据，是不是又要我们继续写个 sink 的插件呢？确实，所以 Flink 里面就默认支持了不少 sink，比如也支持 Kafka sink connector（FlinkKafkaProducer），那么这篇文章我们就讲讲如何将数据写入到 Kafka。</p>
@@ -444,6 +444,17 @@
             </div>
           </div>
         </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                id: 'article-inner',
+                blogId: '15013-1569300160626-611',
+                name: 'zhisheng',
+                qrcode: 'http://www.54tianzhisheng.cn/img/wx.jpg',
+                keyword: '1024',
+            });
+        </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
         <script type="text/javascript">
           $(".pay_item").click(function(){
@@ -453,7 +464,7 @@
             $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
           });
           function dashangToggle(){
-            
+
             $(".hide_box").fadeToggle();
             $(".shang_box").fadeToggle();
           }

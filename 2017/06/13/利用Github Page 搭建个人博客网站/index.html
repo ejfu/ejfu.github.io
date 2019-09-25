@@ -277,7 +277,7 @@
 </a>
     </div>
   
-  <div class="article-inner">
+  <div class="article-inner" id="article-inner">
     
       <input type="hidden" class="isFancy" />
     
@@ -304,7 +304,7 @@
       </div>
       
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody" id="article-inner">
       
           
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近这几天，没事干，想找点事折腾下，于是自己便想到了自己一直想干的一件事：搭建一个属于自己的博客网站。目前搭建个人 <code>blog</code> 网站最好的是用 <code>wordpress</code> ，但是那个折腾起来好像还挺麻烦的，再加上还需要自己修改些前端代码和用 <code>PHP</code> 做（虽然我学了几天拍黄片，但是早已忘了），然后就是用 <code>Github Page</code> 吧，自己也一直在这个最大的交友网站装 X 。想想就用这个吧（后来好像觉得这个还挺省事的）</p>
@@ -417,6 +417,17 @@
             </div>
           </div>
         </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                id: 'article-inner',
+                blogId: '15013-1569300160626-611',
+                name: 'zhisheng',
+                qrcode: 'http://www.54tianzhisheng.cn/img/wx.jpg',
+                keyword: '1024',
+            });
+        </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
         <script type="text/javascript">
           $(".pay_item").click(function(){
@@ -426,7 +437,7 @@
             $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
           });
           function dashangToggle(){
-            
+
             $(".hide_box").fadeToggle();
             $(".shang_box").fadeToggle();
           }

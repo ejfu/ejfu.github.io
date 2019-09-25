@@ -267,7 +267,7 @@
 </a>
     </div>
   
-  <div class="article-inner">
+  <div class="article-inner" id="article-inner">
     
       <input type="hidden" class="isFancy" />
     
@@ -294,7 +294,7 @@
       </div>
       
     
-    <div class="article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody" id="article-inner">
       
           
         <h4 id="题目一："><a href="#题目一：" class="headerlink" title="题目一："></a>题目一：</h4><p>如果一个字符串 str ，把字符串 str 前面的任意部分挪到后面去形成的字符串叫做 str 的旋转词。比如 str = “ 1234 ” ， 那么 str 的旋转词有 “ 1234 ” ， “ 2341 ” ， “ 3412 ” ， “ 4123 ” 。给定两个字符串 a 和 b ，请判断 a 和 b 是否互为旋转词？<br><a id="more"></a><br>举例：</p>
@@ -382,6 +382,17 @@
             </div>
           </div>
         </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                id: 'article-inner',
+                blogId: '15013-1569300160626-611',
+                name: 'zhisheng',
+                qrcode: 'http://www.54tianzhisheng.cn/img/wx.jpg',
+                keyword: '1024',
+            });
+        </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
         <script type="text/javascript">
           $(".pay_item").click(function(){
@@ -391,7 +402,7 @@
             $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
           });
           function dashangToggle(){
-            
+
             $(".hide_box").fadeToggle();
             $(".shang_box").fadeToggle();
           }
