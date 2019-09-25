@@ -17,28 +17,47 @@
    <meta name="keywords" content="Flink,Spark,大数据,Hive,Java,架构,后端,服务端,RocketMQ,分布式消息队列,分布式存储,技术博客,HBase,ElasticSearch,Spring,Spring Boot,Spring Boot 2.0,Spring Cloud,Spring MVC,Java EE,前端,HTML,MyBatis,Android,Docker,Mac,Consul,Kafka,Logstash,Kibana,MySQL,Maven,Nginx,Python,RabbitMQ,ActiveMQ,JVM">
 
 
-  <title>小马哥 《Java 微服务实践 - Spring Boot 系列》强烈推荐 | zhisheng的博客</title>
+  <title>一文彻底搞懂 Flink 网络流控与反压机制 | zhisheng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="视频内容Java 微服务实践 - Spring Boot 为系列讲座，二十节专题直播，时长高达50个小时，包括目前最流行技术，深入源码分析，授人以渔的方式，帮助初学者深入浅出地掌握，为高阶从业人员抛砖引玉。">
-<meta name="keywords" content="Java,SpringBoot,微服务">
+  <meta name="description" content="看完本文，你能get到以下知识 Flink 流处理为什么需要网络流控？ Flink V1.5 版之前网络流控介绍">
+<meta name="keywords" content="大数据,Flink">
 <meta property="og:type" content="article">
-<meta property="og:title" content="小马哥 《Java 微服务实践 - Spring Boot 系列》强烈推荐">
-<meta property="og:url" content="http://www.54tianzhisheng.cn/2018/03/04/springboot-vedio/index.html">
+<meta property="og:title" content="一文彻底搞懂 Flink 网络流控与反压机制">
+<meta property="og:url" content="http://www.54tianzhisheng.cn/2019/08/26/flink-back-pressure/index.html">
 <meta property="og:site_name" content="zhisheng的博客">
-<meta property="og:description" content="视频内容Java 微服务实践 - Spring Boot 为系列讲座，二十节专题直播，时长高达50个小时，包括目前最流行技术，深入源码分析，授人以渔的方式，帮助初学者深入浅出地掌握，为高阶从业人员抛砖引玉。">
+<meta property="og:description" content="看完本文，你能get到以下知识 Flink 流处理为什么需要网络流控？ Flink V1.5 版之前网络流控介绍">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-04-25-133746.jpg">
-<meta property="og:image" content="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/irPD25.jpg">
-<meta property="og:image" content="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/mE2JAn.jpg">
-<meta property="og:image" content="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/pAGHXS.jpg">
-<meta property="og:image" content="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/ih2Vgc.jpg">
-<meta property="og:image" content="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/AMpEII.jpg">
-<meta property="og:image" content="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/mXfFdj.jpg">
-<meta property="og:updated_time" content="2019-04-25T13:37:54.000Z">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004422.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004441.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004457.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004519.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004537.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004553.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004607.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004625.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004640.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004700.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004714.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004728.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004740.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004753.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004807.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004820.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004831.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004846.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004901.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004924.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004939.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004956.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-005010.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-010155.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-005033.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-005112.jpg">
+<meta property="og:updated_time" content="2019-09-25T01:02:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小马哥 《Java 微服务实践 - Spring Boot 系列》强烈推荐">
-<meta name="twitter:description" content="视频内容Java 微服务实践 - Spring Boot 为系列讲座，二十节专题直播，时长高达50个小时，包括目前最流行技术，深入源码分析，授人以渔的方式，帮助初学者深入浅出地掌握，为高阶从业人员抛砖引玉。">
-<meta name="twitter:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-04-25-133746.jpg">
+<meta name="twitter:title" content="一文彻底搞懂 Flink 网络流控与反压机制">
+<meta name="twitter:description" content="看完本文，你能get到以下知识 Flink 流处理为什么需要网络流控？ Flink V1.5 版之前网络流控介绍">
+<meta name="twitter:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004422.jpg">
   
     <link rel="alternative" href="/atom.xml" title="zhisheng的博客" type="application/atom+xml">
   
@@ -259,11 +278,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-springboot-vedio" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-flink-back-pressure" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/03/04/springboot-vedio/" class="article-date">
-      <time datetime="2018-03-03T16:00:00.000Z" itemprop="datePublished">2018-03-04</time>
+      <a href="/2019/08/26/flink-back-pressure/" class="article-date">
+      <time datetime="2019-08-25T16:00:00.000Z" itemprop="datePublished">2019-08-26</time>
 </a>
     </div>
   
@@ -276,7 +295,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      小马哥 《Java 微服务实践 - Spring Boot 系列》强烈推荐
+      一文彻底搞懂 Flink 网络流控与反压机制
     </h1>
   
 
@@ -287,7 +306,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/">SpringBoot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微服务/">微服务</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -297,51 +316,158 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-04-25-133746.jpg" alt=""></p>
-<h3 id="视频内容"><a href="#视频内容" class="headerlink" title="视频内容"></a>视频内容</h3><p>Java 微服务实践 - Spring Boot 为系列讲座，二十节专题直播，时长高达50个小时，包括目前最流行技术，深入源码分析，授人以渔的方式，帮助初学者深入浅出地掌握，为高阶从业人员抛砖引玉。</p>
+        <ul>
+<li>看完本文，你能get到以下知识<ul>
+<li>Flink 流处理为什么需要网络流控？</li>
+<li>Flink V1.5 版之前网络流控介绍</li>
+</ul>
+</li>
+</ul>
 <a id="more"></a>
-<p><strong><a href="http://www.54tianzhisheng.cn/tags/SpringBoot/">SpringBoot 系列文章</a></strong></p>
-<h3 id="讲师介绍"><a href="#讲师介绍" class="headerlink" title="讲师介绍"></a>讲师介绍</h3><blockquote>
-<p><strong>小马哥</strong>，一线互联网公司技术专家，十余年 Java EE 从业经验，架构师、微服务布道师。目前主要负责微服务技术实施、架构衍进、基础设施构建等。重点关注云计算、微服务以及软件架构等领域。通过 SUN Java（SCJP、SCWCD、SCBCD）以及 Oracle OCA 等的认证。</p>
-</blockquote>
-<h3 id="视频列表"><a href="#视频列表" class="headerlink" title="视频列表"></a>视频列表</h3><p>1、<a href="https://segmentfault.com/l/1500000009515571">Java 微服务实践 - Spring Boot 系列（一）初体验</a></p>
-<p>2、<a href="https://segmentfault.com/l/1500000009659111">Java 微服务实践 - Spring Boot 系列（二） Web篇（上）</a></p>
-<p>3、<a href="https://segmentfault.com/l/1500000009767025">Java 微服务实践 - Spring Boot 系列（三）Web篇（中）</a></p>
-<p>4、<a href="https://segmentfault.com/l/1500000009830944"> Java 微服务实践 - Spring Boot 系列（四）Web篇（下）</a></p>
-<p>5、<a href="https://segmentfault.com/l/1500000009844304">Java 微服务实践 - Spring Boot 系列（五）嵌入式Web容器</a></p>
-<p>6、<a href="https://segmentfault.com/l/1500000009904190">Java 微服务实践 - Spring Boot 系列（六）数据库 JDBC</a></p>
-<p>7、<a href="https://segmentfault.com/l/1500000009952220"> Java 微服务实践 - Spring Boot 系列（七）MyBatis</a></p>
-<p>8、<a href="https://segmentfault.com/l/1500000009952527"> Java 微服务实践 - Spring Boot 系列（八）JPA</a></p>
-<p>9、<a href="https://segmentfault.com/l/1500000009957330"> Java 微服务实践 - Spring Boot 系列（九）NoSQL</a></p>
-<p>10、<a href="https://segmentfault.com/l/1500000009970812"> Java 微服务实践 - Spring Boot 系列（十）缓存</a></p>
-<p>11、<a href="https://segmentfault.com/l/1500000009971600"> Java 微服务实践 - Spring Boot 系列（十一）消息</a></p>
-<p>12、<a href="https://segmentfault.com/l/1500000009971716"> Java 微服务实践 - Spring Boot 系列（十二）验证</a></p>
-<p>13、<a href="https://segmentfault.com/l/1500000009971764">Java 微服务实践 - Spring Boot 系列（十三）WebSocket</a></p>
-<p>14、<a href="https://segmentfault.com/l/1500000009978309"> Java 微服务实践- Spring Boot 系列（十四）WebService</a></p>
-<p>15、<a href="https://segmentfault.com/l/1500000009978481"> Java 微服务实践 - Spring Boot 系列（十五）安全</a></p>
-<p>16、<a href="https://segmentfault.com/l/1500000009978585">Java 微服务实践 - Spring Boot 系列（十六）日志</a></p>
-<p>17、<a href="https://segmentfault.com/l/1500000009978661">Java 微服务实践 - Spring Boot 系列（十七）监管</a></p>
-<p>18、<a href="https://segmentfault.com/l/1500000009978729">Java 微服务实践 - Spring Boot 系列（十八）配置</a></p>
-<p>19、<a href="https://segmentfault.com/l/1500000009978826"> Java 微服务实践 - Spring Boot 系列（十九）测试</a></p>
-<p>20、<a href="https://segmentfault.com/l/1500000009978904">Java 微服务实践 - Spring Boot 系列（二十）自定义启动器</a></p>
-<h3 id="购买链接"><a href="#购买链接" class="headerlink" title="购买链接"></a>购买链接</h3><p>你可以使用下面链接购买（有优惠的哦）</p>
-<p><strong><a href="https://segmentfault.com/ls/1650000011063780?r=bPrFW3">https://segmentfault.com/ls/1650000011063780?r=bPrFW3</a></strong></p>
-<p>或者你也可以扫描下面的二维码购买（同样也有优惠的哦）</p>
-<p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/irPD25.jpg" alt="sb视频"></p>
-<h3 id="课程评价"><a href="#课程评价" class="headerlink" title="课程评价"></a>课程评价</h3><blockquote>
-<p>1、小马哥讲的好详细，以前似是而非的东东，现在都懂了<br>2、学到了怎么使用，也学到了怎么自定义校验，知其然也知其所以然<br>3、6666 起飞了 websocket 之前看了写 这次更加深入和标准化 感谢小马哥带来的干货<br>4、深入浅出，思路清晰。<br>5、深入浅出啊。非常好，而且如果有问题，不管简单还是难的，都从不同的角度和层次来解答了。学到的东西非常多。谢谢。</p>
-</blockquote>
-<p>以上评价摘自 segmentfault</p>
-<h3 id="相关课程"><a href="#相关课程" class="headerlink" title="相关课程"></a>相关课程</h3><p><strong>Java 微服务实践 - Spring Cloud 系列</strong></p>
-<p>优惠地址：<strong><a href="https://segmentfault.com/ls/1650000011386794?r=bPrFW3">https://segmentfault.com/ls/1650000011386794?r=bPrFW3</a></strong></p>
-<p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/mE2JAn.jpg" alt="sc视频"></p>
-<p>另外：还有这个 <strong>Java 微服务实践 - Spring Boot / Spring Cloud</strong>，算是两个的合集了，合买的话优惠更大。</p>
-<p>优惠地址：<strong><a href="https://segmentfault.com/ls/1650000011387052?r=bPrFW3">https://segmentfault.com/ls/1650000011387052?r=bPrFW3</a></strong></p>
-<p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/pAGHXS.jpg" alt="sb-sc合集"></p>
-<h3 id="关注我"><a href="#关注我" class="headerlink" title="关注我"></a>关注我</h3><p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/ih2Vgc.jpg" alt="C6LG3mGa12"></p>
-<p>建了个不错的微信群，如果有感兴趣的可以加我微信，然后拉你进群交流。</p>
-<p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/AMpEII.jpg" alt="1520091522031"></p>
-<p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/mXfFdj.jpg" alt=""></p>
+<ul>
+<li>Flink V1.5 版之前的反压策略存在的问题</li>
+<li><strong>Credit的反压策略实现原理</strong>，Credit是如何解决 Flink 1.5 之前的问题？</li>
+<li>对比spark，都说flink延迟低，来一条处理一条，真是这样吗？其实Flink内部也有Buffer机制，Buffer机制具体是如何实现的？</li>
+<li>Flink 如何在吞吐量和延迟之间做权衡？<ul>
+<li>后续相关博客</li>
+</ul>
+</li>
+<li>Flink 反压相关 Metrics 介绍</li>
+<li>基于 Flink 的流控机制和反压如何定位 Flink 任务的瓶颈。或者说，如果一个平时正常的 Flink 任务突然出现延迟了，怎么来定位问题？到底是 Kafka 读取数据慢，还是中间某个计算环节比较消耗资源使得变慢，还是由于最后的写入外部存储时比较慢？</li>
+</ul>
+<h2 id="Flink-流处理为什么需要网络流控？"><a href="#Flink-流处理为什么需要网络流控？" class="headerlink" title="Flink 流处理为什么需要网络流控？"></a>Flink 流处理为什么需要网络流控？</h2><p>分析一个简单的 Flink 流任务，下图是一个简单的Flink流任务执行图：任务首先从 Kafka 中读取数据、 map 算子对数据进行转换、keyBy 按照指定 key 对数据进行分区（相同 key 的数据经过 keyBy 后分到同一个 subtask 实例中），keyBy 后对数据接着进行 map 转换，然后使用 Sink 将数据输出到外部存储。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004422.jpg" alt=""></p>
+<p>众所周知，在大数据处理中，无论是批处理还是流处理，单点处理的性能总是有限的，我们的单个 Job 一般会运行在多个节点上，多个节点共同配合来提升整个系统的处理性能。图中，任务被切分成 4 个可独立执行的 subtask（ A0、A1、B0、B1），在数据处理过程中，就会存在 shuffle（数据传输）的过程。例如，subtask A0 处理完的数据经过 keyBy 后发送到 subtask B0、B1 所在节点去处理。</p>
+<p>那么问题来了，下图中，上游 Producer 向下游 Consumer 发送数据，在发送端和接受端都有相应的 Send Buffer 和 Receive Buffer，但是上游 Producer 生成数据的速率比下游 Consumer 消费数据的速率快。Producer 生产数据 2MB/s， Consumer 消费数据 1MB/s，Receive Buffer 只有 5MB，所以过了5秒后，接收端的 Receive Buffer 满了。（可以把下图中的 Producer 当做上面案例中的 subtask A0，把下图中的 Consumer 当做上面案例中的 subtask B0）</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004441.jpg" alt=""></p>
+<p>下游接收区的 Receive Buffer 有限，如果上游一直有源源不断的数据，那么将会面临着以下两个情况：</p>
+<ol>
+<li><p>下游消费者会丢弃新到达的数据，因为下游消费者的缓冲区放不下</p>
+</li>
+<li><p>为了不丢弃数据，所以下游消费者的 Receive Buffer 持续扩张，最后耗尽消费者的内存，OOM，程序挂掉</p>
+</li>
+</ol>
+<p>常识告诉我们，这两种情况在生产环境都是不能接受的，第一种会把数据丢弃、第二种会把我们的应用程序挂掉。所以，该问题的解决方案不应该是下游 Receive Buffer 一直累积数据，而是上游 Producer 发现下游 Consumer 处理比较慢之后，应该在 Producer 端做出限流的策略，防止在下游 Consumer 端无限制的数据堆积。</p>
+<p>那上游 Producer 端该如何做限流呢？可以采用下图所示静态限流的策略：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004457.jpg" alt=""></p>
+<p>静态限速的思想就是，提前已知下游 Consumer 的消费速率，然后通过在上游 Producer 端使用类似令牌桶的思想，限制 Producer 端生产数据的速率，从而控制上游 Producer 端向下游 Consumer 端发送数据的速率。但是静态限速会存在问题：</p>
+<ol>
+<li>通常无法事先预估下游 Consumer 端能承受的最大速率</li>
+<li>就算通过某种方式预估出下游 Consumer 端能承受的最大速率，下游应用程序也可能会因为网络抖动、 CPU 共享竞争、内存紧张、IO阻塞等原因造成下游应用程序的吞吐量降低，然后又会出现上面所说的下游接收区的 Receive Buffer 有限，上游一直有源源不断的数据发送到下游的问题，还是会造成下游要么丢数据，要么为了不丢数据 buffer 不断扩充导致下游 OOM的问题</li>
+</ol>
+<p>综上所述，我们发现了，上游 Producer 端必须有一个限流的策略，且静态限流是不可靠的，于是就需要一个动态限流的策略。可以采用下图动态反馈所示：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004519.jpg" alt=""></p>
+<p>下游 Consumer 端会频繁地向上游 Producer 端进行动态反馈，告诉 Producer 下游 Consumer 的负载能力，从而 Producer 端动态调整向下游 Consumer 发送数据的速率实现 Producer 端的动态限流。当 Consumer 端处理较慢时，Consumer 将负载反馈到 Producer 端，Producer端<strong>会根据反馈适当降低 Producer 自身从上游或者 Source 端读数据的速率</strong>来降低向下游 Consumer 发送数据的速率。当 Consumer 处理负载能力提升后，又及时向 Producer 端反馈，Producer 会通过提升从上游或 Source 端读数据的速率来提升向下游发送数据的速率。通过这个动态反馈来提升整个系统的吞吐量。</p>
+<p>补充一点，如下图所示，假如我们的 Job 分为 Task A、B、C，Task A 是 Source Task、Task B 处理数据、Task C 是 Sink Task。假如 Task C 由于各种原因吞吐量降低，会将负载信息反馈给 Task B，Task B 会降低向 Task C 发送数据的速率，此时如果 Task B 如果还是一直从 Task A 读取数据，那么按照同样的道理，数据会把 Task B 的  Send Buffer 和 Receive Buffer 撑爆，又会出现上面描述的问题。所以，当 Task B 的 Send Buffer 和 Receive Buffer 被用完后，Task B 会用同样的原理将负载信息反馈给 Task A，Task A 收到 Task B 的负载信息后，会降低 给 Task B 发送数据的速率，以此类推。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004537.jpg" alt=""></p>
+<p>上面这个流程，就是 Flink 动态限流（反压机制）的简单描述。我们可以看到 Flink 的反压其实是从下游往上游传播的，一直往上传播到 Source Task 后，Source Task 最终会降低从 Source 端读取数据的速率。如果下游 Task C 的负载能力提升后，会及时反馈给 Task B，于是 Task B 会提升往 Task C 发送数据的速率，Task B 又将负载提升的信息反馈给 Task A，Task A 就会提升从 Source 端读取数据的速率，从而提升整个系统的负载能力。</p>
+<p>读到这里，我们应该知道 Flink 为什么需要一个网络流控机制了，并且知道 Flink 的网络流控机制必须是一个动态反馈的过程。但是还有以下几个问题：</p>
+<ol>
+<li>数据具体是怎么从上游  Producer 端发送到下游 Consumer 端的？</li>
+<li>Flink 的动态限流具体是怎么实现的？下游的负载能力和压力是如何传递给上游的？</li>
+</ol>
+<p>我们带着这两个问题，学习下面的 Flink 网络流控与反压机制</p>
+<h2 id="Flink-V1-5-版之前网络流控介绍"><a href="#Flink-V1-5-版之前网络流控介绍" class="headerlink" title="Flink V1.5 版之前网络流控介绍"></a>Flink V1.5 版之前网络流控介绍</h2><p>在 Flink V1.5 版之前，其实 Flink 并没有刻意做上述所说的动态反馈。那么问题来了，没有做上述的动态反馈机制，Flink 难道不怕数据丢失或者上游和下游的一些 Buffer 把内存撑爆吗？当然不怕了，因为 Flink 已经依赖其他机制来实现了所谓的动态反馈。其实很简单，让我们继续往下看。</p>
+<p>如下图所示，对于一个 Flink 任务，动态反馈可以抽象成以下两个阶段：</p>
+<ol>
+<li>跨 Task，动态反馈如何从下游 Task 的 Receive Buffer 反馈给上游 Task 的 Send Buffer</li>
+</ol>
+<ul>
+<li>当下游 Task C 的 Receive Buffer 满了，如何告诉上游 Task B 应该降低数据发送速率</li>
+<li><p>当下游 Task C 的 Receive Buffer 空了，如何告诉上游 Task B 应该提升数据发送速率</p>
+</li>
+<li><p>注：这里又分了两种情况，Task B 和 Task C 可能在同一台节点上运行，也有可能不在同一个台节点运行</p>
+<ul>
+<li>Task B 和 Task C 在同一台节点上运行指的是：一台节点运行了一个或多个 TaskManager，包含了多个 Slot，Task B 和 Task C 都运行在这台节点上，且 Task B 是 Task C 的上游，给 Task C 发送数据。此时 Task B 给 Task C 发送数据实际上是同一个 JVM 内的数据发送，所以<strong>不存在网络通信</strong></li>
+<li>Task B 和 Task C 不在同一台节点上运行指的是：Task B 和 Task C 运行在不同的 TaskManager 中，且 Task B 是 Task C 的上游，给 Task C 发送数据。此时 Task B 给 Task C 发送数据是跨节点的，所以<strong>会存在网络通信</strong></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>Task 内，动态反馈如何从内部的 Send Buffer 反馈给内部的 Receive Buffer</li>
+</ol>
+<ul>
+<li>当 Task B 的 Send Buffer 满了，如何告诉 Task B 内部的 Receive Buffer 下游 Send Buffer 满了、下游处理性能不行了？因为要让 Task B 的 Receive Buffer 感受到压力，才能把下游的压力传递到 Task A</li>
+<li>当 Task B 的 Send Buffer 空了，如何告诉 Task B 内部的 Receive Buffer 下游 Send Buffer 空了，下游处理性能很强，上游加快处理数据吧</li>
+</ul>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004553.jpg" alt=""></p>
+<h4 id="跨-TaskManager，反压如何向上游传播"><a href="#跨-TaskManager，反压如何向上游传播" class="headerlink" title="跨 TaskManager，反压如何向上游传播"></a>跨 TaskManager，反压如何向上游传播</h4><p>先了解一下 Flink 的 TaskManager 之间网络传输的数据流向：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004607.jpg" alt=""></p>
+<p>图中，我们可以看到 TaskManager A 给 TaskManager B 发送数据，TaskManager A 做为 Producer，TaskManager B 做为 Consumer。Producer 端的 Operator 实例会产生数据，最后通过网络发送给 Consumer 端的 Operator 实例。Producer 端 Operator 实例生产的数据首先缓存到 TaskManager 内部的 NetWork Buffer。NetWork 依赖 Netty 来做通信，Producer 端的 Netty 内部有 ChannelOutbound Buffer，Consumer 端的 Netty 内部有 ChannelInbound Buffer。Netty 最终还是要通过 Socket 发送网络请求，Socket 这一层也会有 Buffer，Producer 端有 Send Buffer，Consumer 端有 Receive Buffer。</p>
+<p>总结一下，现在有两个 TaskManager A、B，TaskManager A 中 Producer Operator 处理完的数据由 TaskManager B 中 Consumer Operator 处理。那么 Producer Operator 处理完的数据是怎么到达 Consumer Operator 的？首先 Producer Operator 从自己的上游或者外部数据源读取到数据后，对一条条的数据进行处理，处理完的数据首先输出到 Producer Operator 对应的 NetWork Buffer 中。Buffer 写满或者超时后，就会触发将 NetWork Buffer 中的数据拷贝到 Producer 端 Netty 的 ChannelOutbound Buffer，之后又把数据拷贝到 Socket 的 Send Buffer 中，这里有一个从用户态拷贝到内核态的过程，最后通过 Socket 发送网络请求，把 Send Buffer 中的数据发送到 Consumer 端的 Receive Buffer。数据到达 Consumer 端后，再依次从 Socket 的 Receive Buffer 拷贝到 Netty 的 ChannelInbound Buffer，再拷贝到 Consumer Operator 的 NetWork Buffer，最后 Consumer Operator 就可以读到数据进行处理了。这就是两个 TaskManager 之间的数据传输过程，我们可以看到发送方和接收方各有三层的 Buffer。</p>
+<p>了解了数据传输流程，我们再具体了解一下跨 TaskManager 的反压过程，如下图所示，Producer 端生产数据速率为 2，Consumer 消费数据速率为 1。持续下去，下游消费较慢，Buffer 容量又是有限的，那 Flink 反压是怎么做的？</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004625.jpg" alt=""></p>
+<p>上面介绍后，我们知道每个 Operator 计算数据时，输出和输入都有对应的 NetWork Buffer，这个 NetWork Buffer 对应到 Flink 就是图中所示的 ResultSubPartition 和 InputChannel。ResultSubPartition 和 InputChannel 都是向 LocalBufferPool 申请 Buffer 空间，然后 LocalBufferPool 再向 NetWork BufferPool 申请内存空间。这里，NetWork BufferPool 是 TaskManager 内所有 Task 共享的 BufferPool，TaskManager 初始化时就会向堆外内存申请 NetWork BufferPool。LocalBufferPool 是每个 Task 自己的 BufferPool，假如一个 TaskManager 内运行着 5 个 Task，那么就会有 5 个 LocalBufferPool，但 TaskManager 内永远只有一个 NetWork BufferPool。Netty 的 Buffer 也是初始化时直接向堆外内存申请内存空间。虽然可以申请，但是<strong>必须明白内存申请肯定是有限制的，不可能无限制的申请</strong>，我们在启动任务时可以指定该任务最多可能申请多大的内存空间用于 NetWork Buffer。</p>
+<p>我们继续分析我们的场景， Producer 端生产数据速率为2，Consumer 端消费数据速率为1。数据从 Task A 的 ResultSubPartition 按照上面的流程最后传输到 Task B 的 InputChannel 供 Task B 读取并计算。持续一段时间后，由于 Task B 消费比较慢，导致 InputChannel 被占满了，所以 InputChannel 向 LocalBufferPool 申请新的 Buffer 空间，LocalBufferPool 分配给 InputChannel 一些 Buffer。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004640.jpg" alt=""></p>
+<p>再持续一段时间后，InputChannel 重复向 LocalBufferPool 申请 Buffer 空间，导致 LocalBufferPool 也满了，所以 LocalBufferPool 向 NetWork BufferPool 申请 Buffer 空间，NetWork BufferPool  给 LocalBufferPool 分配 Buffer。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004700.jpg" alt=""></p>
+<p>再持续下去，NetWork BufferPool 满了，或者说 NetWork BufferPool 不能把自己的 Buffer 全分配给 Task B 对应的 LocalBufferPool ，因为 TaskManager 上一般会运行了多个 Task，每个 Task 只能使用 NetWork BufferPool 中的一部分。所以，<strong>可以认为 Task B 把自己可以使用的 InputChannel 、 LocalBufferPool 和 NetWork BufferPool 都用完了</strong>。此时 Netty 还想把数据写入到 InputChannel，但是发现 InputChannel 满了，所以 Socket 层会把 Netty 的 autoRead disable，Netty 不会再从 Socket 中去读消息。可以看到下图中多个 ❌，表示 Buffer 已满，数据已经不能往下游写了，发生了阻塞。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004714.jpg" alt=""></p>
+<p>由于 Netty 不从 Socket 的 Receive Buffer 读数据了，所以很快 Socket 的 Receive Buffer 就会变满，TCP 的 Socket 通信有动态反馈的流控机制，会把容量为0的消息反馈给上游发送端，所以上游的 Socket 就不会往下游再发送数据 。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004728.jpg" alt=""></p>
+<p>Task A 持续生产数据，发送端 Socket 的 Send Buffer 很快被打满，所以 Task A 端的 Netty 也会停止往 Socket 写数据。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004740.jpg" alt=""></p>
+<p>接下来，数据会在 Netty 的 Buffer 中缓存数据，但 Netty 的 Buffer 是无界的。但可以设置 Netty 的高水位，即：设置一个 Netty 中 Buffer 的上限。所以每次 ResultSubPartition 向 Netty 中写数据时，都会检测 Netty 是否已经到达高水位，如果达到高水位就不会再往 Netty 中写数据，防止 Netty 的 Buffer 无限制的增长。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004753.jpg" alt=""></p>
+<p>接下来，数据会在 Task A 的 ResultSubPartition 中累积，ResultSubPartition 满了后，会向 LocalBufferPool 申请新的 Buffer 空间，LocalBufferPool 分配给 ResultSubPartition 一些 Buffer。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004807.jpg" alt=""></p>
+<p>持续下去 LocalBufferPool 也会用完，LocalBufferPool 再向 NetWork BufferPool 申请 Buffer。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004820.jpg" alt=""></p>
+<p>然后 NetWork BufferPool 也会用完，或者说 NetWork BufferPool 不能把自己的 Buffer 全分配给 Task A 对应的 LocalBufferPool ，因为 TaskManager 上一般会运行了多个 Task，每个 Task 只能使用 NetWork BufferPool 中的一部分。此时，Task A 已经申请不到任何的 Buffer 了，Task A 的 Record Writer 输出就被 wait ，Task A 不再生产数据。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004831.jpg" alt=""></p>
+<p>通过上述的这个流程，来动态反馈，保障各个 Buffer 都不会因为数据太多导致内存溢出。上面描述了整个阻塞的流程，当下游 Task B 持续消费，Buffer 的可用容量会增加，所有被阻塞的数据通道会被一个个打开，之后 Task A 又可以开始正常的生产数据了。</p>
+<p>之前介绍，Task 之间的数据传输可能存在上游的 Task A 和下游的 Task B 运行在同一台节点的情况，整个流程与上述类似，只不过由于 Task A 和 B 运行在同一个 JVM，所以不需要网络传输的环节，Task B 的 InputChannel 会直接从 Task A 的 ResultSubPartition 读取数据。</p>
+<h4 id="Task-内部，反压如何向上游传播"><a href="#Task-内部，反压如何向上游传播" class="headerlink" title="Task 内部，反压如何向上游传播"></a>Task 内部，反压如何向上游传播</h4><p>假如 Task A 的下游所有 Buffer 都占满了，那么 Task A 的 Record Writer 会被 block，Task A 的 Record Reader、Operator、Record Writer 都属于同一个线程，所以 Task A 的 Record Reader 也会被 block。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004846.jpg" alt=""></p>
+<p>然后可以把这里的 Task A 类比成上面所说的 Task B，Task A 上游持续高速率发送数据到 Task A 就会导致可用的 InputChannel、 LocalBufferPool 和 NetWork BufferPool 都会被用完。然后 Netty 、Socket 同理将压力传输到 Task A 的上游。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004901.jpg" alt=""></p>
+<p>假设 Task A 的上游是 Task X，那么 Task A 将压力反馈给 Task X 的过程与 Task B 将压力反馈给 Task A 的过程是一样的。整个 Flink 的反压是从下游往上游传播的，一直传播到 Source Task，Source Task 有压力后，会降低从外部组件中读取数据的速率，例如：Source Task 会降低从 Kafka 中读取数据的速率，来降低整个 Flink Job 中缓存的数据，从而降低负载。</p>
+<p>所以得出的结论是：Flink 1.5之前并没有特殊的机制来处理反压，因为 Flink 中的数据传输相当于已经提供了应对反压的机制。</p>
+<h2 id="Flink-V1-5-版之前的反压策略存在的问题"><a href="#Flink-V1-5-版之前的反压策略存在的问题" class="headerlink" title="Flink V1.5 版之前的反压策略存在的问题"></a>Flink V1.5 版之前的反压策略存在的问题</h2><p>看着挺完美的反压机制，其实是有问题的。如下图所示，我们的任务有4个 SubTask，SubTask A 是 SubTask B的上游，即 SubTask A 给 SubTask B 发送数据。Job 运行在两个 TaskManager中， TaskManager 1 运行着 SubTask A.1 和 SubTask A.2， TaskManager 2 运行着 SubTask B.3 和 SubTask B.4。现在假如由于CPU共享或者内存紧张或者磁盘IO瓶颈造成 SubTask B.4 遇到瓶颈、处理速率有所下降，但是上游源源不断地生产数据，所以导致 SubTask A.2 与 SubTask B.4 产生反压。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004924.jpg" alt=""></p>
+<p>这里需要明确一点：不同 Job 之间的每个（远程）网络连接将在 Flink 的网络堆栈中获得自己的TCP通道。 但是，如果同一 Task 的不同 SubTask 被安排到同一个TaskManager，则它们与其他 TaskManager 的网络连接将<strong>被多路复用并共享一个TCP信道以减少资源使用</strong>。例如，图中的 A.1 -&gt; B.3、A.1 -&gt; B.4、A.2 -&gt; B.3、A.2 -&gt; B.4 这四条将会多路复用共享一个 TCP 信道。</p>
+<p>现在 SubTask B.3 并没有压力，从上面跨 TaskManager 的反压流程，我们知道当上图中 SubTask A.2 与 SubTask B.4 产生反压时，会把 TaskManager1 端该任务对应 Socket 的 Send Buffer 和 TaskManager2 端该任务对应 Socket 的 Receive Buffer 占满，多路复用的 TCP 通道已经被占住了，会导致 SubTask A.1 和 SubTask A.2 要发送给 SubTask B.3 的数据全被阻塞了，从而导致本来没有压力的 SubTask B.3 现在接收不到数据了。所以，Flink 1.5 版之前的反压机制会存在当一个 Task 出现反压时，可能导致其他正常的 Task 接收不到数据。</p>
+<h2 id="Credit的反压策略实现原理"><a href="#Credit的反压策略实现原理" class="headerlink" title="Credit的反压策略实现原理"></a>Credit的反压策略实现原理</h2><p>Flink 1.5 之后，为了解决上述所描述的问题，引入了基于 Credit 的反压机制。如下图所示，反压机制作用于 Flink 的应用层，即在 ResultSubPartition 和 InputChannel 这一层引入了反压机制。每次上游 SubTask A.2 给下游 SubTask B.4 发送数据时，会把 Buffer 中的数据和上游 ResultSubPartition 堆积的数据量 Backlog size发给下游，下游会接收上游发来的数据，并向上游反馈目前下游现在的 Credit 值，Credit 值表示目前下游可以接收上游的 Buffer 量，1 个Buffer 等价于 1 个 Credit 。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004939.jpg" alt=""></p>
+<p>例如，上游 SubTask A.2 发送完数据后，还有 5 个 Buffer 被积压，那么会把发送数据和 Backlog size = 5 一块发送给下游 SubTask B.4，下游接受到数据后，知道上游积压了 5 个Buffer，于是向 Buffer Pool 申请 Buffer，由于容量有限，下游 InputChannel 目前仅有 2 个 Buffer 空间，所以，SubTask B.4 会向上游 SubTask A.2 反馈 Channel Credit = 2。然后上游下一次最多只给下游发送 2 个 Buffer 的数据，这样每次上游发送的数据都是下游 InputChannel 的 Buffer 可以承受的数据量，所以通过这种反馈策略，保证了不会在公用的 Netty 和 TCP 这一层数据堆积而影响其他 SubTask 通信。</p>
+<p>ResultSubPartition 会把 buffer 和 backlog size 同时发送给下游，下游向上游反馈 credit。再用一个案例来详细地描述一下整个过程。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-004956.jpg" alt=""></p>
+<p>Task A 向 Task B 发送了数据 <8,9> 和 backlog size =3，下游 InputChannel 接受完 <8,9> 后，发现上游目前积压了 3 条数据，但是自己的缓冲区不够，于是向 LocalBufferPool 申请 buffer 空间，申请成功后，向上游反馈 credit = 3，表示下游目前可以接受 3 条记录（实际上是以 Buffer 为单位，而不是记录数，Flink 将真实记录序列化后的二进制数据放到 Buffer 中），然后上游下次最多发送 3 条数据给下游。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-005010.jpg" alt=""></p>
+<p>持续下去，上游生产数据速率比下游消费速率快，所以 LocalBufferPool  和 NetWork BufferPool 都会被申请完，下游的 InputChannel 没有可用的缓冲区了，所以会向上游反馈 credit = 0，然后上游就不会发送数据到 Netty。所以基于  Credit 的反压策略不会导致 Netty 和 Socket 的数据积压。当然上游也不会一直不发送数据到下游，上游会定期地仅发送 backlog size 给下游，直到下游反馈 credit &gt; 0 时，上游就会继续发送真正的数据到下游了。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-010155.jpg" alt=""></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-005033.jpg" alt=""></p>
+<p>基于 Credit 的反压机制还带来了一个优势：由于我们在发送方和接收方之间缓存较少的数据，可能<strong>会更早地将反压反馈给上游</strong>，缓冲更多数据只是把数据缓冲在内存中，并没有提高处理性能。</p>
+<h2 id="Flink-如何在吞吐量和延迟之间做权衡？"><a href="#Flink-如何在吞吐量和延迟之间做权衡？" class="headerlink" title="Flink 如何在吞吐量和延迟之间做权衡？"></a>Flink 如何在吞吐量和延迟之间做权衡？</h2><p>Flink 天然支持流式处理，即每来一条数据就能处理一条，而不是像 Spark Streaming 一样，完全是微批处理。但是为了提高吞吐量，默认使用的 Flink 并不是每来一条数据就处理一条。那这个到底是怎么控制的呢？</p>
+<p>我们分析了上述的网络传输后，知道每个 SubTask 输出的数据并不是直接输出到下游，而是在 ResultSubPartition 中有一个 Buffer 用来缓存一批数据后，再 Flush 到 Netty 发送到下游 SubTask。那到底哪些情况会触发 Buffer Flush 到 Netty 呢？</p>
+<ol>
+<li><p>Buffer 变满时</p>
+</li>
+<li><p>Buffer timeout 时</p>
+</li>
+<li><p>特殊事件来临时，例如：CheckPoint 的 barrier 来临时</p>
+</li>
+</ol>
+<p>Flink 在数据传输时，会把数据序列化成二进制然后写到 Buffer 中，当 Buffer 满了，需要 Flush（默认为32KiB，通过taskmanager.memory.segment-size设置）。但是当流量低峰或者测试环节，可能1分钟都没有 32 KB的数据，就会导致1分钟内的数据都积攒在 Buffer 中不会发送到下游 Task 去处理，从而导致数据出现延迟，这并不是我们想看到的。所以 Flink 有一个 Buffer timeout 的策略，意思是当数据量比较少，Buffer 一直没有变满时，后台的 Output flusher 线程会强制地将 Buffer 中的数据 Flush 到下游。Flink 中默认 timeout 时间是 100ms，即：Buffer 中的数据要么变满时 Flush，要么最多等 100ms 也会 Flush 来保证数据不会出现很大的延迟。当然这个可以通过 <code>env.setBufferTimeout(timeoutMillis)</code> 来控制超时时间。</p>
+<ul>
+<li>timeoutMillis &gt; 0 表示最长等待 timeoutMillis 时间，就会flush</li>
+<li>timeoutMillis = 0 表示每条数据都会触发 flush，直接将数据发送到下游，相当于没有Buffer了(避免设置为0，可能导致性能下降)</li>
+<li>timeoutMillis = -1 表示只有等到 buffer满了或 CheckPoint的时候，才会flush。相当于取消了 timeout 策略</li>
+</ul>
+<p>严格来讲，Output flusher 不提供任何保证——它只向 Netty 发送通知，而 Netty 线程会按照能力与意愿进行处理。这也意味着如果存在反压，则 Output flusher 是无效的。言外之意，如果反压很严重，下游 Buffer 都满了，当然不能强制一直往下游发数据。</p>
+<p>一些特殊的消息如果通过 RecordWriter 发送，也会触发立即 Flush 缓存的数据。其中最重要的消息包括 Checkpoint barrier 以及 end-of-partition 事件，这些事件应该尽快被发送，而不应该等待 Buffer 被填满或者 Output flusher 的下一次 Flush。当然如果出现反压，CheckPoint barrier 也会等待，不能发送到下游。</p>
+<p>引入 Network buffers 以获得更高的资源利用率和更高的吞吐量，代价是让一些记录在 Buffer 中等待一段时间。虽然可以通过缓冲区超时给出此等待时间的上限，但你可能知道有关这两个维度（延迟和吞吐量）之间权衡的更多信息：显然，无法同时获得这两者。下图是 Flink 官网的博客展示的不同的 buffer timeout 下对应的吞吐量，从0毫秒开始（每个记录都 flush）到100毫秒（默认值），测试在具有 100 个节点每个节点 8 个 Slot 的群集上运行，每个节点运行没有业务逻辑的 Task，因此只用于测试网络协议栈。为了进行比较，还测试了低延迟改进之前的 Flink 1.4 版本。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-005112.jpg" alt=""></p>
+<p>如图，使用 Flink 1.5+，即使是非常低的 Buffer timeout（例如1ms，对于低延迟场景）也提供高达超时默认参数（100ms）75％ 的最大吞吐，但会缓存更少的数据。但是笔者仍然不理解为什么 timeout 设置为0时，吞吐量竟然能比 Flink 1.4 的吞吐量提高那么多。Credit 只是解决了反压的问题，并不能优化低延迟的吞吐量。杨华老师的回答是网络协议栈做了其他优化而且性能测试是在特定场景下做的。笔者后续会继续深入学习研究 Flink 网络通信来解决笔者目前的疑问。</p>
+<p>本文作者：<strong>范磊</strong></p>
+<p>原文链接地址：<a href="">https://www.jianshu.com/p/2779e73abcb8</a></p>
+<p>参考文献：</p>
+<p><a href="https://flink.apache.org">Flink官网</a></p>
+<p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fflink-china%2Fflink-training-course">flink-china系列课程—-2.7 Flink网络流控及反压剖析</a></p>
+<p>Flink 官网两篇关于 Flink 网络协议栈的博客:</p>
+<p><a href="https://flink.apache.org/2019/06/05/flink-network-stack.html#inflicting-backpressure-1">A Deep-Dive into Flink’s Network Stack</a></p>
+<p><a href="https://flink.apache.org/2019/07/23/flink-network-stack-2.html">Flink Network Stack Vol. 2: Monitoring, Metrics, and that Backpressure Thing</a></p>
 
       
       
@@ -397,13 +523,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/03/04/springboot-vedio/">小马哥 《Java 微服务实践 - Spring Boot 系列》强烈推荐</a></p>
+        <p><span>本文标题:</span><a href="/2019/08/26/flink-back-pressure/">一文彻底搞懂 Flink 网络流控与反压机制</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 zhisheng 的个人博客">zhisheng</a></p>
-        <p><span>发布时间:</span>2018年03月04日 - 00时00分</p>
-        <p><span>最后更新:</span>2019年04月25日 - 21时37分</p>
+        <p><span>发布时间:</span>2019年08月26日 - 00时00分</p>
+        <p><span>最后更新:</span>2019年09月25日 - 09时02分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/03/04/springboot-vedio/" title="小马哥 《Java 微服务实践 - Spring Boot 系列》强烈推荐">http://www.54tianzhisheng.cn/2018/03/04/springboot-vedio/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2018/03/04/springboot-vedio/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/26/flink-back-pressure/" title="一文彻底搞懂 Flink 网络流控与反压机制">http://www.54tianzhisheng.cn/2019/08/26/flink-back-pressure/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2019/08/26/flink-back-pressure/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -421,18 +547,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2018/03/06/SpringBoot2-Migration-Guide/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/12/31/Flink-resources/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Spring Boot 2.0系列文章(一)：Spring Boot 2.0 迁移指南
+          Flink 全网最全资源（视频、博客、PPT、入门、实战、源码解析、问答等持续更新）
         
       </div>
     </a>
   
   
-    <a href="/2018/03/04/springcloud-vedio/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">小马哥 《Java 微服务实践 - Spring Cloud 系列》强烈推荐</div>
+    <a href="/2019/08/25/flink-didi/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">滴滴实时计算发展之路及平台架构实践</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -443,7 +569,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#视频内容"><span class="toc-number">1.</span> <span class="toc-text">视频内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#讲师介绍"><span class="toc-number">2.</span> <span class="toc-text">讲师介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#视频列表"><span class="toc-number">3.</span> <span class="toc-text">视频列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#购买链接"><span class="toc-number">4.</span> <span class="toc-text">购买链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#课程评价"><span class="toc-number">5.</span> <span class="toc-text">课程评价</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关课程"><span class="toc-number">6.</span> <span class="toc-text">相关课程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关注我"><span class="toc-number">7.</span> <span class="toc-text">关注我</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-流处理为什么需要网络流控？"><span class="toc-number">1.</span> <span class="toc-text">Flink 流处理为什么需要网络流控？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-V1-5-版之前网络流控介绍"><span class="toc-number">2.</span> <span class="toc-text">Flink V1.5 版之前网络流控介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#跨-TaskManager，反压如何向上游传播"><span class="toc-number">2.0.1.</span> <span class="toc-text">跨 TaskManager，反压如何向上游传播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Task-内部，反压如何向上游传播"><span class="toc-number">2.0.2.</span> <span class="toc-text">Task 内部，反压如何向上游传播</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-V1-5-版之前的反压策略存在的问题"><span class="toc-number">3.</span> <span class="toc-text">Flink V1.5 版之前的反压策略存在的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Credit的反压策略实现原理"><span class="toc-number">4.</span> <span class="toc-text">Credit的反压策略实现原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-如何在吞吐量和延迟之间做权衡？"><span class="toc-number">5.</span> <span class="toc-text">Flink 如何在吞吐量和延迟之间做权衡？</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -509,13 +635,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/03/06/SpringBoot2-Migration-Guide/" title="上一篇: Spring Boot 2.0系列文章(一)：Spring Boot 2.0 迁移指南">
+            <a href="/2019/12/31/Flink-resources/" title="上一篇: Flink 全网最全资源（视频、博客、PPT、入门、实战、源码解析、问答等持续更新）">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/03/04/springcloud-vedio/" title="下一篇: 小马哥 《Java 微服务实践 - Spring Cloud 系列》强烈推荐">
+            <a href="/2019/08/25/flink-didi/" title="下一篇: 滴滴实时计算发展之路及平台架构实践">
                 <i class="fa fa-angle-right"></i>
             </a>
         
