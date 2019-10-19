@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.54tianzhisheng.cn/"/>
-  <updated>2019-09-25T03:40:34.000Z</updated>
+  <updated>2019-10-05T04:17:54.000Z</updated>
   <id>http://www.54tianzhisheng.cn/</id>
   
   <author>
@@ -15,27 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>最新大数据面试资料整理（包含大数据知识大纲+200G商业落地资料+实战源码）</title>
-    <link href="http://www.54tianzhisheng.cn/2020/01/01/bigdata-ads/"/>
-    <id>http://www.54tianzhisheng.cn/2020/01/01/bigdata-ads/</id>
-    <published>2019-12-31T16:00:00.000Z</published>
-    <updated>2019-09-25T03:40:34.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-ads.png" alt=""></p><p>今天，博主就送上一份行业大牛整理的大数据开发的知识体系图。大家可以对照梳理自己的知识盲区，查漏补缺~（看完大纲，你懂得！）</p><a id="more"></a><h3 id="大数据基础及工具"><a href="#大数据基础及工具" class="headerlink" title="大数据基础及工具"></a>大数据基础及工具</h3><p>掌握Linux必备知识，熟悉Python的使用与爬虫程序的编写，搭建Hadoop（CDH）集群，为大数据技术学习打好基础。</p><ul><li>Linux必备知识                  </li><li>Docker安装与使用</li><li>Python基础及网络爬虫讲解 </li><li>分布式协调基石框架：Zookeeper</li><li>大数据集群搭建</li></ul><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-152133.jpg" alt=""></p><h3 id="HADOOP专题"><a href="#HADOOP专题" class="headerlink" title="HADOOP专题"></a>HADOOP专题</h3><p>掌握离线数据处理的流程、架构及相关技术的运用。掌握大数据核心基础组件：HDFS，MapReduce及YARN。</p><ul><li>大数据基石框架：Hadoop                 </li><li>离线批处理：Hive </li><li>数据采集：flume</li></ul><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-152243.jpg" alt=""></p><h3 id="SPARK-专题"><a href="#SPARK-专题" class="headerlink" title="SPARK 专题"></a>SPARK 专题</h3><p>Spark采用一个统一的技术堆栈解决了云计算大数据的如流处理、图技术、机器学习、NoSQL查询等方面的所有核心问题，具有完善的生态系统，大数据的学习需要从理论到核心源码全面掌握主流通用大数据处理框架：Spark</p><ul><li>Scala语言精讲</li><li>Spark概要</li><li>Spark core</li><li>Spark SQL</li><li>SparkStreaming   </li><li>Spark存储系统及调度系统</li><li>Spark计算引擎 </li></ul><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-152353.jpg" alt=""></p><h3 id="实时计算专题"><a href="#实时计算专题" class="headerlink" title="实时计算专题"></a>实时计算专题</h3><p>熟悉实时处理的应用场景，掌握实时数据处理的流程、架构及相关技术的运用。掌握实时通用处理框架、Flink及实时主流技术组件：Kafka、Hbase。</p><ul><li>分布式消息系统：Kafka</li><li>新一代通用处理框架：Flink</li><li>高性能分布式数据库：Hbase</li></ul><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-152442.jpg" alt=""></p><h3 id="数仓专题"><a href="#数仓专题" class="headerlink" title="数仓专题"></a>数仓专题</h3><p>讲解数据仓库背景知识，常用数仓模型，ETL主流工具Sqoop，Kettle，Oozie和Azkaban。掌握数据仓库搭建过程及具体技术的应用。</p><ul><li>数仓概要知识、建模理论、数据治理</li><li>数仓ETL工具：Sqoop、Kettle</li><li>数仓任务调度工具：Azkaban</li></ul><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-152524.jpg" alt=""></p><h3 id="搜索与推荐专题"><a href="#搜索与推荐专题" class="headerlink" title="搜索与推荐专题"></a>搜索与推荐专题</h3><p>了解了搜索和推荐两大互联网公司必有的大数据应用系统的通用架构，常用算法和相关技术。</p><ul><li>全文搜索引擎ElasticSearch</li><li>推荐理论</li></ul><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-152614.jpg" alt=""></p><h3 id="机器学习算法专题"><a href="#机器学习算法专题" class="headerlink" title="机器学习算法专题"></a>机器学习算法专题</h3><p>机器学习为现阶段大数据重要处理方式，这一部分我们要掌握常用机器学习算法思想、过程和在实际问题中的应用</p><ul><li>机器学习概要</li><li>分类问题常用算法</li><li>预测问题常用算法</li></ul><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-152831.jpg" alt=""></p><h3 id="其他组件与场景运用"><a href="#其他组件与场景运用" class="headerlink" title="其他组件与场景运用"></a>其他组件与场景运用</h3><ul><li>生产应用相关</li><li>交互式查询</li></ul><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-152935.jpg" alt=""></p><p>这套系统的大数据开发资料适合对大数据开发感兴趣想要入门提高的朋友学习。这些内容结合了众多一线互联网大数据工程师常年累积的经验整理汇编而成，今天给大家无套路分享。相信我，这套资料，绝对可以对你进阶大数据工程师有帮助！<br>获取完整的大数据大纲体系及大数据资料，添加下列微信获取哦，市面上这样名师整理、系统全面的资料几乎少有。领取方式：扫描下方二维码，添加好友免费领取（资料持续更新）</p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-153037.jpg" alt=""></p><p>资料的价值取决于你领完后的行动千万莫做收藏党！</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-ads.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;今天，博主就送上一份行业大牛整理的大数据开发的知识体系图。大家可以对照梳理自己的知识盲区，查漏补缺~（看完大纲，你懂得！）&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
-  </entry>
   
   <entry>
     <title>Flink 全网最全资源（视频、博客、PPT、入门、实战、源码解析、问答等持续更新）</title>
@@ -53,9 +32,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
     
@@ -83,9 +62,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
   </entry>
   
@@ -105,9 +84,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
   </entry>
   
@@ -127,9 +106,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
   </entry>
   
@@ -149,9 +128,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
   </entry>
   
@@ -171,9 +150,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
   </entry>
   
@@ -193,9 +172,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
   </entry>
   
@@ -215,9 +194,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="数据仓库" scheme="http://www.54tianzhisheng.cn/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/"/>
     
@@ -239,9 +218,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
     
@@ -263,9 +242,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
     
@@ -287,9 +266,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
     
@@ -311,9 +290,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
     
@@ -335,9 +314,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
     
@@ -359,9 +338,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
     
@@ -385,9 +364,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
     
@@ -409,9 +388,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
     
@@ -433,9 +412,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
     
@@ -457,9 +436,9 @@
     </summary>
     
     
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
     
@@ -481,9 +460,33 @@
     </summary>
     
     
+      <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
       <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
+      <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>流计算框架 Flink 与 Storm 的性能对比</title>
+    <link href="http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/"/>
+    <id>http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/</id>
+    <published>2019-06-16T16:00:00.000Z</published>
+    <updated>2019-09-17T15:13:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h3><p>Apache Flink 和 Apache Storm 是当前业界广泛使用的两个分布式实时计算框架。其中 Apache Storm（以下简称“Storm”）在美团点评实时计算业务中已有较为成熟的运用（可参考 Storm 的可靠性保证测试），有管理平台、常用 API 和相应的文档，大量实时作业基于 Storm 构建。而 Apache Flink（以下简称“Flink”）在近期倍受关注，具有高吞吐、低延迟、高可靠和精确计算等特性，对事件窗口有很好的支持，目前在美团点评实时计算业务中也已有一定应用。</p><a id="more"></a><blockquote><p>本文转载自美团技术团队公众号，作者：梦瑶</p></blockquote><p>为深入熟悉了解 Flink 框架，验证其稳定性和可靠性，评估其实时处理性能，识别该体系中的缺点，找到其性能瓶颈并进行优化，给用户提供最适合的实时计算引擎，我们以实践经验丰富的 Storm 框架作为对照，进行了一系列实验测试 Flink 框架的性能，计算 Flink 作为确保“至少一次”和“恰好一次”语义的实时计算框架时对资源的消耗，为实时计算平台资源规划、框架选择、性能调优等决策及 Flink 平台的建设提出建议并提供数据支持，为后续的 SLA 建设提供一定参考。</p><p>Flink 与 Storm 两个框架对比：</p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-090437.jpg" alt=""></p><h3 id="2-测试目标"><a href="#2-测试目标" class="headerlink" title="2. 测试目标"></a>2. 测试目标</h3><p>评估不同场景、不同数据压力下 Flink 和 Storm 两个实时计算框架目前的性能表现，获取其详细性能数据并找到处理性能的极限；了解不同配置对 Flink 性能影响的程度，分析各种配置的适用场景，从而得出调优建议。</p><h4 id="2-1-测试场景"><a href="#2-1-测试场景" class="headerlink" title="2.1 测试场景"></a>2.1 测试场景</h4><p>“输入-输出”简单处理场景</p><p>通过对“输入-输出”这样简单处理逻辑场景的测试，尽可能减少其它因素的干扰，反映两个框架本身的性能。 同时测算框架处理能力的极限，处理更加复杂的逻辑的性能不会比纯粹“输入-输出”更高。</p><p>用户作业耗时较长的场景</p><p>如果用户的处理逻辑较为复杂，或是访问了数据库等外部组件，其执行时间会增大，作业的性能会受到影响。因此，我们测试了用户作业耗时较长的场景下两个框架的调度性能。</p><p>窗口统计场景</p><p>实时计算中常有对时间窗口或计数窗口进行统计的需求，例如一天中每五分钟的访问量，每 100 个订单中有多少个使用了优惠等。Flink 在窗口支持上的功能比 Storm 更加强大，API 更加完善，但是我们同时也想了解在窗口统计这个常用场景下两个框架的性能。</p><p>精确计算场景（即消息投递语义为“恰好一次”）</p><p>Storm 仅能保证“至多一次” (At Most Once) 和“至少一次” (At Least Once) 的消息投递语义，即可能存在重复发送的情况。有很多业务场景对数据的精确性要求较高，希望消息投递不重不漏。Flink 支持“恰好一次” (Exactly Once) 的语义，但是在限定的资源条件下，更加严格的精确度要求可能带来更高的代价，从而影响性能。因此，我们测试了在不同消息投递语义下两个框架的性能，希望为精确计算场景的资源规划提供数据参考。</p><h4 id="2-2-性能指标"><a href="#2-2-性能指标" class="headerlink" title="2.2 性能指标"></a>2.2 性能指标</h4><p>吞吐量（Throughput） <em> 单位时间内由计算框架成功地传送数据的数量，本次测试吞吐量的单位为：条/秒。 </em> 反映了系统的负载能力，在相应的资源条件下，单位时间内系统能处理多少数据。 * 吞吐量常用于资源规划，同时也用于协助分析系统性能瓶颈，从而进行相应的资源调整以保证系统能达到用户所要求的处理能力。假设商家每小时能做二十份午餐（吞吐量 20 份/小时），一个外卖小哥每小时只能送两份（吞吐量 2 份/小时），这个系统的瓶颈就在小哥配送这个环节，可以给该商家安排十个外卖小哥配送。</p><p>延迟（Latency） <em> 数据从进入系统到流出系统所用的时间，本次测试延迟的单位为：毫秒。 </em> 反映了系统处理的实时性。 <em> 金融交易分析等大量实时计算业务对延迟有较高要求，延迟越低，数据实时性越强。 </em> 假设商家做一份午餐需要 5 分钟，小哥配送需要 25 分钟，这个流程中用户感受到了 30 分钟的延迟。如果更换配送方案后延迟变成了 60 分钟，等送到了饭菜都凉了，这个新的方案就是无法接受的。</p><h3 id="3-测试环境"><a href="#3-测试环境" class="headerlink" title="3. 测试环境"></a>3. 测试环境</h3><p>为 Storm 和 Flink 分别搭建由 1 台主节点和 2 台从节点构成的 Standalone 集群进行本次测试。其中为了观察 Flink 在实际生产环境中的性能，对于部分测内容也进行了 on Yarn 环境的测试。</p><h4 id="3-1-集群参数"><a href="#3-1-集群参数" class="headerlink" title="3.1 集群参数"></a>3.1 集群参数</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-090554.jpg" alt=""></p><h4 id="3-2-框架参数"><a href="#3-2-框架参数" class="headerlink" title="3.2 框架参数"></a>3.2 框架参数</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-090617.jpg" alt=""></p><h3 id="4-测试方法"><a href="#4-测试方法" class="headerlink" title="4. 测试方法"></a>4. 测试方法</h3><h4 id="4-1-测试流程"><a href="#4-1-测试流程" class="headerlink" title="4.1 测试流程"></a>4.1 测试流程</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-090646.jpg" alt=""></p><p>数据生产</p><p>Data Generator 按特定速率生成数据，带上自增的 id 和 eventTime 时间戳写入 Kafka 的一个 Topic（Topic Data）。</p><p>数据处理</p><p>Storm Task 和 Flink Task （每个测试用例不同）从 Kafka Topic Data 相同的 Offset 开始消费，并将结果及相应 inTime、outTime 时间戳分别写入两个 Topic（Topic Storm 和 Topic Flink）中。</p><p>指标统计</p><p>Metrics Collector 按 outTime 的时间窗口从这两个 Topic 中统计测试指标，每五分钟将相应的指标写入 MySQL 表中。<br>Metrics Collector 按 outTime 取五分钟的滚动时间窗口，计算五分钟的平均吞吐（输出数据的条数）、五分钟内的延迟（outTime - eventTime 或 outTime - inTime）的中位数及 99 线等指标，写入 MySQL 相应的数据表中。最后对 MySQL 表中的吞吐计算均值，延迟中位数及延迟 99 线选取中位数，绘制图像并分析。</p><h4 id="4-2-默认参数"><a href="#4-2-默认参数" class="headerlink" title="4.2 默认参数"></a>4.2 默认参数</h4><ul><li>Storm 和 Flink 默认均为 At Least Once 语义。<br>  Storm 开启 ACK，ACKer 数量为 1。<br>  Flink 的 Checkpoint 时间间隔为 30 秒，默认 StateBackend 为 Memory。</li><li>保证 Kafka 不是性能瓶颈，尽可能排除 Kafka 对测试结果的影响。</li><li>测试延迟时数据生产速率小于数据处理能力，假设数据被写入 Kafka 后立刻被读取，即 eventTime 等于数据进入系统的时间。</li><li>测试吞吐量时从 Kafka Topic 的最旧开始读取，假设该 Topic 中的测试数据量充足。</li></ul><h4 id="4-3-测试用例"><a href="#4-3-测试用例" class="headerlink" title="4.3 测试用例"></a>4.3 测试用例</h4><p>Identity</p><ul><li>Identity 用例主要模拟“输入-输出”简单处理场景，反映两个框架本身的性能。</li><li>输入数据为“msgId, eventTime”，其中 eventTime 视为数据生成时间。单条输入数据约 20 B。</li><li>进入作业处理流程时记录 inTime，作业处理完成后（准备输出时）记录 outTime。</li><li>作业从 Kafka Topic Data 中读取数据后，在字符串末尾追加时间戳，然后直接输出到 Kafka。</li><li>输出数据为“msgId, eventTime, inTime, outTime”。单条输出数据约 50 B。</li></ul><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-090814.jpg" alt=""></p><p>Sleep</p><ul><li>Sleep 用例主要模拟用户作业耗时较长的场景，反映复杂用户逻辑对框架差异的削弱，比较两个框架的调度性能。</li><li>输入数据和输出数据均与 Identity 相同。</li><li>读入数据后，等待一定时长（1 ms）后在字符串末尾追加时间戳后输出</li></ul><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-090843.jpg" alt=""></p><p>Windowed Word Count</p><ul><li>Windowed Word Count 用例主要模拟窗口统计场景，反映两个框架在进行窗口统计时性能的差异。</li><li>此外，还用其进行了精确计算场景的测试，反映 Flink 恰好一次投递的性能。</li><li>输入为 JSON 格式，包含 msgId、eventTime 和一个由若干单词组成的句子，单词之间由空格分隔。单条输入数据约 150 B。</li><li>读入数据后解析 JSON，然后将句子分割为相应单词，带 eventTime 和 inTime 时间戳发给 CountWindow 进行单词计数，同时记录一个窗口中最大最小的 eventTime 和 inTime，最后带 outTime 时间戳输出到 Kafka 相应的 Topic。</li><li>Spout/Source 及 OutputBolt/Output/Sink 并发度恒为 1，增大并发度时仅增大 JSONParser、CountWindow 的并发度。</li><li>由于 Storm 对 window 的支持较弱，CountWindow 使用一个 HashMap 手动实现，Flink 用了原生的 CountWindow 和相应的 Reduce 函数。</li></ul><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-090920.jpg" alt=""></p><h3 id="5-测试结果"><a href="#5-测试结果" class="headerlink" title="5. 测试结果"></a>5. 测试结果</h3><h4 id="5-1-Identity-单线程吞吐量"><a href="#5-1-Identity-单线程吞吐量" class="headerlink" title="5.1 Identity 单线程吞吐量"></a>5.1 Identity 单线程吞吐量</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-090954.jpg" alt=""></p><ul><li>上图中蓝色柱形为单线程 Storm 作业的吞吐，橙色柱形为单线程 Flink 作业的吞吐。</li><li>Identity 逻辑下，Storm 单线程吞吐为 8.7 万条/秒，Flink 单线程吞吐可达 35 万条/秒。</li><li>当 Kafka Data 的 Partition 数为 1 时，Flink 的吞吐约为 Storm 的 3.2 倍；当其 Partition 数为 8 时，Flink 的吞吐约为 Storm 的 4.6 倍。</li><li>由此可以看出，Flink 吞吐约为 Storm 的 3-5 倍。</li></ul><h4 id="5-2-Identity-单线程作业延迟"><a href="#5-2-Identity-单线程作业延迟" class="headerlink" title="5.2 Identity 单线程作业延迟"></a>5.2 Identity 单线程作业延迟</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-091032.jpg" alt=""></p><ul><li>采用 outTime - eventTime 作为延迟，图中蓝色折线为 Storm，橙色折线为 Flink。虚线为 99 线，实线为中位数。</li><li>从图中可以看出随着数据量逐渐增大，Identity 的延迟逐渐增大。其中 99 线的增大速度比中位数快，Storm 的 增大速度比 Flink 快。</li><li>其中 QPS 在 80000 以上的测试数据超过了 Storm 单线程的吞吐能力，无法对 Storm 进行测试，只有 Flink 的曲线。</li><li>对比折线最右端的数据可以看出，Storm QPS 接近吞吐时延迟中位数约 100 毫秒，99 线约 700 毫秒，Flink 中位数约 50 毫秒，99 线约 300 毫秒。Flink 在满吞吐时的延迟约为 Storm 的一半。</li></ul><h4 id="5-3-Sleep-吞吐量"><a href="#5-3-Sleep-吞吐量" class="headerlink" title="5.3 Sleep 吞吐量"></a>5.3 Sleep 吞吐量</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-091110.jpg" alt=""></p><ul><li>从图中可以看出，Sleep 1 毫秒时，Storm 和 Flink 单线程的吞吐均在 900 条/秒左右，且随着并发增大基本呈线性增大。</li><li>对比蓝色和橙色的柱形可以发现，此时两个框架的吞吐能力基本一致。</li></ul><h4 id="5-4-Sleep-单线程作业延迟（中位数）"><a href="#5-4-Sleep-单线程作业延迟（中位数）" class="headerlink" title="5.4 Sleep 单线程作业延迟（中位数）"></a>5.4 Sleep 单线程作业延迟（中位数）</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-091138.jpg" alt=""></p><p>依然采用 outTime - eventTime 作为延迟，从图中可以看出，Sleep 1 毫秒时，Flink 的延迟仍低于 Storm。</p><h4 id="5-5-Windowed-Word-Count-单线程吞吐量"><a href="#5-5-Windowed-Word-Count-单线程吞吐量" class="headerlink" title="5.5 Windowed Word Count 单线程吞吐量"></a>5.5 Windowed Word Count 单线程吞吐量</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-091203.jpg" alt=""></p><ul><li>单线程执行大小为 10 的计数窗口，吞吐量统计如图。</li><li>从图中可以看出，Storm 吞吐约为 1.2 万条/秒，Flink Standalone 约为 4.3 万条/秒。Flink 吞吐依然为 Storm 的 3 倍以上。</li></ul><h4 id="5-6-Windowed-Word-Count-Flink-At-Least-Once-与-Exactly-Once-吞吐量对比"><a href="#5-6-Windowed-Word-Count-Flink-At-Least-Once-与-Exactly-Once-吞吐量对比" class="headerlink" title="5.6 Windowed Word Count Flink At Least Once 与 Exactly Once 吞吐量对比"></a>5.6 Windowed Word Count Flink At Least Once 与 Exactly Once 吞吐量对比</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-091234.jpg" alt=""></p><ul><li>由于同一算子的多个并行任务处理速度可能不同，在上游算子中不同快照里的内容，经过中间并行算子的处理，到达下游算子时可能被计入同一个快照中。这样一来，这部分数据会被重复处理。因此，Flink 在 Exactly Once 语义下需要进行对齐，即当前最早的快照中所有数据处理完之前，属于下一个快照的数据不进行处理，而是在缓存区等待。当前测试用例中，在 JSON Parser 和 CountWindow、CountWindow 和 Output 之间均需要进行对齐，有一定消耗。为体现出对齐场景，Source/Output/Sink 并发度的并发度仍为 1，提高了 JSONParser/CountWindow 的并发度。具体流程细节参见前文 Windowed Word Count 流程图。</li><li>上图中橙色柱形为 At Least Once 的吞吐量，黄色柱形为 Exactly Once 的吞吐量。对比两者可以看出，在当前并发条件下，Exactly Once 的吞吐较 At Least Once 而言下降了 6.3%</li></ul><h4 id="5-7-Windowed-Word-Count-Storm-At-Least-Once-与-At-Most-Once-吞吐量对比"><a href="#5-7-Windowed-Word-Count-Storm-At-Least-Once-与-At-Most-Once-吞吐量对比" class="headerlink" title="5.7 Windowed Word Count Storm At Least Once 与 At Most Once 吞吐量对比"></a>5.7 Windowed Word Count Storm At Least Once 与 At Most Once 吞吐量对比</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-091308.jpg" alt=""></p><ul><li>Storm 将 ACKer 数量设置为零后，每条消息在发送时就自动 ACK，不再等待 Bolt 的 ACK，也不再重发消息，为 At Most Once 语义。</li><li>上图中蓝色柱形为 At Least Once 的吞吐量，浅蓝色柱形为 At Most Once 的吞吐量。对比两者可以看出，在当前并发条件下，At Most Once 语义下的吞吐较 At Least Once 而言提高了 16.8%</li></ul><h4 id="5-8-Windowed-Word-Count-单线程作业延迟"><a href="#5-8-Windowed-Word-Count-单线程作业延迟" class="headerlink" title="5.8 Windowed Word Count 单线程作业延迟"></a>5.8 Windowed Word Count 单线程作业延迟</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-091337.jpg" alt=""></p><ul><li>Identity 和 Sleep 观测的都是 outTime - eventTime，因为作业处理时间较短或 Thread.sleep() 精度不高，outTime - inTime 为零或没有比较意义；Windowed Word Count 中可以有效测得 outTime - inTime 的数值，将其与 outTime - eventTime 画在同一张图上，其中 outTime - eventTime 为虚线，outTime - InTime 为实线。</li><li>观察橙色的两条折线可以发现，Flink 用两种方式统计的延迟都维持在较低水平；观察两条蓝色的曲线可以发现，Storm 的 outTime - inTime 较低，outTime - eventTime 一直较高，即 inTime 和 eventTime 之间的差值一直较大，可能与 Storm 和 Flink 的数据读入方式有关。</li><li>蓝色折线表明 Storm 的延迟随数据量的增大而增大，而橙色折线表明 Flink 的延迟随着数据量的增大而减小（此处未测至 Flink 吞吐量，接近吞吐时 Flink 延迟依然会上升）。</li><li>即使仅关注 outTime - inTime（即图中实线部分），依然可以发现，当 QPS 逐渐增大的时候，Flink 在延迟上的优势开始体现出来。</li></ul><h4 id="5-9-Windowed-Word-Count-Flink-At-Least-Once-与-Exactly-Once-延迟对比"><a href="#5-9-Windowed-Word-Count-Flink-At-Least-Once-与-Exactly-Once-延迟对比" class="headerlink" title="5.9 Windowed Word Count Flink At Least Once 与 Exactly Once 延迟对比"></a>5.9 Windowed Word Count Flink At Least Once 与 Exactly Once 延迟对比</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-091420.jpg" alt=""></p><p>图中黄色为 99 线，橙色为中位数，虚线为 At Least Once，实线为 Exactly Once。图中相应颜色的虚实曲线都基本重合，可以看出 Flink Exactly Once 的延迟中位数曲线与 At Least Once 基本贴合，在延迟上性能没有太大差异。</p><h4 id="5-10-Windowed-Word-Count-Storm-At-Least-Once-与-At-Most-Once-延迟对比"><a href="#5-10-Windowed-Word-Count-Storm-At-Least-Once-与-At-Most-Once-延迟对比" class="headerlink" title="5.10 Windowed Word Count Storm At Least Once 与 At Most Once 延迟对比"></a>5.10 Windowed Word Count Storm At Least Once 与 At Most Once 延迟对比</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-091444.jpg" alt=""></p><ul><li>图中蓝色为 99 线，浅蓝色为中位数，虚线为 At Least Once，实线为 At Most Once。QPS 在 4000 及以前的时候，虚线实线基本重合；QPS 在 6000 时两者已有差异，虚线略高；QPS 接近 8000 时，已超过 At Least Once 语义下 Storm 的吞吐，因此只有实线上的点。</li><li>可以看出，QPS 较低时 Storm At Most Once 与 At Least Once 的延迟观察不到差异，随着 QPS 增大差异开始增大，At Most Once 的延迟较低。</li></ul><h4 id="5-11-Windowed-Word-Count-Flink-不同-StateBackends-吞吐量对比"><a href="#5-11-Windowed-Word-Count-Flink-不同-StateBackends-吞吐量对比" class="headerlink" title="5.11 Windowed Word Count Flink 不同 StateBackends 吞吐量对比"></a>5.11 Windowed Word Count Flink 不同 StateBackends 吞吐量对比</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-091515.jpg" alt=""></p><ul><li>Flink 支持 Standalone 和 on Yarn 的集群部署模式，同时支持 Memory、FileSystem、RocksDB 三种状态存储后端（StateBackends）。由于线上作业需要，测试了这三种 StateBackends 在两种集群部署模式上的性能差异。其中，Standalone 时的存储路径为 JobManager 上的一个文件目录，on Yarn 时存储路径为 HDFS 上一个文件目录。</li><li>对比三组柱形可以发现，使用 FileSystem 和 Memory 的吞吐差异不大，使用 RocksDB 的吞吐仅其余两者的十分之一左右。</li><li>对比两种颜色可以发现，Standalone 和 on Yarn 的总体差异不大，使用 FileSystem 和 Memory 时 on Yarn 模式下吞吐稍高，使用 RocksDB 时 Standalone 模式下的吞吐稍高。</li></ul><h4 id="5-12-Windowed-Word-Count-Flink-不同-StateBackends-延迟对比"><a href="#5-12-Windowed-Word-Count-Flink-不同-StateBackends-延迟对比" class="headerlink" title="5.12 Windowed Word Count Flink 不同 StateBackends 延迟对比"></a>5.12 Windowed Word Count Flink 不同 StateBackends 延迟对比</h4><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-091555.jpg" alt=""></p><ul><li>使用 FileSystem 和 Memory 作为 Backends 时，延迟基本一致且较低。</li><li>使用 RocksDB 作为 Backends 时，延迟稍高，且由于吞吐较低，在达到吞吐瓶颈前的延迟陡增。其中 on Yarn 模式下吞吐更低，接近吞吐时的延迟更高。</li></ul><h3 id="6-结论及建议"><a href="#6-结论及建议" class="headerlink" title="6. 结论及建议"></a>6. 结论及建议</h3><h4 id="6-1-框架本身性能"><a href="#6-1-框架本身性能" class="headerlink" title="6.1 框架本身性能"></a>6.1 框架本身性能</h4><ul><li>由 5.1、5.5 的测试结果可以看出，Storm 单线程吞吐约为 8.7 万条/秒，Flink 单线程吞吐可达 35 万条/秒。Flink 吞吐约为 Storm 的 3-5 倍。</li><li>由 5.2、5.8 的测试结果可以看出，Storm QPS 接近吞吐时延迟（含 Kafka 读写时间）中位数约 100 毫秒，99 线约 700 毫秒，Flink 中位数约 50 毫秒，99 线约 300 毫秒。Flink 在满吞吐时的延迟约为 Storm 的一半，且随着 QPS 逐渐增大，Flink 在延迟上的优势开始体现出来。</li></ul><p>综上可得，Flink 框架本身性能优于 Storm。</p><h4 id="6-2-复杂用户逻辑对框架差异的削弱"><a href="#6-2-复杂用户逻辑对框架差异的削弱" class="headerlink" title="6.2 复杂用户逻辑对框架差异的削弱"></a>6.2 复杂用户逻辑对框架差异的削弱</h4><p>对比 5.1 和 5.3、5.2 和 5.4 的测试结果可以发现，单个 Bolt Sleep 时长达到 1 毫秒时，Flink 的延迟仍低于 Storm，但吞吐优势已基本无法体现。</p><p>因此，用户逻辑越复杂，本身耗时越长，针对该逻辑的测试体现出来的框架的差异越小。</p><h4 id="6-3-不同消息投递语义的差异"><a href="#6-3-不同消息投递语义的差异" class="headerlink" title="6.3 不同消息投递语义的差异"></a>6.3 不同消息投递语义的差异</h4><ul><li>由 5.6、5.7、5.9、5.10 的测试结果可以看出，Flink Exactly Once 的吞吐较 At Least Once 而言下降 6.3%，延迟差异不大；Storm At Most Once 语义下的吞吐较 At Least Once 提升 16.8%，延迟稍有下降。</li><li>由于 Storm 会对每条消息进行 ACK，Flink 是基于一批消息做的检查点，不同的实现原理导致两者在 At Least Once 语义的花费差异较大，从而影响了性能。而 Flink 实现 Exactly Once 语义仅增加了对齐操作，因此在算子并发量不大、没有出现慢节点的情况下对 Flink 性能的影响不大。Storm At Most Once 语义下的性能仍然低于 Flink。</li></ul><h4 id="6-4-Flink-状态存储后端选择"><a href="#6-4-Flink-状态存储后端选择" class="headerlink" title="6.4 Flink 状态存储后端选择"></a>6.4 Flink 状态存储后端选择</h4><p>Flink 提供了内存、文件系统、RocksDB 三种 StateBackends，结合 5.11、5.12 的测试结果，三者的对比如下：</p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-07-091719.jpg" alt=""></p><h4 id="6-5-推荐使用-Flink-的场景"><a href="#6-5-推荐使用-Flink-的场景" class="headerlink" title="6.5 推荐使用 Flink 的场景"></a>6.5 推荐使用 Flink 的场景</h4><p>综合上述测试结果，以下实时计算场景建议考虑使用 Flink 框架进行计算： + 要求消息投递语义为 Exactly Once 的场景； + 数据量较大，要求高吞吐低延迟的场景； + 需要进行状态管理或窗口统计的场景。</p><h3 id="7-展望"><a href="#7-展望" class="headerlink" title="7. 展望"></a>7. 展望</h3><ul><li>本次测试中尚有一些内容没有进行更加深入的测试，有待后续测试补充。例如：<br>  Exactly Once 在并发量增大的时候是否吞吐会明显下降？<br>  用户耗时到 1ms 时框架的差异已经不再明显（Thread.sleep() 的精度只能到毫秒），用户耗时在什么范围内 Flink 的优势依然能体现出来？</li><li>本次测试仅观察了吞吐量和延迟两项指标，对于系统的可靠性、可扩展性等重要的性能指标没有在统计数据层面进行关注，有待后续补充。</li><li>Flink 使用 RocksDBStateBackend 时的吞吐较低，有待进一步探索和优化。</li><li>关于 Flink 的更高级 API，如 Table API &amp; SQL 及 CEP 等，需要进一步了解和完善。</li></ul><h3 id="8-参考内容"><a href="#8-参考内容" class="headerlink" title="8. 参考内容"></a>8. 参考内容</h3><ul><li>分布式流处理框架——功能对比和性能评估.</li><li>intel-hadoop/HiBench: HiBench is a big data benchmark suite.</li><li>Yahoo的流计算引擎基准测试.</li><li>Extending the Yahoo! Streaming Benchmark.</li></ul><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>GitHub Flink 学习代码地址：<a href="https://github.com/zhisheng17/flink-learning">https://github.com/zhisheng17/flink-learning</a></p><p>微信公众号：<strong>zhisheng</strong></p><p>另外我自己整理了些 Flink 的学习资料，目前已经全部放到微信公众号（zhisheng）了，你可以回复关键字：<strong>Flink</strong> 即可无条件获取到。另外也可以加我微信 你可以加我的微信：<strong>yuanblog_tzs</strong>，探讨技术！</p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg" alt=""></p><p>更多私密资料请加入知识星球！</p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-150802.jpg" alt=""></p><h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>1、<a href="http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/">Flink 从0到1学习 —— Apache Flink 介绍</a></p><p>2、<a href="http://www.54tianzhisheng.cn/2018/09/18/flink-install">Flink 从0到1学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></p><p>3、<a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">Flink 从0到1学习 —— Flink 配置文件详解</a></p><p>4、<a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">Flink 从0到1学习 —— Data Source 介绍</a></p><p>5、<a href="http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/">Flink 从0到1学习 —— 如何自定义 Data Source ？</a></p><p>6、<a href="http://www.54tianzhisheng.cn/2018/10/29/flink-sink/">Flink 从0到1学习 —— Data Sink 介绍</a></p><p>7、<a href="http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/">Flink 从0到1学习 —— 如何自定义 Data Sink ？</a></p><p>8、<a href="http://www.54tianzhisheng.cn/2018/11/04/Flink-Data-transformation/">Flink 从0到1学习 —— Flink Data transformation(转换)</a></p><p>9、<a href="http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/">Flink 从0到1学习 —— 介绍 Flink 中的 Stream Windows</a></p><p>10、<a href="http://www.54tianzhisheng.cn/2018/12/11/Flink-time/">Flink 从0到1学习 —— Flink 中的几种 Time 详解</a></p><p>11、<a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 ElasticSearch</a></p><p>12、<a href="http://www.54tianzhisheng.cn/2019/01/05/Flink-run/">Flink 从0到1学习 —— Flink 项目如何运行？</a></p><p>13、<a href="http://www.54tianzhisheng.cn/2019/01/06/Flink-Kafka-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Kafka</a></p><p>14、<a href="http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/">Flink 从0到1学习 —— Flink JobManager 高可用性配置</a></p><p>15、<a href="http://www.54tianzhisheng.cn/2019/01/14/Flink-parallelism-slot/">Flink 从0到1学习 —— Flink parallelism 和 Slot 介绍</a></p><p>16、<a href="http://www.54tianzhisheng.cn/2019/01/15/Flink-MySQL-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></p><p>17、<a href="http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></p><p>18、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HBase</a></p><p>19、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HDFS</a></p><p>20、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Redis</a></p><p>21、<a href="https://t.zsxq.com/uVbi2nq">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Cassandra</a></p><p>22、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Flume</a></p><p>23、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 InfluxDB</a></p><p>24、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RocketMQ</a></p><p>25、<a href="http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/">Flink 从0到1学习 —— 你上传的 jar 包藏到哪里去了</a></p><p>26、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— 你的 Flink job 日志跑到哪里去了</a></p><p>27、<a href="http://www.54tianzhisheng.cn/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></p><p>28、<a href="http://www.54tianzhisheng.cn/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></p><p>29、<a href="http://www.54tianzhisheng.cn/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></p><p>30、<a href="http://www.54tianzhisheng.cn/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></p><p>31、<a href="http://www.54tianzhisheng.cn/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></p><p>32、<a href="http://www.54tianzhisheng.cn/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></p><p>33、<a href="http://www.54tianzhisheng.cn/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></p><p>34、<a href="http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></p><p>35、<a href="http://www.54tianzhisheng.cn/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></p><p>36、<a href="http://www.54tianzhisheng.cn/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></p><p>37、<a href="http://www.54tianzhisheng.cn/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></p><p>38、<a href="http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></p><p>39、<a href="http://www.54tianzhisheng.cn/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></p><p>40、<a href="http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/">Flink 全网最全资源（视频、博客、PPT、入门、实战、源码解析、问答等持续更新）</a></p><p>41、<a href="https://mp.weixin.qq.com/s/ok-YwuVbwAVtJz7hUCiZxg">Flink 灵魂两百问，这谁顶得住？</a></p><p>42、<a href="http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></p><p>43、<a href="http://www.54tianzhisheng.cn/2019/08/06/flink-streaming-system/">你公司到底需不需要引入实时计算引擎？</a></p><p>44、<a href="http://www.54tianzhisheng.cn/2019/08/19/flink/">一文让你彻底了解大数据实时计算引擎 Flink</a></p><h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><p>1、<a href="http://www.54tianzhisheng.cn/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></p><p>2、<a href="http://www.54tianzhisheng.cn/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></p><p>3、<a href="http://www.54tianzhisheng.cn/tags/Flink/">Flink 源码解析—— local 模式启动流程</a></p><p>4、<a href="http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— standalone session 模式启动流程</a></p><p>5、<a href="http://www.54tianzhisheng.cn/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></p><p>6、<a href="http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></p><p>7、<a href="http://www.54tianzhisheng.cn/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></p><p>8、<a href="http://www.54tianzhisheng.cn/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></p><p>9、<a href="http://www.54tianzhisheng.cn/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></p><p>10、<a href="http://www.54tianzhisheng.cn/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></p><p>11、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></p><p>12、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></p><p>13、<a href="http://www.54tianzhisheng.cn/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></p><p>14、<a href="http://www.54tianzhisheng.cn/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></p><p>15、<a href="http://www.54tianzhisheng.cn/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></p><p>16、<a href="http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></p><p>17、<a href="http://www.54tianzhisheng.cn/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></p><p>18、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-core</a></p><p>19、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-datadog</a></p><p>20、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-dropwizard</a></p><p>21、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-graphite</a></p><p>22、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-influxdb</a></p><p>23、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-jmx</a></p><p>24、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-slf4j</a></p><p>25、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-statsd</a></p><p>26、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-prometheus</a></p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg" alt=""></p><p>26、<a href="http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg" alt=""></p><p>27、<a href="http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></p><p>28、<a href="https://t.zsxq.com/UvrRNJM">大数据重磅炸弹——实时计算框架 Flink</a></p><p>29、<a href="https://t.zsxq.com/QVFqjea">Flink Checkpoint-轻量级分布式快照</a></p><p>30、<a href="http://www.54tianzhisheng.cn/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-背景&quot;&gt;&lt;a href=&quot;#1-背景&quot; class=&quot;headerlink&quot; title=&quot;1. 背景&quot;&gt;&lt;/a&gt;1. 背景&lt;/h3&gt;&lt;p&gt;Apache Flink 和 Apache Storm 是当前业界广泛使用的两个分布式实时计算框架。其中 Apache Storm（以下简称“Storm”）在美团点评实时计算业务中已有较为成熟的运用（可参考 Storm 的可靠性保证测试），有管理平台、常用 API 和相应的文档，大量实时作业基于 Storm 构建。而 Apache Flink（以下简称“Flink”）在近期倍受关注，具有高吞吐、低延迟、高可靠和精确计算等特性，对事件窗口有很好的支持，目前在美团点评实时计算业务中也已有一定应用。&lt;/p&gt;
+    
+    </summary>
+    
+    
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
     
