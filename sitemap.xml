@@ -4,7 +4,7 @@
   <url>
     <loc>http://www.54tianzhisheng.cn/2019/12/31/geekbang/</loc>
     
-    <lastmod>2019-10-21T06:07:22.000Z</lastmod>
+    <lastmod>2019-10-22T07:18:34.000Z</lastmod>
     
   </url>
   
@@ -135,14 +135,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
     
@@ -184,14 +184,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/10/27/flink-config/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/06/13/flink-book-paper/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/06/13/flink-book-paper/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/10/27/flink-config/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
     
@@ -212,14 +212,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/06/20/flink-kafka-Exactly-Once/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/06/20/flink-kafka-Exactly-Once/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
     
@@ -282,14 +282,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/06/16/flink-sql-oppo/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/06/16/flink-sql-oppo/</loc>
     
     <lastmod>2019-09-17T15:13:34.000Z</lastmod>
     
@@ -331,13 +331,6 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/</loc>
-    
-    <lastmod>2019-09-01T12:02:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/</loc>
     
     <lastmod>2019-09-01T12:02:46.000Z</lastmod>
@@ -345,7 +338,7 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/20/Flink-code-StreamGraph/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/</loc>
     
     <lastmod>2019-09-01T12:02:46.000Z</lastmod>
     
@@ -353,6 +346,13 @@
   
   <url>
     <loc>http://www.54tianzhisheng.cn/2019/03/28/Flink-code-TaskManager-submitJob/</loc>
+    
+    <lastmod>2019-09-01T12:02:46.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.54tianzhisheng.cn/2019/03/20/Flink-code-StreamGraph/</loc>
     
     <lastmod>2019-09-01T12:02:46.000Z</lastmod>
     
@@ -408,14 +408,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/14/Flink-code-structure/</loc>
     
     <lastmod>2019-09-01T12:02:46.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/14/Flink-code-structure/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/</loc>
     
     <lastmod>2019-09-01T12:02:46.000Z</lastmod>
     
@@ -681,14 +681,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/01/25/Docker-install/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/12/25/ELK/</loc>
     
     <lastmod>2019-04-24T17:04:38.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/12/25/ELK/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/01/25/Docker-install/</loc>
     
     <lastmod>2019-04-24T17:04:38.000Z</lastmod>
     
