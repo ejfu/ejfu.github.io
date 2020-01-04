@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.54tianzhisheng.cn/2019/12/30/flink-meituan-real-time-warehouse/</loc>
+    
+    <lastmod>2020-01-04T04:12:51.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.54tianzhisheng.cn/2019/12/10/flink-real-time-data-analysis-platform/</loc>
+    
+    <lastmod>2020-01-04T03:42:48.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/</loc>
+    
+    <lastmod>2020-01-04T02:20:12.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.54tianzhisheng.cn/2019/12/23/flink-monitor-alert/</loc>
     
     <lastmod>2019-12-26T15:00:56.000Z</lastmod>
@@ -37,14 +58,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/10/29/flink-sink/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/10/29/flink-sink/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
@@ -58,14 +79,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
@@ -93,14 +114,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/08/25/flink-didi/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/08/25/flink-didi/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
@@ -156,14 +177,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/08/22/flink-1.9/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/08/22/flink-1.9/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
@@ -177,14 +198,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/08/23/flink-ebay/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/08/23/flink-ebay/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
@@ -247,20 +268,6 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/</loc>
-    
-    <lastmod>2019-12-12T14:22:41.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.54tianzhisheng.cn/2019/12/10/flink-real-time-data-analysis-platform/</loc>
-    
-    <lastmod>2019-12-10T15:09:30.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.54tianzhisheng.cn/2019/12/30/java-ads/</loc>
     
     <lastmod>2019-12-10T14:25:32.000Z</lastmod>
@@ -310,13 +317,6 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/</loc>
-    
-    <lastmod>2019-11-05T10:23:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/</loc>
     
     <lastmod>2019-11-05T10:23:14.000Z</lastmod>
@@ -331,7 +331,7 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/18/Flink-code-batch-wordcount-start/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/</loc>
     
     <lastmod>2019-11-05T10:23:14.000Z</lastmod>
     
@@ -339,6 +339,13 @@
   
   <url>
     <loc>http://www.54tianzhisheng.cn/2019/07/04/Flink-code-clients/</loc>
+    
+    <lastmod>2019-11-05T10:23:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.54tianzhisheng.cn/2019/03/18/Flink-code-batch-wordcount-start/</loc>
     
     <lastmod>2019-11-05T10:23:14.000Z</lastmod>
     
@@ -429,14 +436,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/</loc>
     
     <lastmod>2019-11-05T10:23:13.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/</loc>
     
     <lastmod>2019-11-05T10:23:13.000Z</lastmod>
     
@@ -912,14 +919,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/12/13/Google-Developer-Days/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/09/23/Guava-limit/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/09/23/Guava-limit/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/12/13/Google-Developer-Days/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
@@ -968,14 +975,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/12/02/wx-01/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/01/04/weixin/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/01/04/weixin/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/12/02/wx-01/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
