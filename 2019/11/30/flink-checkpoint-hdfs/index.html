@@ -17,22 +17,36 @@
    <meta name="keywords" content="Flink,Spark,大数据,Hive,Java,架构,后端,服务端,RocketMQ,分布式消息队列,分布式存储,技术博客,HBase,ElasticSearch,Spring,Spring Boot,Spring Boot 2.0,Spring Cloud,Spring MVC,Java EE,前端,HTML,MyBatis,Android,Docker,Mac,Consul,Kafka,Logstash,Kibana,MySQL,Maven,Nginx,Python,RabbitMQ,ActiveMQ,JVM">
 
 
-  <title>最近很火的鸡汤，分享给大家 | zhisheng的博客</title>
+  <title>阿里巴巴 Flink 踩坑经验：如何大幅降低 HDFS 压力？ | zhisheng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;lt;最近很火的一首小诗，分享给大家&amp;gt;">
-<meta name="keywords" content="随笔">
+  <meta name="description" content="众所周知，Flink 是当前最为广泛使用的计算引擎之一，它使用 Checkpoint 机制进行容错处理 [1]，Checkpoint 会将状态快照备份到分布式存储系统，供后续恢复使用。在 Alibaba 内部，我们使用的存储主要是 HDFS，当同一个集群的 Job 到达一定数量后，会对 HDFS 造成非常大的压力，本文将介绍一种大幅度降低 HDFS 压力的方法——小文件合并。">
+<meta name="keywords" content="Flink,大数据,流式计算">
 <meta property="og:type" content="article">
-<meta property="og:title" content="最近很火的鸡汤，分享给大家">
-<meta property="og:url" content="http://www.54tianzhisheng.cn/2017/05/12/poetry/index.html">
+<meta property="og:title" content="阿里巴巴 Flink 踩坑经验：如何大幅降低 HDFS 压力？">
+<meta property="og:url" content="http://www.54tianzhisheng.cn/2019/11/30/flink-checkpoint-hdfs/index.html">
 <meta property="og:site_name" content="zhisheng的博客">
-<meta property="og:description" content="&amp;lt;最近很火的一首小诗，分享给大家&amp;gt;">
+<meta property="og:description" content="众所周知，Flink 是当前最为广泛使用的计算引擎之一，它使用 Checkpoint 机制进行容错处理 [1]，Checkpoint 会将状态快照备份到分布式存储系统，供后续恢复使用。在 Alibaba 内部，我们使用的存储主要是 HDFS，当同一个集群的 Job 到达一定数量后，会对 HDFS 造成非常大的压力，本文将介绍一种大幅度降低 HDFS 压力的方法——小文件合并。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://image.54tianzhisheng.cn/owl-2287017_960_720.jpg">
-<meta property="og:updated_time" content="2018-11-22T14:51:58.000Z">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-144832.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-144921.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-144902.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145048.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145114.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145326.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145406.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145805.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145821.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145834.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145848.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg">
+<meta property="og:updated_time" content="2020-01-11T05:55:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="最近很火的鸡汤，分享给大家">
-<meta name="twitter:description" content="&amp;lt;最近很火的一首小诗，分享给大家&amp;gt;">
-<meta name="twitter:image" content="http://image.54tianzhisheng.cn/owl-2287017_960_720.jpg">
+<meta name="twitter:title" content="阿里巴巴 Flink 踩坑经验：如何大幅降低 HDFS 压力？">
+<meta name="twitter:description" content="众所周知，Flink 是当前最为广泛使用的计算引擎之一，它使用 Checkpoint 机制进行容错处理 [1]，Checkpoint 会将状态快照备份到分布式存储系统，供后续恢复使用。在 Alibaba 内部，我们使用的存储主要是 HDFS，当同一个集群的 Job 到达一定数量后，会对 HDFS 造成非常大的压力，本文将介绍一种大幅度降低 HDFS 压力的方法——小文件合并。">
+<meta name="twitter:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-144832.jpg">
   
     <link rel="alternative" href="/atom.xml" title="zhisheng的博客" type="application/atom+xml">
   
@@ -253,11 +267,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-poetry" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-flink-checkpoint-hdfs" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/05/12/poetry/" class="article-date">
-      <time datetime="2017-05-11T16:00:00.000Z" itemprop="datePublished">2017-05-12</time>
+      <a href="/2019/11/30/flink-checkpoint-hdfs/" class="article-date">
+      <time datetime="2019-11-29T16:00:00.000Z" itemprop="datePublished">2019-11-30</time>
 </a>
     </div>
   
@@ -270,7 +284,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      最近很火的鸡汤，分享给大家
+      阿里巴巴 Flink 踩坑经验：如何大幅降低 HDFS 压力？
     </h1>
   
 
@@ -281,7 +295,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -291,55 +305,184 @@
     <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
-        <h4 id="lt-最近很火的一首小诗，分享给大家-gt"><a href="#lt-最近很火的一首小诗，分享给大家-gt" class="headerlink" title="&lt;最近很火的一首小诗，分享给大家&gt;"></a>&lt;最近很火的一首小诗，分享给大家&gt;</h4><p><img src="http://image.54tianzhisheng.cn/owl-2287017_960_720.jpg" alt=""><br><a id="more"></a></p>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=415792881&auto=1&height=66"></iframe>
-
-<p>纽约时间比加州时间早三个小时，</p>
-<p> New York is 3 hours ahead of California,</p>
-<p> 但加州时间并没有变慢。</p>
-<p> but it does not make California slow.</p>
-<p> 有人22岁就毕业了，</p>
-<p> Someone graduated at the age of 22,</p>
-<p> 但等了五年才找到好的工作！</p>
-<p> but waited 5 years before securing a good job!</p>
-<p> 有人25岁就当上CEO，</p>
-<p> Someone became a CEO at 25,</p>
-<p> 却在50岁去世。</p>
-<p> and died at 50.</p>
-<p> 也有人迟到50岁才当上CEO，</p>
-<p> While another became a CEO at 50,</p>
-<p> 然后活到90岁。</p>
-<p> and lived to 90 years.</p>
-<p> 有人依然单身，</p>
-<p> Someone is still single,</p>
-<p> 同时也有人已婚。</p>
-<p> while someone else got married.</p>
-<p> 奥巴马55岁就退休，</p>
-<p> Obama retires at 55,</p>
-<p> 川普70岁才开始当总统。</p>
-<p> but Trump starts at 70.</p>
-<p> 世上每个人本来就有自己的发展时区。</p>
-<p> Absolutely everyone in this world works based on their Time Zone.</p>
-<p> 身边有些人看似走在你前面，</p>
-<p> People around you might seem to go ahead of you,</p>
-<p> 也有人看似走在你后面。</p>
-<p> some might seem to be behind you.</p>
-<p> 但其实每个人在自己的时区有自己的步程。</p>
-<p> But everyone is running their own RACE, in their own TIME.</p>
-<p> 不用嫉妒或嘲笑他们。</p>
-<p> Don’t envy them or mock them.</p>
-<p> 他们都在自己的时区里，你也是！</p>
-<p> They are in their TIME ZONE, and you are in yours!</p>
-<p> 生命就是等待正确的行动时机。</p>
-<p> Life is about waiting for the right moment to act.</p>
-<p> 所以，放轻松。</p>
-<p> So, RELAX.</p>
-<p> 你没有落后。</p>
-<p> You’re not LATE.</p>
-<p> 你没有领先。</p>
-<p> You’re not EARLY.</p>
-<p> 在命运为你安排的属于自己的时区里，一切都准时。</p>
-<p> You are very much ON TIME, and in your TIME ZONE Destiny set up for you.</p>
+        <p>众所周知，Flink 是当前最为广泛使用的计算引擎之一，它使用 Checkpoint 机制进行容错处理 [1]，Checkpoint 会将状态快照备份到分布式存储系统，供后续恢复使用。在 Alibaba 内部，我们使用的存储主要是 HDFS，当同一个集群的 Job 到达一定数量后，会对 HDFS 造成非常大的压力，本文将介绍一种大幅度降低 HDFS 压力的方法——小文件合并。</p>
+<a id="more"></a>
+<p>本文转自：<a href="">https://www.infoq.cn/article/OLlJNzQpTOHfyrgOG8xq</a></p>
+<p>作者：邱从贤</p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>不管使用 FsStateBackend、RocksDBStateBackend 还是 NiagaraStateBackend，Flink 在进行 Checkpoint 的时候，TM 会将状态快照写到分布式文件系统中，然后将文件句柄发给 JM，JM 完成全局 checkpoint 快照的存储，如下图所示。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-144832.jpg" alt=""></p>
+<p>对于全量 Checkpoint 来说，TM 将每个 Checkpoint 内部的数据都写到同一个文件，而对于 RocksDBStateBackend/NiagaraStateBackend 的增量 Checkpoint [2] 来说，则会将每个 sst 文件写到一个分布式系统的文件内。当作业量很大，且作业的并发很大时，则会对底层 HDFS 形成非常大的压力：1）大量的 RPC 请求会影响 RPC 的响应时间（如下图所示）；2）大量文件对 NameNode 内存造成很大压力。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-144921.jpg" alt=""></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-144902.jpg" alt=""></p>
+<p>在 Flink 中曾经尝试使用 ByteStreamStateHandle 来解决小文件多的问题 [3]，将小于一定阈值的 state 直接发送到 JM，由 JM 统一写到分布式文件中，从而避免在 TM 端生成小文件。但是这个方案有一定的局限性，阈值设置太小，还会有很多小文件生成，阈值设置太大，则会导致 JM 内存消耗太多有 OOM 的风险。</p>
+<h3 id="1-小文件合并方案"><a href="#1-小文件合并方案" class="headerlink" title="1 小文件合并方案"></a>1 小文件合并方案</h3><p>针对上面的问题我们提出一种解决方案——小文件合并。</p>
+<p>在原来的实现中，每个 sst 文件会打开一个 CheckpointOutputStream，每个 CheckpointOutputStream 对应一个 FSDataOutputStream，将本地文件写往一个分布式文件，然后关闭 FSDataOutputStream，生成一个 StateHandle。如下图所示：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145048.jpg" alt=""></p>
+<p>小文件合并则会重用打开的 FSDataOutputStream，直至文件大小达到预设的阈值为止，换句话说多个 sst 文件会重用同一个 DFS 上的文件，每个 sst 文件占用 DFS 文件中的一部分，最终多个 StateHandle 共用一个物理文件，如下图所示。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145114.jpg" alt=""></p>
+<p>在接下来的章节中我们会描述实现的细节，其中需要重点考虑的地方包括：</p>
+<ul>
+<li>并发 Checkpoint 的支持</li>
+</ul>
+<p>Flink 天生支持并发 Checkpoint，小文件合并方案则会将多个文件写往同一个分布式存储文件中，如果考虑不当，数据会写串或者损坏，因此我们需要有一种机制保证该方案的正确性，详细描述参考 2.1 节。</p>
+<ul>
+<li>防止误删文件</li>
+</ul>
+<p>我们使用引用计数来记录文件的使用情况，仅通过文件引用计数是否降为 0 进行判断删除，则可能误删文件，如何保证文件不会被错误删除，我们将会在 2.2 节进行阐述。</p>
+<ul>
+<li>降低空间放大</li>
+</ul>
+<p>使用小文件合并之后，只要文件中还有一个 statehandle 被使用，整个分布式文件就不能被删除，因此会占用更多的空间，我们在 2.3 节描述了解决该问题的详细方案。</p>
+<ul>
+<li>异常处理</li>
+</ul>
+<p>我们将在 2.4 节阐述如何处理异常情况，包括 JM 异常和 TM 异常的情况。</p>
+<p>2.5 节中会详细描述在 Checkpoint 被取消或者失败后，如何取消 TM 端的 Snapshot，如果不取消 TM 端的 Snapshot，则会导致 TM 端实际运行的 Snapshot 比正常的多。</p>
+<p>在第 3 节中阐述了小文件合并方案与现有方案的兼容性；第 4 节则会描述小文件合并方案的优势和不足；最后在第 5 节我们展示在生产环境下取得的效果。</p>
+<h3 id="2-设计实现"><a href="#2-设计实现" class="headerlink" title="2 设计实现"></a>2 设计实现</h3><p>本节中我们会详细描述整个小文件合并的细节，以及其中的设计要点。</p>
+<p>这里我们大致回忆一下 TM 端 Snapshot 的过程：</p>
+<ul>
+<li>TM 端 barrier 对齐</li>
+<li>TM Snapshot 同步操作</li>
+<li>TM Snapshot 异步操作</li>
+</ul>
+<p>其中上传 sst 文件到分布式存储系统在上面的第三步，同一个 Checkpoint 内的文件顺序上传，多个 Checkpoint 的文件上传可能同时进行。</p>
+<h4 id="2-1-并发-Checkpoint-支持"><a href="#2-1-并发-Checkpoint-支持" class="headerlink" title="2.1 并发 Checkpoint 支持"></a>2.1 并发 Checkpoint 支持</h4><p>Flink 天生支持并发 Checkpoint，因此小文件合并方案也需要能够支持并发 Checkpoint，如果不同 Checkpoint 的 sst 文件同时写往一个分布式文件，则会导致文件内容损坏，后续无法从该文件进行 restore。</p>
+<p>在 FLINK-11937[4] 的提案中，我们会将每个 Checkpoint 的 state 文件写到同一个 HDFS 文件，不同 Checkpoint 的 state 写到不同的 HDFS 文件 – 换句话说，HDFS 文件不跨 Checkpoint 共用，从而避免了多个客户端同时写入同一个文件的情况。</p>
+<p>后续我们会继续推进跨 Checkpoint 共用文件的方案，当然在跨 Checkpoint 共用文件的方案中，并行的 Checkpoint 也会写往不同的 HDFS 文件。</p>
+<h4 id="2-2-防止误删文件"><a href="#2-2-防止误删文件" class="headerlink" title="2.2 防止误删文件"></a>2.2 防止误删文件</h4><p>复用底层文件之后，我们使用引用计数追踪文件的使用情况，在文件引用数降为 0 的情况下删除文件。但是在某些情况下，文件引用数为 0 的时候，并不代表文件不会被继续使用，可能导致文件误删。下面我们会详细描述开启并发 Checkpoint 后可能导致文件误删的情况，以及解决方案。</p>
+<p>以下图为例，maxConcurrentlyCheckpoint = 2</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145326.jpg" alt=""></p>
+<p>上图中共有 3 个 Checkpoint，其中 chk-1 已经完成，chk-2 和 chk-3 都基于 chk-1 进行，chk-2 在 chk-3 前完成，chk-3 在注册 4.sst 的时候发现，发现 4.sst 在 chk-2 中已经注册过，会重用 chk-2 中 4.sst 对应的 stateHandle，然后取消 chk-3 中的 4.sst 的注册，并且删除 stateHandle，在处理完 chk-3 中 4.sst 之后，该 stateHandle 对应的分布式文件的引用计数为 0，如果我们这个时候删除分布式文件，则会同时删除 5.sst 对应的内容，导致后续无法从 chk-3 恢复。</p>
+<p>这里的问题是如何在 stateHandle 对应的分布式文件引用计数降为 0 的时候正确判断是否还会继续引用该文件，因此在整个 Checkpoint 完成处理之后再判断某个分布式文件能否删除，如果真个 Checkpoint 完成发现文件没有被引用，则可以安全删除，否则不进行删除。</p>
+<h4 id="2-3-降低空间放大"><a href="#2-3-降低空间放大" class="headerlink" title="2.3 降低空间放大"></a>2.3 降低空间放大</h4><p>使用小文件合并方案后，每个 sst 文件对应分布式文件中的一个 segment，如下图所示：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145406.jpg" alt=""></p>
+<p>文件仅能在所有 segment 都不再使用时进行删除，上图中有 4 个 segment，仅 segment-4 被使用，但是整个文件都不能删除，其中 segment[1-3] 的空间被浪费掉了，从实际生产环境中的数据可知，整体的空间放大率（实际占用的空间 / 真实有用的空间）在 1.3 - 1.6 之间。</p>
+<p>为了解决空间放大的问题，在 TM 端起异步线程对放大率超过阈值的文件进行压缩。而且仅对已经关闭的文件进行压缩。</p>
+<p>整个压缩的流程如下所示：</p>
+<ul>
+<li>计算每个文件的放大率</li>
+<li>如果放大率较小则直接跳到步骤 7</li>
+<li>如果文件 A 的放大率超过阈值，则生成一个对应的新文件 A‘（如果这个过程中创建文件失败，则由 TM 负责清理工作）</li>
+<li>记录 A 与 A’ 的映射关系</li>
+<li>在下一次 Checkpoint X 往 JM 发送落在文件 A 中的 StateHandle 时，则使用 A` 中的信息生成一个新的 StateHandle 发送给 JM</li>
+<li>Checkpoint X 完成后，我们增加 A‘ 的引用计数，减少 A 的引用计数，在引用计数降为 0 后将文件 A 删除（如果 JM 增加了 A’ 的引用，然后出现异常，则会从上次成功的 Checkpoint 重新构建整个引用计数器）</li>
+<li>文件压缩完成</li>
+</ul>
+<h4 id="2-4-异常情况处理"><a href="#2-4-异常情况处理" class="headerlink" title="2.4 异常情况处理"></a>2.4 异常情况处理</h4><p>在 Checkpoint 的过程中，主要有两种异常：JM 异常和 TM 异常，我们将分情况阐述。</p>
+<h5 id="2-4-1-JM-异常"><a href="#2-4-1-JM-异常" class="headerlink" title="2.4.1 JM 异常"></a>2.4.1 JM 异常</h5><p>JM 端主要记录 StateHandle 以及文件的引用计数，引用计数相关数据不需要持久化到外存中，因此不需要特殊的处理，也不需要考虑 transaction 等相关操作，如果 JM 发送 failover，则可以直接从最近一次 complete Checkpoint 恢复，并重建引用计数即可。</p>
+<h5 id="2-4-2-TM-异常"><a href="#2-4-2-TM-异常" class="headerlink" title="2.4.2 TM 异常"></a>2.4.2 TM 异常</h5><p>TM 异常可以分为两种：1）该文件在之前 Checkpoint 中已经汇报过给 JM；2）文件尚未汇报过给 JM，我们会分情况阐述。</p>
+<p><strong>文件已经汇报过给 JM</strong></p>
+<p>文件汇报过给 JM，因此在 JM 端有文件的引用计数，文件的删除由 JM 控制，当文件的引用计数变为 0 之后，JM 将删除该文件。</p>
+<p><strong>文件尚未汇报给 JM</strong></p>
+<p>该文件暂时尚未汇报过给 JM，该文件不再被使用，也不会被 JM 感知，成为孤儿文件。这种情况暂时有外围工具统一进行清理。</p>
+<h4 id="2-5-取消-TM-端-snapshot"><a href="#2-5-取消-TM-端-snapshot" class="headerlink" title="2.5 取消 TM 端 snapshot"></a>2.5 取消 TM 端 snapshot</h4><p>像前面章节所说，我们需要在 Checkpoint 超时 / 失败时，取消 TM 端的 snapshot，而 Flink 则没有相应的通知机制，现在 FLINK-8871[5] 在追踪相应的优化，我们在内部增加了相关实现，当 Checkpoint 失败时会发送 RPC 数据给 TM，TM 端接受到相应的 RPC 消息后，会取消相应的 snapshot。</p>
+<h3 id="3-兼容性"><a href="#3-兼容性" class="headerlink" title="3 兼容性"></a>3 兼容性</h3><p>小文件合并功能支持从之前的版本无缝迁移过来。从之前的 Checkpoint restore 的的步骤如下：</p>
+<ul>
+<li>每个 TM 分到自己需要 restore 的 state handle</li>
+<li>TM 从远程下载 state handle 对应的数据</li>
+<li>从本地进行恢复</li>
+</ul>
+<p>小文件合并主要影响的是第 2 步，从远程下载对应数据的时候对不同的 StateHandle 进行适配，因此不影响整体的兼容性。</p>
+<h3 id="4-优势和不足"><a href="#4-优势和不足" class="headerlink" title="4 优势和不足"></a>4 优势和不足</h3><ul>
+<li>优势：大幅度降低 HDFS 的压力：包括 RPC 压力以及 NameNode 内存的压力</li>
+<li>不足：不支持 State 多线程上传的功能（State 上传暂时不是 Checkpoint 的瓶颈）</li>
+</ul>
+<h3 id="5-线上环境的结果"><a href="#5-线上环境的结果" class="headerlink" title="5 线上环境的结果"></a>5 线上环境的结果</h3><p>在该方案上线后，对 Namenode 的压力大幅降低，下面的截图来自线上生产集群，从数据来看，文件创建和关闭的 RPC 有明显下降，RPC 的响应时间也有大幅度降低，确保顺利度过双十一。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145805.jpg" alt=""></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145821.jpg" alt=""></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145834.jpg" alt=""></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-01-10-145848.jpg" alt=""></p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p>[1] <a href="https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/checkpoints.html">https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/checkpoints.html</a></p>
+<p>[2] <a href="https://flink.apache.org/features/2018/01/30/incremental-checkpointing.html">https://flink.apache.org/features/2018/01/30/incremental-checkpointing.html</a></p>
+<p>[3] <a href="https://www.slideshare.net/dataArtisans/stephan-ewen-experiences-running-flink-at-very-large-scale">https://www.slideshare.net/dataArtisans/stephan-ewen-experiences-running-flink-at-very-large-scale</a></p>
+<p>[4] <a href="https://issues.apache.org/jira/browse/FLINK-11937">https://issues.apache.org/jira/browse/FLINK-11937</a></p>
+<p>[5] <a href="https://issues.apache.org/jira/browse/FLINK-8871">https://issues.apache.org/jira/browse/FLINK-8871</a></p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>GitHub Flink 学习代码地址：<a href="https://github.com/zhisheng17/flink-learning">https://github.com/zhisheng17/flink-learning</a></p>
+<p>微信公众号：<strong>zhisheng</strong></p>
+<p>另外我自己整理了些 Flink 的学习资料，目前已经全部放到微信公众号（zhisheng）了，你可以回复关键字：<strong>Flink</strong> 即可无条件获取到。另外也可以加我微信 你可以加我的微信：<strong>yuanblog_tzs</strong>，探讨技术！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg" alt=""></p>
+<p>更多私密资料请加入知识星球！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg" alt=""></p>
+<h3 id="专栏介绍"><a href="#专栏介绍" class="headerlink" title="专栏介绍"></a>专栏介绍</h3><p>首发地址：<a href="http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/">http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/</a></p>
+<p>专栏地址：<a href="https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f">https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f</a></p>
+<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>1、<a href="http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/">Flink 从0到1学习 —— Apache Flink 介绍</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2018/09/18/flink-install">Flink 从0到1学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">Flink 从0到1学习 —— Flink 配置文件详解</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">Flink 从0到1学习 —— Data Source 介绍</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/">Flink 从0到1学习 —— 如何自定义 Data Source ？</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2018/10/29/flink-sink/">Flink 从0到1学习 —— Data Sink 介绍</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/">Flink 从0到1学习 —— 如何自定义 Data Sink ？</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2018/11/04/Flink-Data-transformation/">Flink 从0到1学习 —— Flink Data transformation(转换)</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/">Flink 从0到1学习 —— 介绍 Flink 中的 Stream Windows</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2018/12/11/Flink-time/">Flink 从0到1学习 —— Flink 中的几种 Time 详解</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 ElasticSearch</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/01/05/Flink-run/">Flink 从0到1学习 —— Flink 项目如何运行？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/01/06/Flink-Kafka-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Kafka</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/">Flink 从0到1学习 —— Flink JobManager 高可用性配置</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/01/14/Flink-parallelism-slot/">Flink 从0到1学习 —— Flink parallelism 和 Slot 介绍</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/01/15/Flink-MySQL-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></p>
+<p>17、<a href="http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></p>
+<p>18、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HBase</a></p>
+<p>19、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HDFS</a></p>
+<p>20、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Redis</a></p>
+<p>21、<a href="https://t.zsxq.com/uVbi2nq">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Cassandra</a></p>
+<p>22、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Flume</a></p>
+<p>23、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 InfluxDB</a></p>
+<p>24、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RocketMQ</a></p>
+<p>25、<a href="http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/">Flink 从0到1学习 —— 你上传的 jar 包藏到哪里去了</a></p>
+<p>26、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— 你的 Flink job 日志跑到哪里去了</a></p>
+<p>27、<a href="http://www.54tianzhisheng.cn/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></p>
+<p>28、<a href="http://www.54tianzhisheng.cn/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></p>
+<p>29、<a href="http://www.54tianzhisheng.cn/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></p>
+<p>30、<a href="http://www.54tianzhisheng.cn/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></p>
+<p>31、<a href="http://www.54tianzhisheng.cn/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></p>
+<p>32、<a href="http://www.54tianzhisheng.cn/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></p>
+<p>33、<a href="http://www.54tianzhisheng.cn/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></p>
+<p>34、<a href="http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></p>
+<p>35、<a href="http://www.54tianzhisheng.cn/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></p>
+<p>36、<a href="http://www.54tianzhisheng.cn/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></p>
+<p>37、<a href="http://www.54tianzhisheng.cn/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></p>
+<p>38、<a href="http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></p>
+<p>39、<a href="http://www.54tianzhisheng.cn/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></p>
+<p>40、<a href="http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/">Flink 全网最全资源（视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新）</a></p>
+<p>41、<a href="https://mp.weixin.qq.com/s/ok-YwuVbwAVtJz7hUCiZxg">Flink 灵魂两百问，这谁顶得住？</a></p>
+<p>42、<a href="http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></p>
+<p>43、<a href="http://www.54tianzhisheng.cn/2019/08/06/flink-streaming-system/">你公司到底需不需要引入实时计算引擎？</a></p>
+<p>44、<a href="http://www.54tianzhisheng.cn/2019/08/19/flink/">一文让你彻底了解大数据实时计算引擎 Flink</a></p>
+<h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><p>1、<a href="http://www.54tianzhisheng.cn/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/tags/Flink/">Flink 源码解析—— local 模式启动流程</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— standalone session 模式启动流程</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></p>
+<p>17、<a href="http://www.54tianzhisheng.cn/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></p>
+<p>18、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-core</a></p>
+<p>19、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-datadog</a></p>
+<p>20、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-dropwizard</a></p>
+<p>21、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-graphite</a></p>
+<p>22、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-influxdb</a></p>
+<p>23、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-jmx</a></p>
+<p>24、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-slf4j</a></p>
+<p>25、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-statsd</a></p>
+<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-prometheus</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg" alt=""></p>
+<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg" alt=""></p>
+<p>27、<a href="http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></p>
+<p>28、<a href="https://t.zsxq.com/UvrRNJM">大数据重磅炸弹——实时计算框架 Flink</a></p>
+<p>29、<a href="https://t.zsxq.com/QVFqjea">Flink Checkpoint-轻量级分布式快照</a></p>
+<p>30、<a href="http://www.54tianzhisheng.cn/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></p>
 
       
       
@@ -406,13 +549,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/05/12/poetry/">最近很火的鸡汤，分享给大家</a></p>
+        <p><span>本文标题:</span><a href="/2019/11/30/flink-checkpoint-hdfs/">阿里巴巴 Flink 踩坑经验：如何大幅降低 HDFS 压力？</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 zhisheng 的个人博客">zhisheng</a></p>
-        <p><span>发布时间:</span>2017年05月12日 - 00时00分</p>
-        <p><span>最后更新:</span>2018年11月22日 - 22时51分</p>
+        <p><span>发布时间:</span>2019年11月30日 - 00时00分</p>
+        <p><span>最后更新:</span>2020年01月11日 - 13时55分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/05/12/poetry/" title="最近很火的鸡汤，分享给大家">http://www.54tianzhisheng.cn/2017/05/12/poetry/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2017/05/12/poetry/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/11/30/flink-checkpoint-hdfs/" title="阿里巴巴 Flink 踩坑经验：如何大幅降低 HDFS 压力？">http://www.54tianzhisheng.cn/2019/11/30/flink-checkpoint-hdfs/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2019/11/30/flink-checkpoint-hdfs/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -430,18 +573,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/06/02/poetry2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/12/07/Flink_Forward_Asia_2019/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-           六月 —— 愿你做最美好的自己！
+          Flink Forward Asia 2019 PPT 下载
         
       </div>
     </a>
   
   
-    <a href="/2017/04/13/Hexo-yilia-changyan/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Github pages + Hexo 博客 yilia 主题使用畅言评论系统</div>
+    <a href="/2019/11/30/flink-aqniu/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于 Flink 构建关联分析引擎的挑战和实践</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -452,7 +595,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#lt-最近很火的一首小诗，分享给大家-gt"><span class="toc-number">1.</span> <span class="toc-text">&lt;最近很火的一首小诗，分享给大家&gt;</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-小文件合并方案"><span class="toc-number">2.</span> <span class="toc-text">1 小文件合并方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-设计实现"><span class="toc-number">3.</span> <span class="toc-text">2 设计实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-并发-Checkpoint-支持"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 并发 Checkpoint 支持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-防止误删文件"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 防止误删文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-降低空间放大"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 降低空间放大</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-异常情况处理"><span class="toc-number">3.4.</span> <span class="toc-text">2.4 异常情况处理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-1-JM-异常"><span class="toc-number">3.4.1.</span> <span class="toc-text">2.4.1 JM 异常</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-2-TM-异常"><span class="toc-number">3.4.2.</span> <span class="toc-text">2.4.2 TM 异常</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-取消-TM-端-snapshot"><span class="toc-number">3.5.</span> <span class="toc-text">2.5 取消 TM 端 snapshot</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-兼容性"><span class="toc-number">4.</span> <span class="toc-text">3 兼容性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-优势和不足"><span class="toc-number">5.</span> <span class="toc-text">4 优势和不足</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-线上环境的结果"><span class="toc-number">6.</span> <span class="toc-text">5 线上环境的结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文献"><span class="toc-number">7.</span> <span class="toc-text">参考文献</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">8.</span> <span class="toc-text">最后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#专栏介绍"><span class="toc-number">9.</span> <span class="toc-text">专栏介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客"><span class="toc-number">10.</span> <span class="toc-text">博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码解析"><span class="toc-number">11.</span> <span class="toc-text">源码解析</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -518,13 +661,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/06/02/poetry2/" title="上一篇:  六月 —— 愿你做最美好的自己！">
+            <a href="/2019/12/07/Flink_Forward_Asia_2019/" title="上一篇: Flink Forward Asia 2019 PPT 下载">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/04/13/Hexo-yilia-changyan/" title="下一篇: Github pages + Hexo 博客 yilia 主题使用畅言评论系统">
+            <a href="/2019/11/30/flink-aqniu/" title="下一篇: 基于 Flink 构建关联分析引擎的挑战和实践">
                 <i class="fa fa-angle-right"></i>
             </a>
         
