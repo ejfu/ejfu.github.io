@@ -17,25 +17,35 @@
    <meta name="keywords" content="Flink,Spark,大数据,Hive,Java,架构,后端,服务端,RocketMQ,分布式消息队列,分布式存储,技术博客,HBase,ElasticSearch,Spring,Spring Boot,Spring Boot 2.0,Spring Cloud,Spring MVC,Java EE,前端,HTML,MyBatis,Android,Docker,Mac,Consul,Kafka,Logstash,Kibana,MySQL,Maven,Nginx,Python,RabbitMQ,ActiveMQ,JVM">
 
 
-  <title>使用 CodeMirror 打造属于自己的在线代码编辑器 | zhisheng的博客</title>
+  <title>58 同城基于 Flink 的千亿级实时计算平台架构实践 | zhisheng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前提写这个的目的是因为之前项目里用到过 CodeMirror，觉得作为一款在线代码编辑器还是不错，也看到过有些网站用到过在线代码编辑，当然我不知道他们是用什么做的，这里我把公司项目里用到的那部分抽出来，单独写篇博客，并把抽出来的那部分代码提交到 GitHub 去（地址），以防日后可能会再次用到（没准毕业设计里可能用的到）。">
-<meta name="keywords" content="前端">
+  <meta name="description" content="58 同城作为覆盖生活全领域的服务平台，业务覆盖招聘、房产、汽车、金融、二手及本地服务等各个方面。丰富的业务线和庞大的用户数每天产生海量用户数据需要实时化的计算分析，实时计算平台定位于为集团海量数据提供高效、稳定、分布式实时计算的基础服务。本文主要介绍 58 同城基于 Flink 打造的一站式实时计算平台 Wstream。">
+<meta name="keywords" content="Flink,大数据,流式计算">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用 CodeMirror 打造属于自己的在线代码编辑器">
-<meta property="og:url" content="http://www.54tianzhisheng.cn/2017/12/09/CodeMirror/index.html">
+<meta property="og:title" content="58 同城基于 Flink 的千亿级实时计算平台架构实践">
+<meta property="og:url" content="http://www.54tianzhisheng.cn/2019/11/30/flink-in-58/index.html">
 <meta property="og:site_name" content="zhisheng的博客">
-<meta property="og:description" content="前提写这个的目的是因为之前项目里用到过 CodeMirror，觉得作为一款在线代码编辑器还是不错，也看到过有些网站用到过在线代码编辑，当然我不知道他们是用什么做的，这里我把公司项目里用到的那部分抽出来，单独写篇博客，并把抽出来的那部分代码提交到 GitHub 去（地址），以防日后可能会再次用到（没准毕业设计里可能用的到）。">
+<meta property="og:description" content="58 同城作为覆盖生活全领域的服务平台，业务覆盖招聘、房产、汽车、金融、二手及本地服务等各个方面。丰富的业务线和庞大的用户数每天产生海量用户数据需要实时化的计算分析，实时计算平台定位于为集团海量数据提供高效、稳定、分布式实时计算的基础服务。本文主要介绍 58 同城基于 Flink 打造的一站式实时计算平台 Wstream。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://image.54tianzhisheng.cn/blog/171209/bA6g59gGB5.jpg-1">
-<meta property="og:image" content="http://image.54tianzhisheng.cn/blog/171209/cJHjjadJ9E.png">
-<meta property="og:image" content="http://image.54tianzhisheng.cn/blog/171209/C1303F6F9A.png-1">
-<meta property="og:image" content="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/PpbUQA.jpg">
-<meta property="og:updated_time" content="2019-04-24T17:04:38.000Z">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060416.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060445.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060523.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060546.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060608.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060642.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060703.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060730.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060754.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060824.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg">
+<meta property="og:updated_time" content="2020-01-11T06:10:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用 CodeMirror 打造属于自己的在线代码编辑器">
-<meta name="twitter:description" content="前提写这个的目的是因为之前项目里用到过 CodeMirror，觉得作为一款在线代码编辑器还是不错，也看到过有些网站用到过在线代码编辑，当然我不知道他们是用什么做的，这里我把公司项目里用到的那部分抽出来，单独写篇博客，并把抽出来的那部分代码提交到 GitHub 去（地址），以防日后可能会再次用到（没准毕业设计里可能用的到）。">
-<meta name="twitter:image" content="http://image.54tianzhisheng.cn/blog/171209/bA6g59gGB5.jpg-1">
+<meta name="twitter:title" content="58 同城基于 Flink 的千亿级实时计算平台架构实践">
+<meta name="twitter:description" content="58 同城作为覆盖生活全领域的服务平台，业务覆盖招聘、房产、汽车、金融、二手及本地服务等各个方面。丰富的业务线和庞大的用户数每天产生海量用户数据需要实时化的计算分析，实时计算平台定位于为集团海量数据提供高效、稳定、分布式实时计算的基础服务。本文主要介绍 58 同城基于 Flink 打造的一站式实时计算平台 Wstream。">
+<meta name="twitter:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060416.jpg">
   
     <link rel="alternative" href="/atom.xml" title="zhisheng的博客" type="application/atom+xml">
   
@@ -256,11 +266,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-CodeMirror" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-flink-in-58" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/12/09/CodeMirror/" class="article-date">
-      <time datetime="2017-12-08T16:00:00.000Z" itemprop="datePublished">2017-12-09</time>
+      <a href="/2019/11/30/flink-in-58/" class="article-date">
+      <time datetime="2019-11-29T16:00:00.000Z" itemprop="datePublished">2019-11-30</time>
 </a>
     </div>
   
@@ -273,7 +283,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      使用 CodeMirror 打造属于自己的在线代码编辑器
+      58 同城基于 Flink 的千亿级实时计算平台架构实践
     </h1>
   
 
@@ -284,7 +294,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -294,85 +304,144 @@
     <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
-        <p><img src="http://image.54tianzhisheng.cn/blog/171209/bA6g59gGB5.jpg-1" alt="mark"></p>
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>写这个的目的是因为之前项目里用到过 CodeMirror，觉得作为一款在线代码编辑器还是不错，也看到过有些网站用到过在线代码编辑，当然我不知道他们是用什么做的，这里我把公司项目里用到的那部分抽出来，单独写篇博客，并把抽出来的那部分代码提交到 GitHub 去（<a href="https://github.com/zhisheng17/CoderBlog/tree/master/CodeMirror">地址</a>），以防日后可能会再次用到（没准毕业设计里可能用的到）。<br><a id="more"></a></p>
-<h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h3><p>CodeMirror 是一款在线的支持语法高亮的代码编辑器。官网： <a href="http://codemirror.net/">http://codemirror.net/</a></p>
-<p>可能光看官网，第一眼觉得那些在线编辑器有点<strong>丑</strong>，反正第一眼给我的感觉就是这样子，但是经过自己的细调，也能打造出一款精美的在线代码编辑器。</p>
-<p>官网可以把它下载下来。</p>
-<p>下载后，解压开得到的文件夹中，lib 下是放的是核心库和核心 css，mode 下放的是各种支持语言的语法定义，theme 目录下是支持的主题样式。一般在开发中，添加 lib 下的引用和 mode 下的引用就够了。</p>
-<p><img src="http://image.54tianzhisheng.cn/blog/171209/cJHjjadJ9E.png" alt="mark"></p>
-<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>下面两个是使用 Code Mirror 必须引入的：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"codemirror-5.31.0/lib/codemirror.css"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"codemirror-5.31.0/lib/codemirror.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>接下来要引用的就是在 mode 目录下编辑器中要编辑的语言对应的 js 文件，这里以 Groovy 为例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--groovy代码高亮--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"codemirror-5.31.0/mode/groovy/groovy.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>如果你想让 Java 代码也支持代码高亮，则需要引入我从网上下载下来的 clike.js（我已经放到我的 GitHub 去了）</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--Java代码高亮必须引入--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"codemirror-5.31.0/clike.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>引用的文件用于支持对应语言的语法高亮。</p>
-<p>然后前面说了第一次进入 Code Mirror 官网，觉得那些编辑器比较丑，那可能是主题比较丑，我这里推荐一款还不错的主题，只需按照如下引入即可：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--引入css文件，用以支持主题--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"codemirror-5.31.0/theme/dracula.css"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<p>如果你还想让你的编辑器支持代码行折叠，请按照如下进行操作：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--支持代码折叠--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"codemirror-5.31.0/addon/fold/foldgutter.css"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"codemirror-5.31.0/addon/fold/foldcode.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"codemirror-5.31.0/addon/fold/foldgutter.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"codemirror-5.31.0/addon/fold/brace-fold.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"codemirror-5.31.0/addon/fold/comment-fold.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>是不是这样引入就好了呢，当然不是啦</p>
-<h3 id="创建编辑器"><a href="#创建编辑器" class="headerlink" title="创建编辑器"></a>创建编辑器</h3><p>在实际项目中，一般都不会直接把 body 整个内容作为编辑器的容器。而最常用的，是使用 textarea。这里我在 <body> 里使用个 textarea，</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- begin code --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">id</span>=<span class="string">"code"</span> <span class="attr">name</span>=<span class="string">"code"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- end code--&gt;</span></span><br></pre></td></tr></table></figure>
-<p>接下来就是创建编辑器了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据DOM元素的id构造出一个编辑器</span></span><br><span class="line"><span class="keyword">var</span> editor = CodeMirror.fromTextArea(<span class="built_in">document</span>.getElementById(<span class="string">"code"</span>), &#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>是不是有点单调？</p>
-<p>没错，我还可以在里面给他设置些属性：（充分利用我一开始引入的那些文件）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mode: <span class="string">"text/groovy"</span>,    <span class="comment">//实现groovy代码高亮</span></span><br><span class="line">mode: <span class="string">"text/x-java"</span>, <span class="comment">//实现Java代码高亮</span></span><br><span class="line">lineNumbers: <span class="literal">true</span>,	<span class="comment">//显示行号</span></span><br><span class="line">theme: <span class="string">"dracula"</span>,	<span class="comment">//设置主题</span></span><br><span class="line">lineWrapping: <span class="literal">true</span>,	<span class="comment">//代码折叠</span></span><br><span class="line">foldGutter: <span class="literal">true</span>,</span><br><span class="line">gutters: [<span class="string">"CodeMirror-linenumbers"</span>, <span class="string">"CodeMirror-foldgutter"</span>],</span><br><span class="line">matchBrackets: <span class="literal">true</span>,	<span class="comment">//括号匹配</span></span><br><span class="line"><span class="comment">//readOnly: true,        //只读</span></span><br></pre></td></tr></table></figure>
-<p>如果需要查看更多属性，可以去官网查找，目前我只用到这些属性！</p>
-<p><strong>下面也列举些吧：</strong></p>
-<p><strong>indentUnit: integer</strong><br>缩进单位，值为空格数，默认为2 。</p>
-<p><strong>smartIndent: boolean</strong><br>自动缩进，设置是否根据上下文自动缩进（和上一行相同的缩进量）。默认为true。</p>
-<p><strong>tabSize: integer</strong><br>tab字符的宽度，默认为4 。</p>
-<p><strong>indentWithTabs: boolean</strong><br>在缩进时，是否需要把 n*tab宽度个空格替换成n个tab字符，默认为false 。</p>
-<p><strong>electricChars: boolean</strong><br>在输入可能改变当前的缩进时，是否重新缩进，默认为true （仅在mode支持缩进时有效）。</p>
-<p><strong>specialChars: RegExp</strong><br>需要被占位符(placeholder)替换的特殊字符的正则表达式。最常用的是非打印字符。默认为：/[\u0000-\u0019\u00ad\u200b-\u200f\u2028\u2029\ufeff]/。</p>
-<p><strong>specialCharPlaceholder: function(char) → Element</strong><br>这是一个接收由specialChars选项指定的字符作为参数的函数，此函数会产生一个用来显示指定字符的DOM节点。默认情况下，显示一个红点（•），这个红点有一个带有前面特殊字符编码的提示框。</p>
-<p><strong>rtlMoveVisually: boolean</strong><br>Determines whether horizontal cursor movement through right-to-left (Arabic, Hebrew) text is visual (pressing the left arrow moves the cursor left) or logical (pressing the left arrow moves to the next lower index in the string, which is visually right in right-to-left text). The default is false on Windows, and true on other platforms.（这段完全不晓得搞啥子鬼）</p>
-<p><strong>keyMap: string</strong><br>配置快捷键。默认值为default，即 codemorrir.js 内部定义。其它在<a href="http://codemirror.net/keymap/">key map</a>目录下。</p>
-<p><strong>extraKeys: object</strong><br>给编辑器绑定与前面keyMap配置不同的快捷键。</p>
-<p><strong>lineWrapping: boolean</strong><br>在长行时文字是换行(wrap)还是滚动(scroll)，默认为滚动(scroll)。</p>
-<p><strong>lineNumbers: boolean</strong><br>是否在编辑器左侧显示行号。</p>
-<p><strong>firstLineNumber: integer</strong><br>行号从哪个数开始计数，默认为1 。</p>
-<p><strong>lineNumberFormatter: function(line: integer) → string</strong><br>使用一个函数设置行号。</p>
-<p><strong>gutters: array<string></strong><br>用来添加额外的gutter（在行号gutter前或代替行号gutter）。值应该是CSS名称数组，每一项定义了用于绘制gutter背景的宽度（还有可选的背景）。为了能明确设置行号gutter的位置（默认在所有其它gutter的右边），也可以包含CodeMirror-linenumbers类。类名是用于传给setGutterMarker的键名(keys)。</p>
-<p><strong>fixedGutter: boolean</strong><br>设置gutter跟随编辑器内容水平滚动（false）还是固定在左侧（true或默认）。</p>
-<p><strong>scrollbarStyle: string</strong><br>设置滚动条。默认为”native”，显示原生的滚动条。核心库还提供了”null”样式，此样式会完全隐藏滚动条。Addons可以设置更多的滚动条模式。</p>
-<p><strong>coverGutterNextToScrollbar: boolean</strong><br>当fixedGutter启用，并且存在水平滚动条时，在滚动条最左侧默认会显示gutter，当此项设置为true时，gutter会被带有CodeMirror-gutter-filler类的元素遮挡。<br><strong>inputStyle: string</strong><br>选择CodeMirror处理输入和焦点的方式。核心库定义了textarea和contenteditable输入模式。在移动浏览器上，默认是contenteditable，在桌面浏览器上，默认是textarea。在contenteditable模式下对IME和屏幕阅读器支持更好。</p>
-<p><strong>readOnly: boolean|string</strong><br>编辑器是否只读。如果设置为预设的值 “nocursor”，那么除了设置只读外，编辑区域还不能获得焦点。</p>
-<p><strong>showCursorWhenSelecting: boolean</strong><br>在选择时是否显示光标，默认为false。</p>
-<p><strong>lineWiseCopyCut: boolean</strong><br>启用时，如果在复制或剪切时没有选择文本，那么就会自动操作光标所在的整行。</p>
-<p><strong>undoDepth: integer</strong><br>最大撤消次数，默认为200（包括选中内容改变事件） 。</p>
-<p><strong>historyEventDelay: integer</strong><br>在输入或删除时引发历史事件前的毫秒数。</p>
-<p><strong>tabindex: integer</strong><br>编辑器的tabindex。</p>
-<p><strong>autofocus: boolean</strong><br>是否在初始化时自动获取焦点。默认情况是关闭的。但是，在使用textarea并且没有明确指定值的时候会被自动设置为true。</p>
-<p><strong>dragDrop: boolean</strong><br>是否允许拖放，默认为true。</p>
-<p><strong>allowDropFileTypes: array<string></strong><br>默认为null。当设置此项时，只接收包含在此数组内的文件类型拖入编辑器。文件类型为MIME名称。</p>
-<p><strong>cursorBlinkRate: number</strong><br>光标闪动的间隔，单位为毫秒。默认为530。当设置为0时，会禁用光标闪动。负数会隐藏光标。</p>
-<p><strong>cursorScrollMargin: number</strong><br>当光标靠近可视区域边界时，光标距离上方和下方的距离。默认为0 。</p>
-<p><strong>cursorHeight: number</strong><br>光标高度。默认为1，也就是撑满行高。对一些字体，设置0.85看起来会更好。</p>
-<p><strong>resetSelectionOnContextMenu: boolean</strong><br>设置在选择文本外点击打开上下文菜单时，是否将光标移动到点击处。默认为true。</p>
-<p><strong>workTime, workDelay: number</strong><br>通过一个假的后台线程高亮 workTime 时长，然后使用 timeout 休息 workDelay 时长。默认为200和300 。（完全不懂这个功能是在说啥）</p>
-<p><strong>pollInterval: number</strong><br>指明CodeMirror向对应的textarea滚动（写数据）的速度（获得焦点时）。大多数的输入都是通过事件捕获，但是有的输入法（如IME）在某些浏览器上并不会生成事件，所以使用数据滚动。默认为100毫秒。</p>
-<p><strong>flattenSpans: boolean</strong><br>默认情况下，CodeMirror会将使用相同class的两个span合并成一个。通过设置此项为false禁用此功能。</p>
-<p><strong>addModeClass: boolean</strong><br>当启用时（默认禁用），会给每个标记添加额外的表示生成标记的mode的以cm-m开头的CSS样式类。例如，XML mode产生的标记，会添加cm-m-xml类。</p>
-<p><strong>maxHighlightLength: number</strong><br>当需要高亮很长的行时，为了保持响应性能，当到达某些位置时，编辑器会直接将其他行设置为纯文本(plain text)。默认为10000，可以设置为Infinity来关闭此功能。</p>
-<p><strong>viewportMargin: integer</strong><br>指定当前滚动到视图中内容上方和下方要渲染的行数。这会影响到滚动时要更新的行数。通常情况下应该使用默认值10。可以设置值为Infinity始终渲染整个文档。注意：这样设置在处理大文档时会影响性能。</p>
-<hr>
-<p>如果你要设置代码框的大小该怎么做呢？</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">editor.setSize(<span class="string">'800px'</span>, <span class="string">'950px'</span>);     <span class="comment">//设置代码框的长宽</span></span><br></pre></td></tr></table></figure>
-<p>另外，如果你想给代码框赋值，该怎么办呢？</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">editor.setValue(<span class="string">""</span>);    <span class="comment">//给代码框赋值</span></span><br><span class="line">editor.getValue();    <span class="comment">//获取代码框的值</span></span><br></pre></td></tr></table></figure>
-<p>如果你再想在其他地方设置新的属性，可以像下面这样写：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">editor.setOption(<span class="string">"readOnly"</span>, <span class="literal">true</span>);	<span class="comment">//类似这种</span></span><br></pre></td></tr></table></figure>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>上面就大概讲了下 Code Mirror 怎么使用，那么我们来看看效果吧</p>
-<p><img src="http://image.54tianzhisheng.cn/blog/171209/C1303F6F9A.png-1" alt="mark"></p>
-<p>我自我感觉还是可以的哈！</p>
-<p>里面所有涉及的代码在 GitHub 里可以下载：<a href="https://github.com/zhisheng17/CoderBlog/tree/master/CodeMirror">https://github.com/zhisheng17/CoderBlog/tree/master/CodeMirror</a></p>
-<p>文章原创，转载务必请注明原创地址：<a href="http://www.54tianzhisheng.cn/2017/12/09/CodeMirror/">http://www.54tianzhisheng.cn/2017/12/09/CodeMirror/</a></p>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>fuck  无脑的推酷爬虫，竟然把我所有文章最后的原创链接都给去掉了，这是我现在想到的一种对策方法。任何其他形式的转载，也必须把我文章所有内容加上，不得做任何修改，否则请别转载了！</p>
-<p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/PpbUQA.jpg" alt=""></p>
+        <p>58 同城作为覆盖生活全领域的服务平台，业务覆盖招聘、房产、汽车、金融、二手及本地服务等各个方面。丰富的业务线和庞大的用户数每天产生海量用户数据需要实时化的计算分析，实时计算平台定位于为集团海量数据提供高效、稳定、分布式实时计算的基础服务。本文主要介绍 58 同城基于 Flink 打造的一站式实时计算平台 Wstream。</p>
+<a id="more"></a>
+<p>本文转自：<a href="https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&amp;mid=2650784251&amp;idx=1&amp;sn=3f90f0eadad3b781200ec8b31d281dfd&amp;chksm=f3f9746ec48efd78b0e10fa9a3e9fe646ef385c9450762ed634194760b03a528b561dbcab321&amp;scene=27#wechat_redirect">dbaplus 社群公众号</a></p>
+<p>作者：冯海涛 / 万石康，负责 58 同城实时计算平台建设。</p>
+<h3 id="实时计算场景"><a href="#实时计算场景" class="headerlink" title="实时计算场景"></a>实时计算场景</h3><p>和很多互联网公司一样，实时计算在 58 拥有丰富的场景需求，主要包括以下几类：</p>
+<ul>
+<li>实时数据 ETL：实时消费 Kafka 数据进行清洗、转换、结构化处理用于下游计算处理。</li>
+<li>实时数仓：实时化数据计算，仓库模型加工和存储。实时分析业务及用户各类指标，让运营更加实时化。</li>
+<li>实时监控：对系统和用户行为进行实时检测和分析，如业务指标实时监控，运维线上稳定性监控，金融风控等。</li>
+<li>实时分析：特征平台，用户画像，实时个性化推荐等。</li>
+</ul>
+<h3 id="平台演进"><a href="#平台演进" class="headerlink" title="平台演进"></a>平台演进</h3><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060416.jpg" alt=""></p>
+<p>在实时计算平台建设过程中，主要是跟进开源社区发展以及实际业务需求，计算框架经历了 Storm 到 Spark Streaming 到 Flink 的发展，同时建设一站式实时计算平台，旨在提升用户实时计算需求开发上线管理监控效率，优化平台管理。</p>
+<p>实时计算引擎前期基于 Storm 和 Spark Streaming 构建, 很多情况下并不能很好的满足业务需求，如商业部门基于 Spark Streaming 构建的特征平台希望将计算延迟由分钟级降低到秒级，提升用户体验，运维监控平台基于 Storm 分析公司全量 nginx 日志对线上业务进行监控，需要秒级甚至毫秒级别的延迟，Storm 的吞吐能力成为瓶颈。</p>
+<p>同时随着实时需求不断增加，场景更加丰富，在追求任务高吞吐低延迟的基础上，对计算过程中间状态管理，灵活窗口支持，以及 exactly once 语义保障的诉求越来越多。Apache Flink 开源之后，支持高吞吐低延迟的架构设计以及高可用的稳定性，同时拥有实时计算场景一系列特性以及支持实时 Sql 模型，使我们决定采用 Flink 作为新一代实时计算平台的计算引擎。</p>
+<h3 id="平台规模"><a href="#平台规模" class="headerlink" title="平台规模"></a>平台规模</h3><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060445.jpg" alt=""></p>
+<p>实时计算平台当前主要基于 Storm/Spark Streaming/Flink，集群共计 500 多台机器，每天处理数据量 6000 亿 +，其中 Flink 经过近一年的建设，任务占比已经达到 50%。</p>
+<h3 id="Flink-稳定性"><a href="#Flink-稳定性" class="headerlink" title="Flink 稳定性"></a>Flink 稳定性</h3><p>Flink 作为实时计算集群，可用性要求远高于离线计算集群。为保障集群可用性，平台主要采用任务隔离以及高可用集群架构保障稳定性。</p>
+<h4 id="任务隔离"><a href="#任务隔离" class="headerlink" title="任务隔离"></a>任务隔离</h4><p>在应用层面主要基于业务线以及场景进行机器隔离，队列资源分配管理，避免集群抖动造成全局影响。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060523.jpg" alt=""></p>
+<h4 id="集群架构"><a href="#集群架构" class="headerlink" title="集群架构"></a>集群架构</h4><p>Flink 集群采用了 ON YARN 模式独立部署，为减少集群维护工作量，底层 HDFS 利用公司统一 HDFS Federation 架构下建立独立的 namespace，减少 Flink 任务在 checkpoint 采用 hdfs/rocksdb 作为状态存储后端场景下由于 hdfs 抖动出现频繁异常失败。</p>
+<p>在资源隔离层面，引入 Node Label 机制实现重要任务运行在独立机器，不同计算性质任务运行在合适的机器下，最大化机器资源的利用率。同时在 YARN 资源隔离基础上增加 Cgroup 进行物理 cpu 隔离，减少任务间抢占影响，保障任务运行稳定性。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060546.jpg" alt=""></p>
+<h3 id="平台化管理"><a href="#平台化管理" class="headerlink" title="平台化管理"></a>平台化管理</h3><p>Wstream 是一套基于 Apache Flink 构建的一站式、高性能实时大数据处理平台。提供 SQL 化流式数据分析能力，大幅降低数据实时分析门槛，支持通过 DDL 实现 source/sink 以及维表，支持 UDF/UDAF/UDTF，为用户提供更强大的数据实时处理能力。支持多样式应用构建方式 FlinkJar/Stream SQL/Flink-Storm，以满足不同用户的开发需求，同时通过调试，监控，诊断，探查结果等辅助手段完善任务生命周期管理。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060608.jpg" alt=""></p>
+<p>###<br>流式 sql 能力建设<br>Stream SQL 是平台为了打造 sql 化实时计算能力，减小实时计算开发门槛，基于开源的 Flink，对底层 sql 模块进行扩展实现以下功能：</p>
+<ul>
+<li>支持自定义 DDL 语法（包括源表, 输出表, 维表）</li>
+<li>支持自定义 UDF/UDTF/UDAF 语法</li>
+<li>实现了流与维表的 join, 双流 join</li>
+</ul>
+<p>在支持大数据开源组件的同时，也打通了公司主流的实时存储平台。同时为用户提供基于 Sql client 的 cli 方式以及在 Wstream 集成了对实时 sql 能力的支持，为用户提供在线开发调试 sql 任务的编辑器，同时支持代码高亮，智能提示，语法校验及运行时校验，尽可能避免用户提交到集群的任务出现异常。</p>
+<p>另外也为用户提供了向导化配置方式，解决用户定义 table 需要了解复杂的参数设置，用户只需关心业务逻辑处理，像开发离线 Hive 一样使用 sql 开发实时任务。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060642.jpg" alt=""></p>
+<h3 id="Storm-任务迁移-Flink"><a href="#Storm-任务迁移-Flink" class="headerlink" title="Storm 任务迁移 Flink"></a>Storm 任务迁移 Flink</h3><p>在完善 Flink 平台建设的同时，我们也启动 Storm 任务迁移 Flink 计划，旨在提升实时计算平台整体效率，减少机器成本和运维成本。Flink-Storm 作为官方提供 Flink 兼容 Storm 程序为我们实现无缝迁移提供了可行性，但是作为 beta 版本，在实际使用过程中存在很多无法满足现实场景的情况，因此我们进行了大量改进，主要包括实现 Storm 任务 on yarn ，迁移之后任务 at least once 语义保障，兼容 Storm 的 tick tuple 机制等等。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060703.jpg" alt=""></p>
+<p>通过对 Fink-Storm 的优化，在无需用户修改代码的基础上，我们已经顺利完成多个 Storm 版本集群任务迁移和集群下线，在保障实时性及吞吐量的基础上可以节约计算资源 40% 以上，同时借助 yarn 统一管理实时计算平台无需维护多套 Storm 集群，整体提升了平台资源利用率，减轻平台运维工作量。</p>
+<h3 id="任务诊断"><a href="#任务诊断" class="headerlink" title="任务诊断"></a>任务诊断</h3><h4 id="指标监控"><a href="#指标监控" class="headerlink" title="指标监控"></a>指标监控</h4><p>Flink webUI 提供了大量的运行时信息供用户了解任务当前运行状况，但是存在无法获取历史 metrics 的问题导致用户无法了解任务历史运行状态，因此我们采用了 Flink 原生支持的 Prometheus 进行实时指标采集和存储。</p>
+<p>Prometheus 是一个开源的监控和报警系统，通过 pushgateway 的方式实时上报 metrics，Prometheus 集群采用 Fedration 部署模式，meta 节点定时抓取所有子节点指标进行汇总，方便统一数据源提供给 Grafana 进行可视化以及告警配置。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060730.jpg" alt=""></p>
+<h4 id="任务延迟"><a href="#任务延迟" class="headerlink" title="任务延迟"></a>任务延迟</h4><p>吞吐能力和延迟作为衡量实时任务性能最重要的指标，我们经常需要通过这两个指标来调整任务并发度和资源配置。Flink Metrics 提供 latencyTrackingInterval 参数启用任务延迟跟踪，打开会显著影响集群和任务性能，官方高度建议只在 debug 下使用。</p>
+<p>在实践场景下，Flink 任务数据源基本都是 Kafka，因此我们采用 topic 消费堆积作为衡量任务延迟的指标，监控模块实时通过 Flink rest 获取任务正在消费 topic 的 offset，同时通过 Kafka JMX 获取对应 topic 的 logsize，采用 logsize– offset 作为 topic 的堆积。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060754.jpg" alt=""></p>
+<h4 id="日志检索"><a href="#日志检索" class="headerlink" title="日志检索"></a>日志检索</h4><p>Flink 作为分布式计算引擎，所有任务会由 YARN 统一调度到任意的计算节点，因此任务的运行日志会分布在不同的机器，用户定位日志困难。我们通过调整 log4j 日志框架默认机制，按天切分任务日志，定期清理过期日志，避免异常任务频繁写满磁盘导致计算节点不可用的情况，同时在所有计算节点部署 agent 实时采集日志，汇聚写入 Kafka，通过日志分发平台实时将数据分发到 ES，方便用户进行日志检索和定位问题。</p>
+<h3 id="Flink-优化"><a href="#Flink-优化" class="headerlink" title="Flink 优化"></a>Flink 优化</h3><p>在实际使用过程中，我们也针对业务场景进行了一些优化和扩展，主要包括：</p>
+<p>1）Storm 任务需要 Storm 引擎提供 ack 机制保障消息传递 at least once 语义，迁移到 Flink 无法使用 ack 机制，我们通过定制 KafakSpout 实现 checkpoint 相关接口，通过 Flink checkpoint 机制实现消息传递不丢失。另外 Flink-Storm 默认只能支持 standalone 的提交方式，我们通过实现 yarn client 相关接口增加了 storm on yarn 的支持。</p>
+<p>2）Flink 1.6 推荐的是一个 TaskManager 对应一个 slot 的使用方式，在申请资源的时候根据最大并发度申请对应数量的 TaskManger，这样导致的问题就是在任务设置 task slots 之后需要申请的资源大于实际资源。</p>
+<p>我们通过在 ResoureManager 请求资源管理器 SlotManager 的时候增加 TaskManagerSlot 相关信息，用于维护申请到的待分配 TaskManager 和 slot，之后对于 SlotRequests 请求不是直接申请 TaskManager，而是先从 SlotManager 申请是否有足够 slot，没有才会启动新的 TaskManger, 这样就实现了申请资源等于实际消耗资源，避免任务在资源足够的情况下无法启动。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2020-01-11-060824.jpg" alt=""></p>
+<p>3）Kafak Connector 改造，增加自动换行支持，另外针对 08source 无法设置 client.id，通过将 client.id 生成机制优化成更有标识意义的 id，便于 Kafka 层面管控。</p>
+<p>4）Flink 提交任务无法支持第三方依赖 jar 包和配置文件供 TaskManager 使用，我们通过修改 flink 启动脚本，增加相关参数支持外部传输文件，之后在任务启动过程中通过将对应的 jar 包和文件加入 classpath，借助 yarn 的文件管理机制实现类似 spark 对应的使用方式，方便用户使用。</p>
+<p>5）业务场景存在大量实时写入 hdfs 需求，Flink 自带 BucketingSink 默认只支持 string 和 avro 格式，我们在此基础上同时支持了 LZO 及 Parquet 格式写入，极大提升数据写入性能。</p>
+<h3 id="后续规划"><a href="#后续规划" class="headerlink" title="后续规划"></a>后续规划</h3><p>实时计算平台当前正在进行 Storm 任务迁移 Flink 集群，目前已经基本完成，大幅提升了平台资源利用率和计算效率。后续将继续调研完善 Flink 相关能力，推动 Flink 在更多的实时场景下的应用，包括实时规则引擎，实时机器学习等。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>GitHub Flink 学习代码地址：<a href="https://github.com/zhisheng17/flink-learning">https://github.com/zhisheng17/flink-learning</a></p>
+<p>微信公众号：<strong>zhisheng</strong></p>
+<p>另外我自己整理了些 Flink 的学习资料，目前已经全部放到微信公众号（zhisheng）了，你可以回复关键字：<strong>Flink</strong> 即可无条件获取到。另外也可以加我微信 你可以加我的微信：<strong>yuanblog_tzs</strong>，探讨技术！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg" alt=""></p>
+<p>更多私密资料请加入知识星球！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg" alt=""></p>
+<h3 id="专栏介绍"><a href="#专栏介绍" class="headerlink" title="专栏介绍"></a>专栏介绍</h3><p>首发地址：<a href="http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/">http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/</a></p>
+<p>专栏地址：<a href="https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f">https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f</a></p>
+<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>1、<a href="http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/">Flink 从0到1学习 —— Apache Flink 介绍</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2018/09/18/flink-install">Flink 从0到1学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">Flink 从0到1学习 —— Flink 配置文件详解</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">Flink 从0到1学习 —— Data Source 介绍</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/">Flink 从0到1学习 —— 如何自定义 Data Source ？</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2018/10/29/flink-sink/">Flink 从0到1学习 —— Data Sink 介绍</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/">Flink 从0到1学习 —— 如何自定义 Data Sink ？</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2018/11/04/Flink-Data-transformation/">Flink 从0到1学习 —— Flink Data transformation(转换)</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/">Flink 从0到1学习 —— 介绍 Flink 中的 Stream Windows</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2018/12/11/Flink-time/">Flink 从0到1学习 —— Flink 中的几种 Time 详解</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 ElasticSearch</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/01/05/Flink-run/">Flink 从0到1学习 —— Flink 项目如何运行？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/01/06/Flink-Kafka-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Kafka</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/">Flink 从0到1学习 —— Flink JobManager 高可用性配置</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/01/14/Flink-parallelism-slot/">Flink 从0到1学习 —— Flink parallelism 和 Slot 介绍</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/01/15/Flink-MySQL-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></p>
+<p>17、<a href="http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></p>
+<p>18、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HBase</a></p>
+<p>19、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HDFS</a></p>
+<p>20、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Redis</a></p>
+<p>21、<a href="https://t.zsxq.com/uVbi2nq">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Cassandra</a></p>
+<p>22、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Flume</a></p>
+<p>23、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 InfluxDB</a></p>
+<p>24、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RocketMQ</a></p>
+<p>25、<a href="http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/">Flink 从0到1学习 —— 你上传的 jar 包藏到哪里去了</a></p>
+<p>26、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— 你的 Flink job 日志跑到哪里去了</a></p>
+<p>27、<a href="http://www.54tianzhisheng.cn/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></p>
+<p>28、<a href="http://www.54tianzhisheng.cn/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></p>
+<p>29、<a href="http://www.54tianzhisheng.cn/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></p>
+<p>30、<a href="http://www.54tianzhisheng.cn/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></p>
+<p>31、<a href="http://www.54tianzhisheng.cn/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></p>
+<p>32、<a href="http://www.54tianzhisheng.cn/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></p>
+<p>33、<a href="http://www.54tianzhisheng.cn/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></p>
+<p>34、<a href="http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></p>
+<p>35、<a href="http://www.54tianzhisheng.cn/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></p>
+<p>36、<a href="http://www.54tianzhisheng.cn/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></p>
+<p>37、<a href="http://www.54tianzhisheng.cn/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></p>
+<p>38、<a href="http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></p>
+<p>39、<a href="http://www.54tianzhisheng.cn/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></p>
+<p>40、<a href="http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/">Flink 全网最全资源（视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新）</a></p>
+<p>41、<a href="https://mp.weixin.qq.com/s/ok-YwuVbwAVtJz7hUCiZxg">Flink 灵魂两百问，这谁顶得住？</a></p>
+<p>42、<a href="http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></p>
+<p>43、<a href="http://www.54tianzhisheng.cn/2019/08/06/flink-streaming-system/">你公司到底需不需要引入实时计算引擎？</a></p>
+<p>44、<a href="http://www.54tianzhisheng.cn/2019/08/19/flink/">一文让你彻底了解大数据实时计算引擎 Flink</a></p>
+<h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><p>1、<a href="http://www.54tianzhisheng.cn/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/tags/Flink/">Flink 源码解析—— local 模式启动流程</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— standalone session 模式启动流程</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></p>
+<p>17、<a href="http://www.54tianzhisheng.cn/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></p>
+<p>18、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-core</a></p>
+<p>19、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-datadog</a></p>
+<p>20、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-dropwizard</a></p>
+<p>21、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-graphite</a></p>
+<p>22、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-influxdb</a></p>
+<p>23、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-jmx</a></p>
+<p>24、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-slf4j</a></p>
+<p>25、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-statsd</a></p>
+<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-prometheus</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg" alt=""></p>
+<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg" alt=""></p>
+<p>27、<a href="http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></p>
+<p>28、<a href="https://t.zsxq.com/UvrRNJM">大数据重磅炸弹——实时计算框架 Flink</a></p>
+<p>29、<a href="https://t.zsxq.com/QVFqjea">Flink Checkpoint-轻量级分布式快照</a></p>
+<p>30、<a href="http://www.54tianzhisheng.cn/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></p>
 
       
       
@@ -439,13 +508,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/12/09/CodeMirror/">使用 CodeMirror 打造属于自己的在线代码编辑器</a></p>
+        <p><span>本文标题:</span><a href="/2019/11/30/flink-in-58/">58 同城基于 Flink 的千亿级实时计算平台架构实践</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 zhisheng 的个人博客">zhisheng</a></p>
-        <p><span>发布时间:</span>2017年12月09日 - 00时00分</p>
-        <p><span>最后更新:</span>2019年04月25日 - 01时04分</p>
+        <p><span>发布时间:</span>2019年11月30日 - 00时00分</p>
+        <p><span>最后更新:</span>2020年01月11日 - 14时10分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/12/09/CodeMirror/" title="使用 CodeMirror 打造属于自己的在线代码编辑器">http://www.54tianzhisheng.cn/2017/12/09/CodeMirror/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2017/12/09/CodeMirror/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/11/30/flink-in-58/" title="58 同城基于 Flink 的千亿级实时计算平台架构实践">http://www.54tianzhisheng.cn/2019/11/30/flink-in-58/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2019/11/30/flink-in-58/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -463,18 +532,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/12/13/Google-Developer-Days/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/30/flink-checkpoint-hdfs/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          谷歌开发者大会收获满满，不去真 “可惜” 了
+          阿里巴巴 Flink 踩坑经验：如何大幅降低 HDFS 压力？
         
       </div>
     </a>
   
   
-    <a href="/2017/12/08/netty-01-env/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Netty系列文章（一）：Netty 源码阅读之初始环境搭建</div>
+    <a href="/2019/11/30/flink-aqniu/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于 Flink 构建关联分析引擎的挑战和实践</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -485,7 +554,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单介绍"><span class="toc-number">2.</span> <span class="toc-text">简单介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何使用"><span class="toc-number">3.</span> <span class="toc-text">如何使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建编辑器"><span class="toc-number">4.</span> <span class="toc-text">创建编辑器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">6.</span> <span class="toc-text">最后</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#实时计算场景"><span class="toc-number">1.</span> <span class="toc-text">实时计算场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#平台演进"><span class="toc-number">2.</span> <span class="toc-text">平台演进</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#平台规模"><span class="toc-number">3.</span> <span class="toc-text">平台规模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flink-稳定性"><span class="toc-number">4.</span> <span class="toc-text">Flink 稳定性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#任务隔离"><span class="toc-number">4.1.</span> <span class="toc-text">任务隔离</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集群架构"><span class="toc-number">4.2.</span> <span class="toc-text">集群架构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#平台化管理"><span class="toc-number">5.</span> <span class="toc-text">平台化管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Storm-任务迁移-Flink"><span class="toc-number">6.</span> <span class="toc-text">Storm 任务迁移 Flink</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#任务诊断"><span class="toc-number">7.</span> <span class="toc-text">任务诊断</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#指标监控"><span class="toc-number">7.1.</span> <span class="toc-text">指标监控</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#任务延迟"><span class="toc-number">7.2.</span> <span class="toc-text">任务延迟</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#日志检索"><span class="toc-number">7.3.</span> <span class="toc-text">日志检索</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flink-优化"><span class="toc-number">8.</span> <span class="toc-text">Flink 优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后续规划"><span class="toc-number">9.</span> <span class="toc-text">后续规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">10.</span> <span class="toc-text">最后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#专栏介绍"><span class="toc-number">11.</span> <span class="toc-text">专栏介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客"><span class="toc-number">12.</span> <span class="toc-text">博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码解析"><span class="toc-number">13.</span> <span class="toc-text">源码解析</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -551,13 +620,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/12/13/Google-Developer-Days/" title="上一篇: 谷歌开发者大会收获满满，不去真 “可惜” 了">
+            <a href="/2019/11/30/flink-checkpoint-hdfs/" title="上一篇: 阿里巴巴 Flink 踩坑经验：如何大幅降低 HDFS 压力？">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/12/08/netty-01-env/" title="下一篇: Netty系列文章（一）：Netty 源码阅读之初始环境搭建">
+            <a href="/2019/11/30/flink-aqniu/" title="下一篇: 基于 Flink 构建关联分析引擎的挑战和实践">
                 <i class="fa fa-angle-right"></i>
             </a>
         
