@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/</loc>
+    
+    <lastmod>2020-02-15T05:25:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.54tianzhisheng.cn/2019/12/30/flink-meituan-real-time-warehouse/</loc>
+    
+    <lastmod>2020-02-15T05:24:52.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.54tianzhisheng.cn/2019/01/30/Flink-code-compile/</loc>
     
     <lastmod>2020-01-19T15:43:01.000Z</lastmod>
@@ -30,23 +44,9 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/12/30/flink-meituan-real-time-warehouse/</loc>
-    
-    <lastmod>2020-01-04T04:12:51.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.54tianzhisheng.cn/2019/12/10/flink-real-time-data-analysis-platform/</loc>
     
     <lastmod>2020-01-04T03:42:48.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/</loc>
-    
-    <lastmod>2020-01-04T02:20:12.000Z</lastmod>
     
   </url>
   
@@ -331,14 +331,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/</loc>
     
     <lastmod>2019-11-05T10:23:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/</loc>
     
     <lastmod>2019-11-05T10:23:14.000Z</lastmod>
     
@@ -394,14 +394,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/10/28/flink-sources/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/06/12/flink-split/</loc>
     
     <lastmod>2019-11-05T10:23:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/06/12/flink-split/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/10/28/flink-sources/</loc>
     
     <lastmod>2019-11-05T10:23:14.000Z</lastmod>
     
@@ -415,14 +415,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/27/Flink-code-JobManager-submitJob/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/</loc>
     
     <lastmod>2019-11-05T10:23:13.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/27/Flink-code-JobManager-submitJob/</loc>
     
     <lastmod>2019-11-05T10:23:13.000Z</lastmod>
     
@@ -443,13 +443,6 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/19/Flink-code-streaming-wordcount-start/</loc>
-    
-    <lastmod>2019-11-05T10:23:13.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/</loc>
     
     <lastmod>2019-11-05T10:23:13.000Z</lastmod>
@@ -458,6 +451,13 @@
   
   <url>
     <loc>http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/</loc>
+    
+    <lastmod>2019-11-05T10:23:13.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.54tianzhisheng.cn/2019/03/19/Flink-code-streaming-wordcount-start/</loc>
     
     <lastmod>2019-11-05T10:23:13.000Z</lastmod>
     
@@ -912,14 +912,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/12/13/Google-Developer-Days/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/09/23/Guava-limit/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/09/23/Guava-limit/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/12/13/Google-Developer-Days/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
@@ -1059,14 +1059,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/06/14/%E9%80%9A%E8%BF%87%E9%A1%B9%E7%9B%AE%E9%80%90%E6%AD%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Mybatis(%E4%B8%89)/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/06/15/%E9%80%9A%E8%BF%87%E9%A1%B9%E7%9B%AE%E9%80%90%E6%AD%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Mybatis(%E5%9B%9B)/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/06/15/%E9%80%9A%E8%BF%87%E9%A1%B9%E7%9B%AE%E9%80%90%E6%AD%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Mybatis(%E5%9B%9B)/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/06/14/%E9%80%9A%E8%BF%87%E9%A1%B9%E7%9B%AE%E9%80%90%E6%AD%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Mybatis(%E4%B8%89)/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
