@@ -4,7 +4,7 @@
   <url>
     <loc>http://www.54tianzhisheng.cn/2020/02/22/flink-nacos/</loc>
     
-    <lastmod>2020-02-22T01:09:16.000Z</lastmod>
+    <lastmod>2020-02-22T09:15:37.000Z</lastmod>
     
   </url>
   
@@ -219,14 +219,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/08/22/flink-1.9/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/08/22/flink-1.9/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
@@ -240,14 +240,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/08/23/flink-ebay/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/08/23/flink-ebay/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
@@ -366,14 +366,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/28/Flink-code-TaskManager-submitJob/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/18/Flink-code-batch-wordcount-start/</loc>
     
     <lastmod>2019-11-05T10:23:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/18/Flink-code-batch-wordcount-start/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/28/Flink-code-TaskManager-submitJob/</loc>
     
     <lastmod>2019-11-05T10:23:14.000Z</lastmod>
     
@@ -464,14 +464,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/</loc>
     
     <lastmod>2019-11-05T10:23:13.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/</loc>
     
     <lastmod>2019-11-05T10:23:13.000Z</lastmod>
     
@@ -989,6 +989,20 @@
   </url>
   
   <url>
+    <loc>http://www.54tianzhisheng.cn/2018/01/04/weixin/</loc>
+    
+    <lastmod>2018-11-22T14:51:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.54tianzhisheng.cn/2017/12/02/wx-01/</loc>
+    
+    <lastmod>2018-11-22T14:51:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.54tianzhisheng.cn/2017/11/26/Docker-harbor/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
@@ -1031,14 +1045,7 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/01/04/weixin/</loc>
-    
-    <lastmod>2018-11-22T14:51:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.54tianzhisheng.cn/2017/12/02/wx-01/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/07/09/servlet/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
@@ -1073,13 +1080,6 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/07/09/servlet/</loc>
-    
-    <lastmod>2018-11-22T14:51:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.54tianzhisheng.cn/2017/06/14/%E9%80%9A%E8%BF%87%E9%A1%B9%E7%9B%AE%E9%80%90%E6%AD%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Mybatis(%E4%B8%89)/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
@@ -1101,14 +1101,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/09/17/Interview-summary/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/06/13/%E9%80%9A%E8%BF%87%E9%A1%B9%E7%9B%AE%E9%80%90%E6%AD%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Mybatis(%E4%BA%8C)/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/06/13/%E9%80%9A%E8%BF%87%E9%A1%B9%E7%9B%AE%E9%80%90%E6%AD%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Mybatis(%E4%BA%8C)/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/09/17/Interview-summary/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
