@@ -17,22 +17,28 @@
    <meta name="keywords" content="Flink,Spark,大数据,Hive,Java,架构,后端,服务端,RocketMQ,分布式消息队列,分布式存储,技术博客,HBase,ElasticSearch,Spring,Spring Boot,Spring Boot 2.0,Spring Cloud,Spring MVC,Java EE,前端,HTML,MyBatis,Android,Docker,Mac,Consul,Kafka,Logstash,Kibana,MySQL,Maven,Nginx,Python,RabbitMQ,ActiveMQ,JVM">
 
 
-  <title>MyBatis的foreach语句详解 | zhisheng的博客</title>
+  <title>Flink 1.10 新特性研究 | zhisheng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="foreach 的主要用在构建in条件中，它可以在SQL语句中进行迭代一个集合。 foreach 元素的属性主要有 item，index，collection，open，separator，close。  item 表示集合中每一个元素进行迭代时的别名，  index 指 定一个名字，用于表示在迭代过程中，每次迭代到的位置，  open 表示该语句以什么开始，  separator 表示在每次进行">
-<meta name="keywords" content="Mybatis,foreach">
+  <meta name="description" content="Flink 1.10 release 文档描述了一些比较重要的点，比如配置、操作、依赖、1.9 版本和 1.10 版本之间的区别，如果你准备将 Flink 升级到 1.10 版本，建议仔细看完下面的内容。">
+<meta name="keywords" content="Flink,大数据,流式计算,Nacos">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MyBatis的foreach语句详解">
-<meta property="og:url" content="http://www.54tianzhisheng.cn/2017/06/13/MyBatis-foreach/index.html">
+<meta property="og:title" content="Flink 1.10 新特性研究">
+<meta property="og:url" content="http://www.54tianzhisheng.cn/2020/02/22/flink-1.10-release/index.html">
 <meta property="og:site_name" content="zhisheng的博客">
-<meta property="og:description" content="foreach 的主要用在构建in条件中，它可以在SQL语句中进行迭代一个集合。 foreach 元素的属性主要有 item，index，collection，open，separator，close。  item 表示集合中每一个元素进行迭代时的别名，  index 指 定一个名字，用于表示在迭代过程中，每次迭代到的位置，  open 表示该语句以什么开始，  separator 表示在每次进行">
+<meta property="og:description" content="Flink 1.10 release 文档描述了一些比较重要的点，比如配置、操作、依赖、1.9 版本和 1.10 版本之间的区别，如果你准备将 Flink 升级到 1.10 版本，建议仔细看完下面的内容。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fp3jkmizmpj30o00didgn.jpg">
-<meta property="og:updated_time" content="2018-03-06T16:16:28.000Z">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-02-21-074438.png">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-02-21-074623.png">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg">
+<meta property="og:image" content="hhttp://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-044731.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg">
+<meta property="og:updated_time" content="2020-02-22T13:34:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MyBatis的foreach语句详解">
-<meta name="twitter:description" content="foreach 的主要用在构建in条件中，它可以在SQL语句中进行迭代一个集合。 foreach 元素的属性主要有 item，index，collection，open，separator，close。  item 表示集合中每一个元素进行迭代时的别名，  index 指 定一个名字，用于表示在迭代过程中，每次迭代到的位置，  open 表示该语句以什么开始，  separator 表示在每次进行">
-<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fp3jkmizmpj30o00didgn.jpg">
+<meta name="twitter:title" content="Flink 1.10 新特性研究">
+<meta name="twitter:description" content="Flink 1.10 release 文档描述了一些比较重要的点，比如配置、操作、依赖、1.9 版本和 1.10 版本之间的区别，如果你准备将 Flink 升级到 1.10 版本，建议仔细看完下面的内容。">
+<meta name="twitter:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-02-21-074438.png">
   
     <link rel="alternative" href="/atom.xml" title="zhisheng的博客" type="application/atom+xml">
   
@@ -247,11 +253,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-MyBatis-foreach" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-flink-1.10-release" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/06/13/MyBatis-foreach/" class="article-date">
-      <time datetime="2017-06-12T16:00:00.000Z" itemprop="datePublished">2017-06-13</time>
+      <a href="/2020/02/22/flink-1.10-release/" class="article-date">
+      <time datetime="2020-02-21T16:00:00.000Z" itemprop="datePublished">2020-02-22</time>
 </a>
     </div>
   
@@ -264,7 +270,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MyBatis的foreach语句详解
+      Flink 1.10 新特性研究
     </h1>
   
 
@@ -275,7 +281,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mybatis/">Mybatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/foreach/">foreach</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nacos/">Nacos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -285,47 +291,208 @@
     <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
-        <p><strong>foreach</strong> 的主要用在构建in条件中，它可以在SQL语句中进行迭代一个集合。</p>
-<p>foreach 元素的属性主要有 item，index，collection，open，separator，close。</p>
-<ul>
-<li><p>item 表示集合中每一个元素进行迭代时的别名，</p>
+        <p>Flink 1.10 release 文档描述了一些比较重要的点，比如配置、操作、依赖、1.9 版本和 1.10 版本之间的区别，如果你准备将 Flink 升级到 1.10 版本，建议仔细看完下面的内容。</p>
+<a id="more"></a>
+<h3 id="集群和部署"><a href="#集群和部署" class="headerlink" title="集群和部署"></a>集群和部署</h3><ul>
+<li><p>文件系统需要通过插件的方式加载</p>
 </li>
-<li><p>index 指 定一个名字，用于表示在迭代过程中，每次迭代到的位置，</p>
+<li><p>Flink 客户端根据配置的类加载策略加载，parent-first 和 child-first 两种方式</p>
 </li>
-<li><p>open 表示该语句以什么开始，</p>
+<li><p>允许在所有的 TaskManager 上均匀地分布任务，需要在 <code>flink-conf.yaml</code> 配置文件中配置 <code>cluster.evenly-spread-out-slots: true</code> 参数</p>
 </li>
-<li><p>separator 表示在每次进行迭代之间以什么符号作为分隔 符，</p>
+<li><p>高可用存储目录做了修改，在 <code>HA_STORAGE_DIR/HA_CLUSTER_ID</code> 下，<code>HA_STORAGE_DIR</code> 路径通过 <code>high-availability.storageDir</code> 参数配置，<code>HA_CLUSTER_ID</code> 路径通过 <code>high-availability.cluster-id</code> 参数配置</p>
 </li>
-<li><p>close 表示以什么结束。</p>
+<li><p>当使用 <code>-yarnship</code> 命令参数时，资源目录和 jar 文件会被添加到 classpath 中</p>
+</li>
+<li><p>移除了 <code>--yn/--yarncontainer</code> 命令参数</p>
+</li>
+<li><p>移除了 <code>--yst/--yarnstreaming</code> 命令参数</p>
+</li>
+<li><p>Flink Mesos 会拒绝掉所有的过期请求</p>
+</li>
+<li><p>重构了 Flink 的调度程序，其目标是使调度策略在未来可以定制</p>
+</li>
+<li><p>支持 Java 11，当使用 Java 11 启动 Flink 时，会有些 WARNING 的日志提醒，注意：Cassandra、Hive、HBase 等 connector 没有使用 Java 11 测试过</p>
 </li>
 </ul>
-<p>在使用 foreach 的时候最关键的也是最容易出错的就是 collection 属性，该属性是必须指定的，但是在不同情况 下，该属性的值是不一样的，主要有一下3种情况：</p>
-<ol>
-<li>如果传入的是单参数且参数类型是一个List的时候，collection 属性值为 list</li>
-<li>如果传入的是单参数且参数类型是一个 array 数组的时候，collection 的属性值为 array</li>
-<li>如果传入的参数是多个的时候，我们就需要把它们封装成一个 Map 了，<strong>当然单参数也可以封装成map</strong>，实际上如果你在传入参数的时候，在 breast 里面也是会把它封装成一个 Map 的，map 的 key 就是参数名，所以这个时候 collection 属性值就是传入的 List 或 array 对象在自己封装的 map 里面的 key 。</li>
-</ol>
-<a id="more"></a>
-<p>下面分别来看看上述三种情况的示例代码：</p>
-<p>1.单参数 List 的类型： </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"dynamicForeachTest"</span> <span class="attr">resultType</span>=<span class="string">"Blog"</span>&gt;</span></span><br><span class="line">        select * from t_blog where id in</span><br><span class="line">        <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">index</span>=<span class="string">"index"</span> <span class="attr">item</span>=<span class="string">"item"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></span><br><span class="line">            #&#123;item&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>上述 collection 的值为list，对应的 Mapper 是这样的 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Blog&gt; <span class="title">dynamicForeachTest</span><span class="params">(List&lt;Integer&gt; ids)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>测试代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dynamicForeachTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        SqlSession session = Util.getSqlSessionFactory().openSession();</span><br><span class="line">        BlogMapper blogMapper = session.getMapper(BlogMapper.class);</span><br><span class="line">        List&lt;Integer&gt; ids = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        ids.add(<span class="number">1</span>);</span><br><span class="line">        ids.add(<span class="number">3</span>);</span><br><span class="line">        ids.add(<span class="number">6</span>);</span><br><span class="line">        List&lt;Blog&gt; blogs = blogMapper.dynamicForeachTest(ids);</span><br><span class="line">        <span class="keyword">for</span> (Blog blog : blogs)</span><br><span class="line">            System.out.println(blog);</span><br><span class="line">        session.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>2.单参数array数组的类型：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"dynamicForeach2Test"</span> <span class="attr">resultType</span>=<span class="string">"Blog"</span>&gt;</span></span><br><span class="line">        select * from t_blog where id in</span><br><span class="line">        <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"array"</span> <span class="attr">index</span>=<span class="string">"index"</span> <span class="attr">item</span>=<span class="string">"item"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></span><br><span class="line">            #&#123;item&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>上述collection为array，对应的Mapper代码： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;Blog&gt; dynamicForeach2Test(int[] ids);</span><br></pre></td></tr></table></figure>
-<p>对应的测试代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dynamicForeach2Test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        SqlSession session = Util.getSqlSessionFactory().openSession();</span><br><span class="line">        BlogMapper blogMapper = session.getMapper(BlogMapper.class);</span><br><span class="line">        <span class="keyword">int</span>[] ids = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">9</span>&#125;;</span><br><span class="line">        List&lt;Blog&gt; blogs = blogMapper.dynamicForeach2Test(ids);</span><br><span class="line">        <span class="keyword">for</span> (Blog blog : blogs)</span><br><span class="line">            System.out.println(blog);</span><br><span class="line">        session.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>3.自己把参数封装成Map的类型</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"dynamicForeach3Test"</span> <span class="attr">resultType</span>=<span class="string">"Blog"</span>&gt;</span></span><br><span class="line">        select * from t_blog where title like "%"#&#123;title&#125;"%" and id in</span><br><span class="line">        <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"ids"</span> <span class="attr">index</span>=<span class="string">"index"</span> <span class="attr">item</span>=<span class="string">"item"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></span><br><span class="line">            #&#123;item&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>上述collection的值为ids，是传入的参数Map的key，对应的Mapper代码： </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Blog&gt; <span class="title">dynamicForeach3Test</span><span class="params">(Map&lt;String, Object&gt; params)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>对应测试代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dynamicForeach3Test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        SqlSession session = Util.getSqlSessionFactory().openSession();</span><br><span class="line">        BlogMapper blogMapper = session.getMapper(BlogMapper.class);</span><br><span class="line">        <span class="keyword">final</span> List&lt;Integer&gt; ids = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        ids.add(<span class="number">1</span>);</span><br><span class="line">        ids.add(<span class="number">2</span>);</span><br><span class="line">        ids.add(<span class="number">3</span>);</span><br><span class="line">        ids.add(<span class="number">6</span>);</span><br><span class="line">        ids.add(<span class="number">7</span>);</span><br><span class="line">        ids.add(<span class="number">9</span>);</span><br><span class="line">        Map&lt;String, Object&gt; params = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">        params.put(<span class="string">"ids"</span>, ids);</span><br><span class="line">        params.put(<span class="string">"title"</span>, <span class="string">"中国"</span>);</span><br><span class="line">        List&lt;Blog&gt; blogs = blogMapper.dynamicForeach3Test(params);</span><br><span class="line">        <span class="keyword">for</span> (Blog blog : blogs)</span><br><span class="line">            System.out.println(blog);</span><br><span class="line">        session.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fp3jkmizmpj30o00didgn.jpg" alt=""></p>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><ul>
+<li>全新的 Task Executor 内存模型，会影响 standalone、YARN、Mesos、K8S 的部署，JobManager 的内存模型没有修改。如果你在没有调整的情况下，重用以前的 Flink 配置，则新的内存模型可能会导致 JVM 的计算内存参数不同，从而导致性能的变化。</li>
+</ul>
+<p>以下选项已经删除，不再起作用：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-02-21-074438.png" alt=""></p>
+<p>以下选项已经替换成其他的选项：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-02-21-074623.png" alt=""></p>
+<ul>
+<li><p>RocksDB State Backend 内存可以控制，用户可以调整 RocksDB 的写/读内存比率 <code>state.backend.rocksdb.memory.write-buffer-ratio</code>（默认情况下 0.5）和为索引/过滤器保留的内存部分 <code>state.backend.rocksdb.memory.high-prio-pool-ratio</code>（默认情况下0.1）</p>
+</li>
+<li><p>细粒度的算子（Operator）资源管理，配置选项 <code>table.exec.resource.external-buffer-memory</code>，<code>table.exec.resource.hash-agg.memory</code>，<code>table.exec.resource.hash-join.memory</code>，和 <code>table.exec.resource.sort.memory</code> 已被弃用</p>
+</li>
+</ul>
+<h3 id="Table-API-和-SQL"><a href="#Table-API-和-SQL" class="headerlink" title="Table API 和 SQL"></a>Table API 和 SQL</h3><ul>
+<li><p>将 ANY 类型重命名为 RAW 类型，该标识符 raw 现在是保留关键字，在用作 SQL 字段或函数名称时必须转义</p>
+</li>
+<li><p>重命名 Table Connector 属性，以便编写 DDL 语句时提供更好的用户体验，比如 Kafka Connector 属性 <code>connector.properties</code> 和 <code>connector.specific-offsets</code>、Elasticsearch Connector 属性 <code>connector.hosts</code></p>
+</li>
+<li><p>之前与临时表和视图进行交互的方法已经被弃用，目前使用 createTemporaryView()</p>
+</li>
+<li><p>移除了 ExternalCatalog API（ExternalCatalog、SchematicDescriptor、MetadataDescriptor、StatisticsDescriptor），建议使用新的 Catalog API</p>
+</li>
+</ul>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
+<li><p>ConfigOptions 如果无法将配置的值解析成所需要的类型，则会抛出 IllegalArgumentException 异常，之前是会返回默认值</p>
+</li>
+<li><p>增加默认的重启策略延迟时间（fixed-delay 和 failure-rate 已经默认是 1s，之前是 0）</p>
+</li>
+<li><p>简化集群级别的重启策略配置，现在集群级别的重启策略仅由 restart-strategy 配置和是否开启 Checkpoint 确定</p>
+</li>
+<li><p>默认情况下禁用内存映射的 BoundedBlockingSubpartition</p>
+</li>
+<li><p>移除基于未认证的网络流量控制</p>
+</li>
+<li><p>移除 HighAvailabilityOptions 中的 HA_JOB_DELAY 配置</p>
+</li>
+</ul>
+<h3 id="状态（State）"><a href="#状态（State）" class="headerlink" title="状态（State）"></a>状态（State）</h3><ul>
+<li><p>默认开启 TTL 的状态后台清理</p>
+</li>
+<li><p>弃用 <code>StateTtlConfig#Builder#cleanupInBackground()</code></p>
+</li>
+<li><p>使用 RocksDBStateBackend 时，默认将计时器存储在 RocksDB 中，之前是存储在堆内存（Heap）中</p>
+</li>
+<li><p><code>StateTtlConfig#TimeCharacteristic</code> 已经被移除，目前使用 <code>StateTtlConfig#TtlTimeCharacteristic</code></p>
+</li>
+<li><p>新增 <code>MapState#isEmpty()</code> 方法来检查 MapState 是否为空，该方法比使用 <code>mapState.keys().iterator().hasNext()</code> 的速度快 40%</p>
+</li>
+<li><p>RocksDB 升级，发布了自己的 FRocksDB（基于 RocksDB 5.17.2 版本），主要是因为高版本的 RocksDB 在某些情况下性能会下降</p>
+</li>
+<li><p>默认禁用 RocksDB 日志记录，需要启用的话需要利用 RocksDBOptionsFactory 创建 DBOptions 实例，并通过 setInfoLogLevel 方法设置 INFO_LEVEL</p>
+</li>
+<li><p>优化从 RocksDB Savepoint 恢复的机制，以前如果从包含大型 KV 对的 RocksDB Savepoint 恢复时，用户可能会遇到 OOM。现在引入了可配置的内存限制，RocksDBWriteBatchWrapper 默认值为 2MB。RocksDB的WriteBatch 将在达到内存限制之前刷新。可以在 <code>flink-conf.yml</code> 中修改 <code>state.backend.rocksdb.write-batch-size</code> 配置</p>
+</li>
+</ul>
+<h3 id="PyFlink"><a href="#PyFlink" class="headerlink" title="PyFlink"></a>PyFlink</h3><ul>
+<li>不再支持 Python2</li>
+</ul>
+<h3 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h3><ul>
+<li>InfluxdbReporter 会跳过 Inf 和 NaN（InfluxDB 不支持的类型，比如 <code>Double.POSITIVE_INFINITY</code>, <code>Double.NEGATIVE_INFINITY</code>, <code>Double.NaN</code>）</li>
+</ul>
+<h3 id="连接器（Connectors）"><a href="#连接器（Connectors）" class="headerlink" title="连接器（Connectors）"></a>连接器（Connectors）</h3><ul>
+<li>改变 Kinesis 连接器的 License</li>
+</ul>
+<h3 id="接口更改"><a href="#接口更改" class="headerlink" title="接口更改"></a>接口更改</h3><ul>
+<li><p><code>ExecutionConfig＃getGlobalJobParameters()</code> 不再返回 null</p>
+</li>
+<li><p>MasterTriggerRestoreHook 中的 triggerCheckpoint 方法必须时非阻塞的</p>
+</li>
+<li><p>HA 服务的客户端/服务器端分离，HighAvailabilityServices 已分离成客户端 ClientHighAvailabilityServices 和集群端 HighAvailabilityServices</p>
+</li>
+<li><p><code>HighAvailabilityServices#getWebMonitorLeaderElectionService()</code> 标记过期</p>
+</li>
+<li><p>LeaderElectionService 接口做了更改</p>
+</li>
+<li><p>弃用 Checkpoint 锁</p>
+</li>
+<li><p>弃用 OptionsFactory 和 ConfigurableOptionsFactory 接口</p>
+</li>
+</ul>
+<p>参考：<a href="https://github.com/apache/flink/blob/master/docs/release-notes/flink-1.10.zh.md">https://github.com/apache/flink/blob/master/docs/release-notes/flink-1.10.zh.md</a></p>
+<hr>
+<p>看了下官方的这份新版本的介绍，感觉还缺少很多新功能的介绍，比如：</p>
+<ul>
+<li>在 1.10 版本中把 Blink 版本的哪些功能整合过来了</li>
+<li>竟然没有写 Flink 对原生 Kubernetes 的集成</li>
+<li>PyFlink 的介绍是认真的吗？</li>
+<li>对 Hive 的生产级别集成，完全没有提及呀</li>
+<li>Table API/SQL 优化点讲得不太多</li>
+</ul>
+<p>可能因为篇幅的问题，还有很多特性都没有讲解出来，得我们自己去找源码学习！</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>GitHub Flink 学习代码地址：<a href="https://github.com/zhisheng17/flink-learning">https://github.com/zhisheng17/flink-learning</a></p>
+<p>微信公众号：<strong>zhisheng</strong></p>
+<p>另外我自己整理了些 Flink 的学习资料，目前已经全部放到微信公众号（zhisheng）了，你可以回复关键字：<strong>Flink</strong> 即可无条件获取到。另外也可以加我微信 你可以加我的微信：<strong>yuanblog_tzs</strong>，探讨技术！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg" alt=""></p>
+<p>更多私密资料请加入知识星球！</p>
+<p><img src="hhttp://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg" alt=""></p>
+<h3 id="专栏介绍"><a href="#专栏介绍" class="headerlink" title="专栏介绍"></a>专栏介绍</h3><p>扫码下面专栏二维码可以订阅该专栏</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-044731.jpg" alt=""></p>
+<p>首发地址：<a href="http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/">http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/</a></p>
+<p>专栏地址：<a href="https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f">https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f</a></p>
+<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>1、<a href="http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/">Flink 从0到1学习 —— Apache Flink 介绍</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2018/09/18/flink-install">Flink 从0到1学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">Flink 从0到1学习 —— Flink 配置文件详解</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">Flink 从0到1学习 —— Data Source 介绍</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/">Flink 从0到1学习 —— 如何自定义 Data Source ？</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2018/10/29/flink-sink/">Flink 从0到1学习 —— Data Sink 介绍</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/">Flink 从0到1学习 —— 如何自定义 Data Sink ？</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2018/11/04/Flink-Data-transformation/">Flink 从0到1学习 —— Flink Data transformation(转换)</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/">Flink 从0到1学习 —— 介绍 Flink 中的 Stream Windows</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2018/12/11/Flink-time/">Flink 从0到1学习 —— Flink 中的几种 Time 详解</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 ElasticSearch</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/01/05/Flink-run/">Flink 从0到1学习 —— Flink 项目如何运行？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/01/06/Flink-Kafka-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Kafka</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/">Flink 从0到1学习 —— Flink JobManager 高可用性配置</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/01/14/Flink-parallelism-slot/">Flink 从0到1学习 —— Flink parallelism 和 Slot 介绍</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/01/15/Flink-MySQL-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></p>
+<p>17、<a href="http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></p>
+<p>18、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HBase</a></p>
+<p>19、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HDFS</a></p>
+<p>20、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Redis</a></p>
+<p>21、<a href="https://t.zsxq.com/uVbi2nq">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Cassandra</a></p>
+<p>22、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Flume</a></p>
+<p>23、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 InfluxDB</a></p>
+<p>24、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RocketMQ</a></p>
+<p>25、<a href="http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/">Flink 从0到1学习 —— 你上传的 jar 包藏到哪里去了</a></p>
+<p>26、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— 你的 Flink job 日志跑到哪里去了</a></p>
+<p>27、<a href="http://www.54tianzhisheng.cn/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></p>
+<p>28、<a href="http://www.54tianzhisheng.cn/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></p>
+<p>29、<a href="http://www.54tianzhisheng.cn/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></p>
+<p>30、<a href="http://www.54tianzhisheng.cn/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></p>
+<p>31、<a href="http://www.54tianzhisheng.cn/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></p>
+<p>32、<a href="http://www.54tianzhisheng.cn/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></p>
+<p>33、<a href="http://www.54tianzhisheng.cn/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></p>
+<p>34、<a href="http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></p>
+<p>35、<a href="http://www.54tianzhisheng.cn/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></p>
+<p>36、<a href="http://www.54tianzhisheng.cn/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></p>
+<p>37、<a href="http://www.54tianzhisheng.cn/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></p>
+<p>38、<a href="http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></p>
+<p>39、<a href="http://www.54tianzhisheng.cn/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></p>
+<p>40、<a href="http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/">Flink 全网最全资源（视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新）</a></p>
+<p>41、<a href="https://mp.weixin.qq.com/s/ok-YwuVbwAVtJz7hUCiZxg">Flink 灵魂两百问，这谁顶得住？</a></p>
+<p>42、<a href="http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></p>
+<p>43、<a href="http://www.54tianzhisheng.cn/2019/08/06/flink-streaming-system/">你公司到底需不需要引入实时计算引擎？</a></p>
+<p>44、<a href="http://www.54tianzhisheng.cn/2019/08/19/flink/">一文让你彻底了解大数据实时计算引擎 Flink</a></p>
+<h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><p>1、<a href="http://www.54tianzhisheng.cn/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/tags/Flink/">Flink 源码解析—— local 模式启动流程</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— standalone session 模式启动流程</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></p>
+<p>17、<a href="http://www.54tianzhisheng.cn/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></p>
+<p>18、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-core</a></p>
+<p>19、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-datadog</a></p>
+<p>20、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-dropwizard</a></p>
+<p>21、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-graphite</a></p>
+<p>22、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-influxdb</a></p>
+<p>23、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-jmx</a></p>
+<p>24、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-slf4j</a></p>
+<p>25、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-statsd</a></p>
+<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-prometheus</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg" alt=""></p>
+<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg" alt=""></p>
+<p>27、<a href="http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></p>
+<p>28、<a href="https://t.zsxq.com/UvrRNJM">大数据重磅炸弹——实时计算框架 Flink</a></p>
+<p>29、<a href="https://t.zsxq.com/QVFqjea">Flink Checkpoint-轻量级分布式快照</a></p>
+<p>30、<a href="http://www.54tianzhisheng.cn/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></p>
 
       
       
@@ -392,13 +559,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/06/13/MyBatis-foreach/">MyBatis的foreach语句详解</a></p>
+        <p><span>本文标题:</span><a href="/2020/02/22/flink-1.10-release/">Flink 1.10 新特性研究</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 zhisheng 的个人博客">zhisheng</a></p>
-        <p><span>发布时间:</span>2017年06月13日 - 00时00分</p>
-        <p><span>最后更新:</span>2018年03月07日 - 00时16分</p>
+        <p><span>发布时间:</span>2020年02月22日 - 00时00分</p>
+        <p><span>最后更新:</span>2020年02月22日 - 21时34分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/06/13/MyBatis-foreach/" title="MyBatis的foreach语句详解">http://www.54tianzhisheng.cn/2017/06/13/MyBatis-foreach/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2017/06/13/MyBatis-foreach/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/02/22/flink-1.10-release/" title="Flink 1.10 新特性研究">http://www.54tianzhisheng.cn/2020/02/22/flink-1.10-release/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2020/02/22/flink-1.10-release/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -416,18 +583,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/06/13/Java连接Oracle数据库的三种连接方式/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/02/22/flink-nacos/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Java连接Oracle数据库的三种连接方式
+          Flink 整合 Nacos，让 Flink 作业配置动态更新不再是难事
         
       </div>
     </a>
   
   
-    <a href="/2017/06/13/Spring MVC + Hibernate JPA + Bootstrap 搭建的博客系统/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Spring MVC系列文章（一）：Spring MVC + Hibernate JPA + Bootstrap 搭建的博客系统 Demo</div>
+    <a href="/2020/02/20/flink-checkpoint/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Flink Checkpoint 问题排查实用指南</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -438,7 +605,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#集群和部署"><span class="toc-number">1.</span> <span class="toc-text">集群和部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存管理"><span class="toc-number">2.</span> <span class="toc-text">内存管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Table-API-和-SQL"><span class="toc-number">3.</span> <span class="toc-text">Table API 和 SQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-number">4.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#状态（State）"><span class="toc-number">5.</span> <span class="toc-text">状态（State）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PyFlink"><span class="toc-number">6.</span> <span class="toc-text">PyFlink</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监控"><span class="toc-number">7.</span> <span class="toc-text">监控</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#连接器（Connectors）"><span class="toc-number">8.</span> <span class="toc-text">连接器（Connectors）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口更改"><span class="toc-number">9.</span> <span class="toc-text">接口更改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">10.</span> <span class="toc-text">最后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#专栏介绍"><span class="toc-number">11.</span> <span class="toc-text">专栏介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客"><span class="toc-number">12.</span> <span class="toc-text">博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码解析"><span class="toc-number">13.</span> <span class="toc-text">源码解析</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -504,13 +671,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/06/13/Java连接Oracle数据库的三种连接方式/" title="上一篇: Java连接Oracle数据库的三种连接方式">
+            <a href="/2020/02/22/flink-nacos/" title="上一篇: Flink 整合 Nacos，让 Flink 作业配置动态更新不再是难事">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/06/13/Spring MVC + Hibernate JPA + Bootstrap 搭建的博客系统/" title="下一篇: Spring MVC系列文章（一）：Spring MVC + Hibernate JPA + Bootstrap 搭建的博客系统 Demo">
+            <a href="/2020/02/20/flink-checkpoint/" title="下一篇: Flink Checkpoint 问题排查实用指南">
                 <i class="fa fa-angle-right"></i>
             </a>
         
