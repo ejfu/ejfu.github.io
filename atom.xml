@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.54tianzhisheng.cn/"/>
-  <updated>2020-05-07T13:03:00.000Z</updated>
+  <updated>2020-05-13T15:04:11.000Z</updated>
   <id>http://www.54tianzhisheng.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Flink Forward 2020 PPT 下载</title>
+    <link href="http://www.54tianzhisheng.cn/2020/05/13/flink-forward-2020/"/>
+    <id>http://www.54tianzhisheng.cn/2020/05/13/flink-forward-2020/</id>
+    <published>2020-05-12T16:00:00.000Z</published>
+    <updated>2020-05-13T15:04:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Flink Forward 2020 是在线上举办的一次会议</p><a id="more"></a><p>1、《Keynote:Introducing Stateful Functions 2.0: Stream Processing meets Serverless Applications》<br>Stephan Ewen – Apache Flink PMC,Ververica Co-founder, CTO</p><p>讲解嘉宾：李钰（绝顶） – Apache Flink Committer，Apache Flink 1.10 Release Manager，阿里巴巴高级技术专家</p><p>2、《Keynote:Stream analytics made real with Pravega and Apache Flink》<br>  Srikanth Satya – VP of Engineering at DellEMC</p><p>讲解嘉宾：滕昱 – DellEMC 技术总监</p><p>3、《Keynote:Apache Flink – Completing Cloudera’s End to End Streaming Platform》<br>  Marton Balassi – Apache Flink PMC ，Senior Solutions Architect at Cloudera</p><p>Joe Witt – VP of Engineering at Cloudera</p><p>讲解嘉宾：杨克特（鲁尼） – Apache Member, Apache Flink PMC, 阿里巴巴高级技术专家</p><p>4、《Keynote:The Evolution of Data Infrastructure at Splunk》<br>Eric Sammer – Distinguished Engineer at Splunk</p><p>讲解嘉宾：王治江（淘江） – 阿里巴巴高级技术专家</p><p>5、《Flink SQL 之 2020：舍我其谁》<br>Fabian Hueske, &amp; Timo Walther</p><p>讲解嘉宾：伍翀（云邪），Apache Flink PMC，阿里巴巴技术专家</p><p>6、《微博基于 Flink 的机器学习实践》</p><p>分享嘉宾：</p><p>于茜，微博机器学习研发中心高级算法工程师。多年来致力于使用 Flink 构建实时数据处理和在线机器学习框架，有丰富的社交媒体应用推荐系统的开发经验。</p><p>曹富强，微博机器学习研发中心系统工程师。现负责微博机器学习平台数据计算模块。主要涉及实时计算 Flink，Storm，Spark Streaming，离线计算 Hive，Spark 等。目前专注于 Flink 在微博机器学习场景的应用。</p><p>于翔，微博机器学习研发中心算法架构工程师。</p><p>7、《Flink’s application at Didi》</p><p>分享嘉宾：薛康 – 现任滴滴技术专家，实时计算负责人</p><p>8、《Alink：提升基于 Flink 的机器学习平台易用性》</p><p>分享嘉宾：杨旭（品数） – 阿里巴巴资深技术专家。</p><p>9、《Google: 机器学习工作流的分布式处理》<br>Ahmet Altay &amp; Reza Rokni &amp; Robert Crowe</p><p>讲解嘉宾：秦江杰 – Apache Flink PMC，阿里巴巴高级技术专家</p><p>10、《Flink + AI Flow：让 AI 易如反掌》</p><p>分享嘉宾：秦江杰 – Apache Flink PMC，阿里巴巴高级技术专家</p><p>11、《终于等到你：PyFlink + Zeppelin》</p><p>分享嘉宾：</p><p>孙金城（金竹） – Apache Member，Apache Flink PMC，阿里巴巴高级技术专家</p><p>章剑锋（简锋） – Apache Member，Apache Zeppelin PMC，阿里巴巴高级技术专家</p><p>12、《Uber ：使用 Flink CEP 进行地理情形检测的实践》<br>Teng (Niel) Hu</p><p>讲解嘉宾：付典 – Apache Flink Committer，阿里巴巴技术专家</p><p>13、《AWS: 如何在全托管 Apache Flink 服务中提供应用高可用》</p><p>Ryan Nienhuis &amp; Tirtha Chatterjee</p><p>讲解嘉宾：章剑锋（简锋） – Apache Member，Apache Zeppelin PMC，阿里巴巴高级技术专家</p><p>14、《Production-Ready Flink and Hive Integration – what story you can tell now?》</p><p>Bowen Li</p><p>讲解嘉宾：李锐（天离） – Apache Hive PMC，阿里巴巴技术专家</p><p>15、《Data Warehouse, Data Lakes, What’s Next?》<br>Xiaowei Jiang</p><p>讲解嘉宾：金晓军（仙隐） – 阿里巴巴高级技术专家</p><p>16、《Netflix 的 Flink 自动扩缩容》</p><p>Abhay Amin</p><p>讲解嘉宾：吕文龙（龙三），阿里巴巴技术专家</p><p>17、《Apache Flink 误用之痛》</p><p>Konstantin Knauf</p><p>讲解嘉宾：孙金城（金竹） – Apache Member，Apache Flink PMC，阿里巴巴高级技术专家</p><p>18、《A deep dive into Flink SQL》</p><p>分享嘉宾：伍翀（云邪），Apache Flink PMC，阿里巴巴技术专家</p><p>19、《Lyft: 基于Flink的准实时海量数据分析平台》</p><p>Ying Xu &amp; Kailash Hassan Dayanand</p><p>讲解嘉宾：王阳（亦祺），阿里巴巴技术专家</p><h3 id="如何获取上面这些-PPT？"><a href="#如何获取上面这些-PPT？" class="headerlink" title="如何获取上面这些 PPT？"></a>如何获取上面这些 PPT？</h3><p>上面的这些 PPT 本人已经整理好了，你可以扫描下面二维码，关注微信公众号：zhisheng，然后在里面回复关键字: <strong>ff2020</strong> 即可获取已放出的 PPT。</p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2019-12-28-144329.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Flink Forward 2020 是在线上举办的一次会议&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="实时计算" scheme="http://www.54tianzhisheng.cn/tags/%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97/"/>
+    
+  </entry>
   
   <entry>
     <title>如何实时监控 Flink 集群和作业？</title>
@@ -468,30 +492,6 @@
     <summary type="html">
     
       &lt;p&gt;本文主要讲解 Metrics、如何使用 Metrics 分析问题并解决问题，并对 Metrics 监控实战进行解释说明。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
-    
-      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
-      <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《大数据实时计算引擎 Flink 实战与性能优化》新专栏</title>
-    <link href="http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/"/>
-    <id>http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/</id>
-    <published>2019-11-14T16:00:00.000Z</published>
-    <updated>2019-11-05T07:11:12.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>基于 Flink 1.9 讲解的专栏，涉及入门、概念、原理、实战、性能调优、系统案例的讲解。</p><a id="more"></a><h2 id="专栏介绍"><a href="#专栏介绍" class="headerlink" title="专栏介绍"></a>专栏介绍</h2><p>扫码下面专栏二维码可以订阅该专栏</p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-044731.jpg" alt=""></p><p>首发地址：<a href="http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/">http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/</a></p><p>专栏地址：<a href="https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f">https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f</a></p><h3 id="专栏亮点"><a href="#专栏亮点" class="headerlink" title="专栏亮点"></a>专栏亮点</h3><ul><li><p>全网首个使用最新版本 <strong>Flink 1.9</strong> 进行内容讲解（该版本更新很大，架构功能都有更新），领跑于目前市面上常见的 Flink 1.7 版本的教学课程。</p></li><li><p>包含大量的<strong>实战案例和代码</strong>去讲解原理，有助于读者一边学习一边敲代码，达到更快，更深刻的学习境界。目前市面上的书籍没有任何实战的内容，还只是讲解纯概念和翻译官网。</p></li><li><p>在专栏高级篇中，根据 Flink 常见的项目问题提供了<strong>排查和解决的思维方法</strong>，并通过这些问题探究了为什么会出现这类问题。</p></li><li><p>在实战和案例篇，围绕大厂公司的<strong>经典需求</strong>进行分析，包括架构设计、每个环节的操作、代码实现都有一一讲解。</p></li></ul><h3 id="为什么要学习-Flink？"><a href="#为什么要学习-Flink？" class="headerlink" title="为什么要学习 Flink？"></a>为什么要学习 Flink？</h3><p>随着大数据的不断发展，对数据的及时性要求越来越高，实时场景需求也变得越来越多，主要分下面几大类：</p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-055800.jpg" alt=""></p><p>为了满足这些实时场景的需求，衍生出不少计算引擎框架。现有市面上的大数据计算引擎的对比如下图所示：</p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-055826.jpg" alt=""></p><p>可以发现无论从 Flink 的架构设计上，还是从其功能完整性和易用性来讲都是领先的，再加上 Flink 是<strong>阿里巴巴主推</strong>的计算引擎框架，所以从去年开始就越来越火了！</p><p>目前，阿里巴巴、腾讯、美团、华为、滴滴出行、携程、饿了么、爱奇艺、有赞、唯品会等大厂都已经将 Flink 实践于公司大型项目中，带起了一波 Flink 风潮，<strong>势必也会让 Flink 人才市场产生供不应求的招聘现象</strong>。</p><h3 id="专栏内容"><a href="#专栏内容" class="headerlink" title="专栏内容"></a>专栏内容</h3><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-060049.jpg" alt=""></p><h4 id="预备篇"><a href="#预备篇" class="headerlink" title="预备篇"></a>预备篇</h4><p>介绍实时计算常见的使用场景，讲解 Flink 的特性，并且对比了 Spark Streaming、Structured Streaming 和 Storm 等大数据处理引擎，然后准备环境并通过两个 Flink 应用程序带大家上手 Flink。</p><h3 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h3><p>深入讲解 Flink 中 Time、Window、Watermark、Connector 原理，并有大量文章篇幅（含详细代码）讲解如何去使用这些 Connector（比如 Kafka、ElasticSearch、HBase、Redis、MySQL 等），并且会讲解使用过程中可能会遇到的坑，还教大家如何去自定义 Connector。</p><h3 id="进阶篇"><a href="#进阶篇" class="headerlink" title="进阶篇"></a>进阶篇</h3><p>讲解 Flink 中 State、Checkpoint、Savepoint、内存管理机制、CEP、Table／SQL API、Machine Learning 、Gelly。在这篇中不仅只讲概念，还会讲解如何去使用 State、如何配置 Checkpoint、Checkpoint 的流程和如何利用 CEP 处理复杂事件。</p><h3 id="高级篇"><a href="#高级篇" class="headerlink" title="高级篇"></a>高级篇</h3><p>重点介绍 Flink 作业上线后的监控运维：如何保证高可用、如何定位和排查反压问题、如何合理的设置作业的并行度、如何保证 Exactly Once、如何处理数据倾斜问题、如何调优整个作业的执行效率、如何监控 Flink 及其作业？</p><h3 id="实战篇"><a href="#实战篇" class="headerlink" title="实战篇"></a>实战篇</h3><p>教大家如何分析实时计算场景的需求，并使用 Flink 里面的技术去实现这些需求，比如实时统计 PV／UV、实时统计商品销售额 TopK、应用 Error 日志实时告警、机器宕机告警。这些需求如何使用 Flink 实现的都会提供完整的代码供大家参考，通过这些需求你可以学到 ProcessFunction、Async I／O、广播变量等知识的使用方式。</p><h3 id="系统案例篇"><a href="#系统案例篇" class="headerlink" title="系统案例篇"></a>系统案例篇</h3><p>讲解大型流量下的真实案例：如何去实时处理海量日志（错误日志实时告警／日志实时 ETL／日志实时展示／日志实时搜索）、基于 Flink 的百亿数据实时去重实践（从去重的通用解决方案 –&gt; 使用 BloomFilter 来实现去重 –&gt; 使用 Flink 的 KeyedState 实现去重）。</p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-060153.jpg" alt=""></p><h3 id="多图讲解-Flink-知识点"><a href="#多图讲解-Flink-知识点" class="headerlink" title="多图讲解 Flink 知识点"></a>多图讲解 Flink 知识点</h3><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-060219.jpg" alt=" Flink 支持多种时间语义"></p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-060232.jpg" alt="Flink 提供灵活的窗口"></p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-060310.jpg" alt="Flink On YARN"></p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-060900.jpg" alt="Flink Checkpoint"></p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-060926.jpg" alt="Flink 监控"></p><h3 id="你将获得什么"><a href="#你将获得什么" class="headerlink" title="你将获得什么"></a>你将获得什么</h3><ul><li>掌握 Flink 与其他计算框架的区别</li><li>掌握 Flink Time／Window／Watermark／Connectors 概念和实现原理</li><li>掌握 Flink State／Checkpoint／Savepoint 状态与容错</li><li>熟练使用 DataStream／DataSet／Table／SQL API 开发 Flink 作业</li><li>掌握 Flink 作业部署／运维／监控／性能调优</li><li>学会如何分析并完成实时计算需求</li><li>获得大型高并发流量系统案例实战项目经验</li></ul><h3 id="适宜人群"><a href="#适宜人群" class="headerlink" title="适宜人群"></a>适宜人群</h3><ul><li>Flink 爱好者</li><li>实时计算开发工程师</li><li>大数据开发工程师</li><li>计算机专业研究生</li><li>有实时计算场景场景的 Java 开发工程师</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;基于 Flink 1.9 讲解的专栏，涉及入门、概念、原理、实战、性能调优、系统案例的讲解。&lt;/p&gt;
     
     </summary>
     
